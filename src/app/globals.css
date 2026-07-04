@@ -1,26 +1,78 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
+  --color-primary: #000000;
+  --color-primary-foreground: #ffffff;
+  --color-accent-purple: #9333ea;
+  --color-accent-blue: #2563eb;
+  --color-accent-cyan: #06b6d4;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --background: #000000;
+  --foreground: #ffffff;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }
+
+@layer utilities {
+  .glass {
+    @apply bg-white/5 backdrop-blur-lg border border-white/10;
+  }
+  .animate-marquee {
+    animation: marquee 25s linear infinite;
+  }
+  .animate-marquee2 {
+    animation: marquee2 25s linear infinite;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-100%); }
+}
+
+@keyframes marquee2 {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(0%); }
+}
+
+@keyframes orbit {
+  0% { transform: rotateX(65deg) rotateY(-15deg) rotateZ(0deg); }
+  100% { transform: rotateX(65deg) rotateY(-15deg) rotateZ(360deg); }
+}
+
+@keyframes counter-orbit {
+  0% { transform: rotateZ(0deg) rotateY(15deg) rotateX(-65deg); }
+  100% { transform: rotateZ(-360deg) rotateY(15deg) rotateX(-65deg); }
+}
+
+@keyframes counter-orbit-offset-90 {
+  0% { transform: rotateZ(-90deg) rotateY(15deg) rotateX(-65deg); }
+  100% { transform: rotateZ(-450deg) rotateY(15deg) rotateX(-65deg); }
+}
+
+@keyframes counter-orbit-offset-180 {
+  0% { transform: rotateZ(-180deg) rotateY(15deg) rotateX(-65deg); }
+  100% { transform: rotateZ(-540deg) rotateY(15deg) rotateX(-65deg); }
+}
+
+@keyframes counter-orbit-offset-270 {
+  0% { transform: rotateZ(-270deg) rotateY(15deg) rotateX(-65deg); }
+  100% { transform: rotateZ(-630deg) rotateY(15deg) rotateX(-65deg); }
+}
+
