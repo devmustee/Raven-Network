@@ -37,6 +37,7 @@ export default function Home() {
         isConnectModalOpen={isConnectModalOpen}
         setIsConnectModalOpen={setIsConnectModalOpen}
         profile={profile}
+        setProfile={setProfile}
         setIsProfileModalOpen={setIsProfileModalOpen}
       />
       
