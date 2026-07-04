@@ -13,8 +13,6 @@ import { WorkspaceHub } from "@/components/sections/workspace-hub";
 import { EligibilityChecker } from "@/components/sections/eligibility-checker";
 import { PartnersSection } from "@/components/sections/partners-section";
 import { AboutSection } from "@/components/sections/about-section";
-import { RoadmapSection } from "@/components/sections/roadmap-section";
-import { FounderSection } from "@/components/sections/founder-section";
 
 export default function Home() {
   const [walletAddress, setWalletAddress] = useState<string | null>(null);
@@ -60,8 +58,6 @@ export default function Home() {
               setIsConnectModalOpen={setIsConnectModalOpen}
               setIsOpportunitiesModalOpen={setIsOpportunitiesModalOpen}
             />
-            <RoadmapSection />
-            <FounderSection />
             <FAQSection />
             <NewsletterSection />
           </>
