@@ -78,65 +78,23 @@ export function HeroSection({ walletAddress, setIsConnectModalOpen }: HeroSectio
             </div>
           </motion.div>
 
-          {/* Premium True CSS 3D Orbiting Ecosystem */}
+          {/* Premium Static Graphic Illustration */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.15 }}
-            className="lg:col-span-5 relative h-[380px] md:h-[450px] flex items-center justify-center"
+            className="lg:col-span-5 relative h-[380px] md:h-[450px] flex items-center justify-center animate-pulse-slow"
           >
-            {/* 3D Viewport container */}
-            <div className="relative w-full max-w-[320px] md:max-w-[380px] aspect-square flex items-center justify-center [perspective:1000px] [transform-style:preserve-3d]">
-              
-              {/* Outer soft glowing background */}
-              <div className="absolute w-[200px] h-[200px] bg-accent-blue/15 rounded-full blur-[80px] opacity-75 pointer-events-none animate-pulse" />
+            {/* Ambient background glow */}
+            <div className="absolute w-[250px] h-[250px] bg-accent-purple/15 rounded-full blur-[80px] opacity-70 pointer-events-none" />
 
-              {/* Central Glowing Core */}
-              <div className="absolute w-24 h-24 md:w-28 md:h-28 bg-gradient-to-tr from-accent-purple/30 to-accent-cyan/30 rounded-full blur-xl opacity-60 animate-pulse pointer-events-none" />
-              <div className="absolute w-20 h-20 md:w-24 md:h-24 rounded-full border border-white/10 flex flex-col items-center justify-center z-20 glass shadow-[0_0_30px_rgba(147,51,234,0.15)] [transform:translateZ(10px)]">
-                <img src="/logo.png" alt="Raven Logo" className="w-8 h-8 md:w-10 md:h-10 object-contain mb-1 animate-bounce" />
-                <span className="text-[10px] font-extrabold tracking-widest text-white/80 uppercase">RAVEN</span>
-              </div>
-
-              {/* Tilted Orbit Ring */}
-              <div className="absolute inset-0 border border-white/5 rounded-full [transform:rotateX(65deg)_rotateY(-15deg)] pointer-events-none shadow-[0_0_20px_rgba(255,255,255,0.02)]" />
-              
-              {/* Secondary tilted ring for visual complexity */}
-              <div className="absolute inset-4 border border-dashed border-white/5 rounded-full [transform:rotateX(-65deg)_rotateY(15deg)] pointer-events-none opacity-40" />
-
-              {/* CSS 3D Orbiting Plane */}
-              <div className="absolute inset-0 [transform-style:preserve-3d] [transform:rotateX(65deg)_rotateY(-15deg)] animate-[orbit_24s_linear_infinite]">
-                
-                {/* Node 1: Learning */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 [transform-style:preserve-3d] [transform:rotateZ(0deg)_translateX(140px)] md:[transform:rotateZ(0deg)_translateX(170px)]">
-                  <div className="px-3 py-1.5 md:px-4 md:py-2 bg-black/90 border border-accent-purple/40 rounded-xl glass shadow-lg text-[10px] md:text-xs font-semibold text-white whitespace-nowrap animate-[counter-orbit_24s_linear_infinite]">
-                    📚 Learning
-                  </div>
-                </div>
-
-                {/* Node 2: Reputation */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 [transform-style:preserve-3d] [transform:rotateZ(90deg)_translateX(140px)] md:[transform:rotateZ(90deg)_translateX(170px)]">
-                  <div className="px-3 py-1.5 md:px-4 md:py-2 bg-black/90 border border-accent-blue/40 rounded-xl glass shadow-lg text-[10px] md:text-xs font-semibold text-white whitespace-nowrap animate-[counter-orbit-offset-90_24s_linear_infinite]">
-                    🛡️ Reputation
-                  </div>
-                </div>
-
-                {/* Node 3: Opportunities */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 [transform-style:preserve-3d] [transform:rotateZ(180deg)_translateX(140px)] md:[transform:rotateZ(180deg)_translateX(170px)]">
-                  <div className="px-3 py-1.5 md:px-4 md:py-2 bg-black/90 border border-accent-cyan/40 rounded-xl glass shadow-lg text-[10px] md:text-xs font-semibold text-white whitespace-nowrap animate-[counter-orbit-offset-180_24s_linear_infinite]">
-                    💼 Opportunities
-                  </div>
-                </div>
-
-                {/* Node 4: Governance */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 [transform-style:preserve-3d] [transform:rotateZ(270deg)_translateX(140px)] md:[transform:rotateZ(270deg)_translateX(170px)]">
-                  <div className="px-3 py-1.5 md:px-4 md:py-2 bg-black/90 border border-white/20 rounded-xl glass shadow-lg text-[10px] md:text-xs font-semibold text-white whitespace-nowrap animate-[counter-orbit-offset-270_24s_linear_infinite]">
-                    🗳️ Governance
-                  </div>
-                </div>
-
-              </div>
-
+            <div className="relative w-full max-w-[340px] md:max-w-[420px] aspect-square rounded-2xl overflow-hidden glass border border-white/10 shadow-[0_0_50px_rgba(147,51,234,0.15)] flex items-center justify-center p-6 bg-black/40 backdrop-blur-md">
+              <img 
+                src="/hero-3d.png" 
+                alt="Raven Network Ecosystem" 
+                className="w-full h-full object-contain rounded-xl hover:scale-102 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
             </div>
           </motion.div>
 
