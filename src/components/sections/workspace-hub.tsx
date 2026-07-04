@@ -180,28 +180,79 @@ export function WorkspaceHub({
               
               {/* Profile Social indicators */}
               <div className="flex gap-2.5 items-center justify-center mt-3">
-                {profile.github && (
-                  <span title={`GitHub: ${profile.github}`} className="p-1.5 rounded-lg bg-white/5 border border-white/10 text-white/80">
-                    <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z" />
-                    </svg>
-                  </span>
-                )}
-                {profile.telegram && (
-                  <span title={`Telegram: ${profile.telegram}`} className="p-1.5 rounded-lg bg-white/5 border border-white/10 text-sky-400">
-                    <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                      <path d="m22 2-7 20-4-9-9-4Z" />
-                      <path d="M22 2 11 13" />
-                    </svg>
-                  </span>
-                )}
-                {profile.x && (
-                  <span title={`X: ${profile.x}`} className="p-1.5 rounded-lg bg-white/5 border border-white/10 text-white/80">
-                    <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                    </svg>
-                  </span>
-                )}
+                {/* GitHub */}
+                <span 
+                  title={profile.github ? `GitHub: ${profile.github}` : "GitHub Not Linked"} 
+                  className={`p-1.5 rounded-lg border transition-all ${
+                    profile.github ? "bg-white/5 border-white/10 text-white" : "bg-white/[0.01] border-white/5 text-white/20 opacity-30"
+                  }`}
+                >
+                  <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z" />
+                  </svg>
+                </span>
+
+                {/* Telegram */}
+                <span 
+                  title={profile.telegram ? `Telegram: ${profile.telegram}` : "Telegram Not Linked"} 
+                  className={`p-1.5 rounded-lg border transition-all ${
+                    profile.telegram ? "bg-white/5 border-white/10 text-sky-400" : "bg-white/[0.01] border-white/5 text-white/20 opacity-30"
+                  }`}
+                >
+                  <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <path d="m22 2-7 20-4-9-9-4Z" />
+                    <path d="M22 2 11 13" />
+                  </svg>
+                </span>
+
+                {/* X */}
+                <span 
+                  title={profile.x ? `X: ${profile.x}` : "X Not Linked"} 
+                  className={`p-1.5 rounded-lg border transition-all ${
+                    profile.x ? "bg-white/5 border-white/10 text-white" : "bg-white/[0.01] border-white/5 text-white/20 opacity-30"
+                  }`}
+                >
+                  <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                  </svg>
+                </span>
+
+                {/* TikTok */}
+                <span 
+                  title={profile.tiktok ? `TikTok: ${profile.tiktok}` : "TikTok Not Linked"} 
+                  className={`p-1.5 rounded-lg border transition-all ${
+                    profile.tiktok ? "bg-white/5 border-white/10 text-pink-500" : "bg-white/[0.01] border-white/5 text-white/20 opacity-30"
+                  }`}
+                >
+                  <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.02 1.59 4.23.95.89 2.24 1.43 3.58 1.49v3.95c-1.74-.08-3.41-.75-4.73-1.89-.13-.11-.26-.22-.39-.34v6.86c.03 2.12-.9 4.19-2.52 5.56-1.92 1.63-4.66 2.1-7.05 1.22C4.5 20.18 2.8 17.55 3.05 14.8c.25-2.78 2.45-5.12 5.23-5.36 1.15-.09 2.3.17 3.3.75v4.06c-.84-.52-1.85-.71-2.8-.52-1.39.26-2.53 1.43-2.77 2.84-.28 1.62.67 3.23 2.25 3.66 1.44.4 3.05-.22 3.73-1.57.19-.38.28-.79.28-1.22V.02z" />
+                  </svg>
+                </span>
+
+                {/* Instagram */}
+                <span 
+                  title={profile.instagram ? `Instagram: ${profile.instagram}` : "Instagram Not Linked"} 
+                  className={`p-1.5 rounded-lg border transition-all ${
+                    profile.instagram ? "bg-white/5 border-white/10 text-pink-400" : "bg-white/[0.01] border-white/5 text-white/20 opacity-30"
+                  }`}
+                >
+                  <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                  </svg>
+                </span>
+
+                {/* Facebook */}
+                <span 
+                  title={profile.facebook ? `Facebook: ${profile.facebook}` : "Facebook Not Linked"} 
+                  className={`p-1.5 rounded-lg border transition-all ${
+                    profile.facebook ? "bg-white/5 border-white/10 text-blue-500" : "bg-white/[0.01] border-white/5 text-white/20 opacity-30"
+                  }`}
+                >
+                  <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                  </svg>
+                </span>
               </div>
             </div>
 
