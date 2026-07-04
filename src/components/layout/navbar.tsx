@@ -38,6 +38,19 @@ export function Navbar({
   const [telegramInput, setTelegramInput] = useState("@");
   const [validationError, setValidationError] = useState<string | null>(null);
 
+  const links = walletAddress 
+    ? [
+        { name: "Workspace Hub", href: "#" },
+        { name: "Opportunities", href: "#opportunities" },
+        { name: "Leaderboard", href: "#leaderboard" }
+      ]
+    : [
+        { name: "Pathways", href: "#pathways" },
+        { name: "Partners", href: "#partners" },
+        { name: "Roadmap", href: "#roadmap" },
+        { name: "FAQs", href: "#faqs" }
+      ];
+
   const handleConnectMock = (provider: string, type: "ton" | "evm") => {
     setConnectingProvider(provider);
     setConnectPhase("verifying");
@@ -100,7 +113,7 @@ export function Navbar({
           </Link>
           
           <nav className="hidden lg:flex items-center gap-6 text-sm font-medium">
-            {navLinks.map((link) => (
+            {links.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}

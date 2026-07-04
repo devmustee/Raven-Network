@@ -5,7 +5,6 @@ import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { HeroSection } from "@/components/sections/hero-section";
 import { PillarsSection } from "@/components/sections/pillars-section";
-import { DashboardSection } from "@/components/sections/dashboard-section";
 import { FAQSection } from "@/components/sections/faq-section";
 import { NewsletterSection } from "@/components/sections/newsletter-section";
 import { OpportunitiesModal } from "@/components/ui/opportunities-modal";
@@ -62,11 +61,6 @@ export default function Home() {
               setIsOpportunitiesModalOpen={setIsOpportunitiesModalOpen}
             />
             <RoadmapSection />
-            <DashboardSection 
-              walletAddress={walletAddress}
-              setIsConnectModalOpen={setIsConnectModalOpen}
-              profile={profile}
-            />
             <FounderSection />
             <FAQSection />
             <NewsletterSection />
