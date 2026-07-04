@@ -59,6 +59,17 @@ export function WorkspaceHub({
     { id: 4, text: "Mock Transaction Signature check", xp: 20, done: false }
   ]);
   const [notification, setNotification] = useState<string | null>(null);
+  const [hasCheckedIn, setHasCheckedIn] = useState(false);
+
+  const handleDailyCheckIn = () => {
+    if (hasCheckedIn) return;
+    setHasCheckedIn(true);
+    showNotification("Daily Streak claimed successfully! +1 Day added.");
+    setProfile(p => ({
+      ...p,
+      streakDays: p.streakDays + 1
+    }));
+  };
 
   const toggleTask = (id: number) => {
     setDailyTasks(prev => prev.map(task => {
@@ -317,6 +328,19 @@ export function WorkspaceHub({
                     );
                   })}
                 </div>
+              </div>
+
+              {/* Daily check-in button */}
+              <div className="mt-5 pt-4 border-t border-white/5">
+                <Button 
+                  disabled={hasCheckedIn}
+                  onClick={handleDailyCheckIn}
+                  variant={hasCheckedIn ? "secondary" : "primary"}
+                  className="w-full text-xs py-2 h-auto flex items-center justify-center gap-2"
+                >
+                  <Flame className={`w-4 h-4 ${hasCheckedIn ? 'text-white/45' : 'text-orange-500 animate-bounce'}`} />
+                  <span>{hasCheckedIn ? "Checked In Today (+1 Day Streak)" : "Claim Daily Streak Check-in"}</span>
+                </Button>
               </div>
             </GlassCard>
 
