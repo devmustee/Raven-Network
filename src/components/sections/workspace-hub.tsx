@@ -327,6 +327,12 @@ export function WorkspaceHub({
                 <li>Focus on consistency. Support fellow members through meaningful engagement.</li>
                 <li>Create conversations instead of chasing likes.</li>
               </ul>
+              
+              <span className="block font-bold text-white uppercase tracking-wider text-[8px] mt-3">Why Daily Tasks Matter</span>
+              <p className="text-[10px] text-white/45 leading-relaxed">
+                Consistency is the key metric on social networks. Completing daily sessions trains algorithms to favor your content, accelerates community onboarding, and keeps your streak multiplier active to unlock higher reputation ranking badges.
+              </p>
+
               <div className="text-[9px] text-accent-purple font-semibold bg-accent-purple/5 border border-accent-purple/10 p-2 rounded-lg mt-2">
                 "Consistency builds visibility. Visibility creates impressions. Impressions lead to followers, opportunities, and growth."
               </div>
