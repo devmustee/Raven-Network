@@ -54,10 +54,16 @@ export function WorkspaceHub({
   
   // Daily Tasks state - streak consistency booster
   const [dailyTasks, setDailyTasks] = useState([
-    { id: 1, text: "Verify GitHub Merge Proof", xp: 15, done: false },
-    { id: 2, text: "Complete 'TON Smart Contract' Quiz", xp: 10, done: false },
-    { id: 3, text: "Post in ecosystem dev-chat", xp: 5, done: false },
-    { id: 4, text: "Mock Transaction Signature check", xp: 20, done: false }
+    { id: 1, text: "Morning: Post GM + 2 original tweets", xp: 15, done: false },
+    { id: 2, text: "Morning: Write 50 quality replies", xp: 20, done: false },
+    { id: 3, text: "Evening: Post Good Evening + 3 original tweets", xp: 15, done: false },
+    { id: 4, text: "Evening: Write 50 quality replies", xp: 20, done: false },
+    { id: 5, text: "Night: Post Good Night + 2 original tweets", xp: 15, done: false },
+    { id: 6, text: "Night: Write 50 quality replies", xp: 20, done: false },
+    { id: 7, text: "Daily Goal: 10 original posts total", xp: 25, done: false },
+    { id: 8, text: "Daily Goal: 150 quality replies total", xp: 30, done: false },
+    { id: 9, text: "Daily Goal: 5 quote reposts with opinion", xp: 15, done: false },
+    { id: 10, text: "Daily Goal: 20 supportive reposts", xp: 15, done: false }
   ]);
   const [notification, setNotification] = useState<string | null>(null);
   const [hasCheckedIn, setHasCheckedIn] = useState(false);
@@ -278,8 +284,8 @@ export function WorkspaceHub({
                 <Flame className="w-5 h-5 text-orange-500 animate-pulse" />
               </div>
               <div>
-                <h3 className="font-bold text-sm text-white">Daily Streak Tasks</h3>
-                <p className="text-[9px] text-white/45">Streaks build consistency & earn XP</p>
+                <h3 className="font-bold text-sm text-white">Daily X Growth Challenge</h3>
+                <p className="text-[9px] text-white/45">Consistency builds visibility & earns XP</p>
               </div>
             </div>
 
@@ -310,6 +316,20 @@ export function WorkspaceHub({
                   </span>
                 </div>
               ))}
+            </div>
+
+            {/* Rules and Guidelines */}
+            <div className="mt-5 pt-4 border-t border-white/5 space-y-2.5 text-[10px] text-white/50 leading-relaxed text-left">
+              <span className="block font-bold text-white uppercase tracking-wider text-[8px]">Rules & Guidelines</span>
+              <ul className="list-disc pl-4 space-y-1.5">
+                <li>Every reply must add value. Avoid "Nice," "Great," "LFG," or emoji-only replies.</li>
+                <li>Every quote repost must include your own opinion or insight.</li>
+                <li>Focus on consistency. Support fellow members through meaningful engagement.</li>
+                <li>Create conversations instead of chasing likes.</li>
+              </ul>
+              <div className="text-[9px] text-accent-purple font-semibold bg-accent-purple/5 border border-accent-purple/10 p-2 rounded-lg mt-2">
+                "Consistency builds visibility. Visibility creates impressions. Impressions lead to followers, opportunities, and growth."
+              </div>
             </div>
           </GlassCard>
 
