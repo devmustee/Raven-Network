@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { GlassCard } from "../ui/glass-card";
 import { Button } from "../ui/button";
-import { ProfileData } from "../ui/profile-modal";
+import { ProfileData, BadgeIcon } from "../ui/profile-modal";
 import { 
   User, Flame, Trophy, Award, Zap, Briefcase, 
   ExternalLink, CheckSquare, Check, Calendar, Sparkles, X
@@ -386,21 +386,23 @@ export function WorkspaceHub({
                 <span className="block text-[8px] uppercase tracking-widest text-white/40 font-bold mb-2">Unlocked Badges</span>
                 <div className="flex flex-wrap gap-1.5">
                   {[
-                    { name: "Fledgling", days: 7, icon: "🪶" },
-                    { name: "Scout", days: 30, icon: "👁️" },
-                    { name: "Vanguard", days: 90, icon: "🦅" }
+                    { name: "Fledgling", days: 7 },
+                    { name: "Scout", days: 30 },
+                    { name: "Vanguard", days: 90 },
+                    { name: "Shadow", days: 180 },
+                    { name: "Legend", days: 365 }
                   ].map((badge) => {
                     const isUnlocked = profile.streakDays >= badge.days;
                     return (
                       <div 
                         key={badge.name} 
-                        className={`flex items-center gap-1 px-2 py-1 rounded-lg border text-[9px] font-bold ${
+                        className={`flex items-center gap-1.5 px-2 py-1 rounded-lg border text-[9px] font-bold ${
                           isUnlocked 
                             ? 'bg-white/5 border-white/10 text-white' 
                             : 'bg-white/[0.01] border-white/5 opacity-30'
                         }`}
                       >
-                        <span>{badge.icon}</span>
+                        <BadgeIcon name={badge.name} className="w-3 h-3" />
                         <span>{badge.name}</span>
                       </div>
                     );
@@ -782,8 +784,46 @@ export function WorkspaceHub({
               </div>
             </div>
 
+            {/* Unlocked Badges for this user */}
+            <div className="mt-4 pt-4 border-t border-white/5">
+              <span className="block text-[8px] uppercase tracking-widest text-white/40 font-bold mb-2.5 text-center">Streak Achievements</span>
+              <div className="grid grid-cols-5 gap-1.5 justify-center">
+                {[
+                  { name: "Fledgling", days: 7 },
+                  { name: "Scout", days: 30 },
+                  { name: "Vanguard", days: 90 },
+                  { name: "Shadow", days: 180 },
+                  { name: "Legend", days: 365 }
+                ].map((badge) => {
+                  let userStreak = 10;
+                  if (viewingUserProfile.name === "MustaphaDev") userStreak = 365;
+                  else if (viewingUserProfile.name === "AfroCoder") userStreak = 120;
+                  else if (viewingUserProfile.name === "FatimaTON") userStreak = 90;
+                  else if (viewingUserProfile.name === "KofiWeb3") userStreak = 30;
+                  else if (viewingUserProfile.name === "Zubairu") userStreak = 15;
+                  else userStreak = profile.streakDays;
+
+                  const isUnlocked = userStreak >= badge.days;
+                  return (
+                    <div 
+                      key={badge.name} 
+                      title={`${badge.name} (${badge.days} Days)`}
+                      className={`flex flex-col items-center p-1.5 rounded-lg border text-center transition-all ${
+                        isUnlocked 
+                          ? 'bg-white/5 border-white/10 text-white' 
+                          : 'bg-white/[0.01] border-white/5 opacity-20'
+                      }`}
+                    >
+                      <BadgeIcon name={badge.name} className="w-4 h-4 mb-1" />
+                      <span className="block text-[5px] font-bold truncate max-w-full text-white/60">{badge.name}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
             {/* Performance metrics */}
-            <div className="grid grid-cols-2 gap-4 mt-6 pt-4 border-t border-white/5 text-center">
+            <div className="grid grid-cols-2 gap-4 mt-4 pt-4 border-t border-white/5 text-center">
               <div>
                 <span className="block text-sm font-black text-white">{viewingUserProfile.reputation} XP</span>
                 <span className="block text-[8px] text-white/40 uppercase font-semibold mt-0.5">Reputation</span>

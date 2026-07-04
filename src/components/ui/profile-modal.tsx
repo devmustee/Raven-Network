@@ -23,6 +23,82 @@ interface ProfileModalProps {
   onSave: (data: ProfileData) => void;
 }
 
+export function BadgeIcon({ name, className = "w-6 h-6" }: { name: string; className?: string }) {
+  const gradientId = `badge-grad-modal-${name.toLowerCase()}`;
+  if (name === "Fledgling") {
+    return (
+      <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#C084FC" />
+            <stop offset="100%" stopColor="#818CF8" />
+          </linearGradient>
+        </defs>
+        <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5l6.74-6.76z" stroke={`url(#${gradientId})`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <line x1="16" y1="8" x2="2" y2="22" stroke={`url(#${gradientId})`} strokeWidth="2" strokeLinecap="round"/>
+      </svg>
+    );
+  }
+  if (name === "Scout") {
+    return (
+      <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#60A5FA" />
+            <stop offset="100%" stopColor="#3B82F6" />
+          </linearGradient>
+        </defs>
+        <circle cx="12" cy="12" r="10" stroke={`url(#${gradientId})`} strokeWidth="2"/>
+        <circle cx="12" cy="12" r="3" fill={`url(#${gradientId})`}/>
+        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke={`url(#${gradientId})`} strokeWidth="1.5" strokeDasharray="3 3"/>
+      </svg>
+    );
+  }
+  if (name === "Vanguard") {
+    return (
+      <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#22D3EE" />
+            <stop offset="100%" stopColor="#06B6D4" />
+          </linearGradient>
+        </defs>
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke={`url(#${gradientId})`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M12 6v12M8 10h8" stroke={`url(#${gradientId})`} strokeWidth="2" strokeLinecap="round"/>
+      </svg>
+    );
+  }
+  if (name === "Shadow") {
+    return (
+      <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#A855F7" />
+            <stop offset="100%" stopColor="#6B21A8" />
+          </linearGradient>
+        </defs>
+        <path d="M12 2L2 12l10 10 10-10L12 2z" stroke={`url(#${gradientId})`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M12 6l-6 6 6 6 6-6-6-6z" fill={`url(#${gradientId})`} opacity="0.4"/>
+      </svg>
+    );
+  }
+  if (name === "Legend") {
+    return (
+      <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#FBBF24" />
+            <stop offset="100%" stopColor="#D97706" />
+          </linearGradient>
+        </defs>
+        <path d="M2 4l3 12h14l3-12-6 7-4-7-4 7-6-7z" fill={`url(#${gradientId})`} stroke={`url(#${gradientId})`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M3 20h18" stroke={`url(#${gradientId})`} strokeWidth="2" strokeLinecap="round"/>
+      </svg>
+    );
+  }
+  return null;
+}
+
 export function ProfileModal({ isOpen, onClose, profile, onSave }: ProfileModalProps) {
   const [formData, setFormData] = useState<ProfileData>({ ...profile });
   const [error, setError] = useState<string | null>(null);
@@ -259,7 +335,7 @@ export function ProfileModal({ isOpen, onClose, profile, onSave }: ProfileModalP
                           : "bg-white/[0.01] border-white/5 opacity-30 select-none"
                       }`}
                     >
-                      <span className="text-xl mb-1.5">{badge.icon}</span>
+                      <BadgeIcon name={badge.name} className="w-5 h-5 mb-1.5" />
                       <span className="block text-[8px] font-bold text-white truncate max-w-full">{badge.name}</span>
                       <span className="block text-[7px] text-white/45 mt-0.5">{badge.days}D</span>
 
