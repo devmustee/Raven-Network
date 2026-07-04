@@ -8,15 +8,15 @@ import { ChevronDown } from "lucide-react";
 const faqData = [
   {
     question: "What is Raven Network?",
-    answer: "Raven Network is an ecosystem designed to build Africa's largest Web3 contributor network. It connects education (Raven Academy), reputation tracking (Raven Network), and digital identity (Raven Wallet) to provide global opportunities."
+    answer: "Raven Network, powered by Raven Learning system LTD, is an ecosystem designed to build Africa's largest Web3 contributor network. It connects education (Raven Academy), reputation tracking, and decentralized wallet verification (TON Flock NFTs) to provide verified global earning opportunities."
   },
   {
     question: "How do I join?",
-    answer: "You can start by joining Raven Academy for free. Complete a learning pathway (Onboarding, Creator, or Builder) to earn your entry into the Raven Network where you can start building reputation."
+    answer: "You can start by enrolling in Raven Academy. Complete a premium learning pathway (Onboarding, Creator, or Builder) to qualify for manual graduation verification and earn your on-chain credentials."
   },
   {
     question: "Is Raven Academy free?",
-    answer: "Yes, the core pathways in Raven Academy are completely free to ensure equitable access to Web3 education for everyone."
+    answer: "No, Raven Academy is a premium credentialed institution. It is not free. All graduates must be manually verified and hold the official Flock NFT on the TON blockchain to gain access to the Raven Network hub."
   },
   {
     question: "What is the streak system?",
