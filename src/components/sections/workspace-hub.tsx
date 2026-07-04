@@ -7,7 +7,7 @@ import { Button } from "../ui/button";
 import { ProfileData } from "../ui/profile-modal";
 import { 
   User, Flame, Trophy, Award, Zap, Briefcase, 
-  ExternalLink, CheckSquare, Check, Calendar, Sparkles 
+  ExternalLink, CheckSquare, Check, Calendar, Sparkles, X
 } from "lucide-react";
 
 interface WorkspaceHubProps {
@@ -19,11 +19,11 @@ interface WorkspaceHubProps {
 }
 
 const initialLeaderboard = [
-  { rank: 1, name: "MustaphaDev", reputation: 980, badge: "TON Dev Legend", avatar: "/devmustee.jpg", isUser: false, socials: { x: "@devmustee", telegram: "devmustee" } },
-  { rank: 2, name: "AfroCoder", reputation: 920, badge: "EVM Architect", avatar: "", isUser: false, socials: { github: "afrocoder" } },
-  { rank: 3, name: "FatimaTON", reputation: 875, badge: "TON OG Builder", avatar: "", isUser: false, socials: { telegram: "fatimaton", x: "@fatima_ton" } },
-  { rank: 5, name: "KofiWeb3", reputation: 790, badge: "Contributor", avatar: "", isUser: false, socials: { github: "kofiweb3" } },
-  { rank: 6, name: "Zubairu", reputation: 740, badge: "Academy Graduate", avatar: "", isUser: false, socials: { x: "@zubairu_ton" } }
+  { rank: 1, name: "MustaphaDev", reputation: 980, badge: "TON Dev Legend", avatar: "/devmustee.jpg", isUser: false, socials: { x: "@devmustee", telegram: "devmustee", github: "devmustee", tiktok: "", instagram: "mustapha_dev", facebook: "" } },
+  { rank: 2, name: "AfroCoder", reputation: 920, badge: "EVM Architect", avatar: "", isUser: false, socials: { github: "afrocoder", telegram: "afrocoder_tg", x: "@afrocoder", tiktok: "", instagram: "", facebook: "" } },
+  { rank: 3, name: "FatimaTON", reputation: 875, badge: "TON OG Builder", avatar: "", isUser: false, socials: { telegram: "fatimaton", x: "@fatima_ton", github: "", tiktok: "", instagram: "", facebook: "" } },
+  { rank: 5, name: "KofiWeb3", reputation: 790, badge: "Contributor", avatar: "", isUser: false, socials: { github: "kofiweb3", telegram: "", x: "@kofiweb3", tiktok: "", instagram: "", facebook: "" } },
+  { rank: 6, name: "Zubairu", reputation: 740, badge: "Academy Graduate", avatar: "", isUser: false, socials: { x: "@zubairu_ton", telegram: "zubairu", github: "", tiktok: "", instagram: "", facebook: "" } }
 ];
 
 const jobs = [
@@ -50,6 +50,7 @@ export function WorkspaceHub({
   setWalletAddress 
 }: WorkspaceHubProps) {
   const [activeTab, setActiveTab] = useState<"jobs" | "hackathons" | "contests">("jobs");
+  const [viewingUserProfile, setViewingUserProfile] = useState<any | null>(null);
   
   // Daily Tasks state - streak consistency booster
   const [dailyTasks, setDailyTasks] = useState([
@@ -546,7 +547,8 @@ export function WorkspaceHub({
                 return (
                   <div 
                     key={user.rank} 
-                    className={`flex items-center justify-between p-3 rounded-xl border transition-all ${
+                    onClick={() => setViewingUserProfile(user)}
+                    className={`flex items-center justify-between p-3 rounded-xl border cursor-pointer hover:border-accent-purple/30 transition-all ${
                       isUser 
                         ? 'bg-accent-purple/10 border-accent-purple/40 shadow-[0_0_20px_rgba(147,51,234,0.1)]' 
                         : 'bg-white/[0.01] border-white/5'
@@ -575,28 +577,62 @@ export function WorkspaceHub({
                           
                           {/* Social handles badges */}
                           <div className="flex gap-1 items-center ml-1">
-                            {user.socials.github && (
-                              <span title={`GitHub: ${user.socials.github}`} className="text-white opacity-85">
-                                <svg className="w-2.5 h-2.5" viewBox="0 0 24 24" fill="currentColor">
-                                  <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z" />
-                                </svg>
-                              </span>
-                            )}
-                            {user.socials.telegram && (
-                              <span title={`Telegram: ${user.socials.telegram}`} className="text-sky-400">
-                                <svg className="w-2.5 h-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                                  <path d="m22 2-7 20-4-9-9-4Z" />
-                                  <path d="M22 2 11 13" />
-                                </svg>
-                              </span>
-                            )}
-                            {user.socials.x && (
-                              <span title={`X: ${user.socials.x}`} className="text-white opacity-85">
-                                <svg className="w-2.5 h-2.5" viewBox="0 0 24 24" fill="currentColor">
-                                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                                </svg>
-                              </span>
-                            )}
+                            {/* GitHub */}
+                            <span 
+                              title={user.socials.github ? `GitHub: ${user.socials.github}` : "GitHub Not Linked"} 
+                              className={user.socials.github ? "text-white opacity-85" : "text-white/20 opacity-25"}
+                            >
+                              <svg className="w-2.5 h-2.5" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z" />
+                              </svg>
+                            </span>
+                            {/* Telegram */}
+                            <span 
+                              title={user.socials.telegram ? `Telegram: ${user.socials.telegram}` : "Telegram Not Linked"} 
+                              className={user.socials.telegram ? "text-sky-400" : "text-white/20 opacity-25"}
+                            >
+                              <svg className="w-2.5 h-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                                <path d="m22 2-7 20-4-9-9-4Z" />
+                                <path d="M22 2 11 13" />
+                              </svg>
+                            </span>
+                            {/* X */}
+                            <span 
+                              title={user.socials.x ? `X: ${user.socials.x}` : "X Not Linked"} 
+                              className={user.socials.x ? "text-white opacity-85" : "text-white/20 opacity-25"}
+                            >
+                              <svg className="w-2.5 h-2.5" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                              </svg>
+                            </span>
+                            {/* TikTok */}
+                            <span 
+                              title={user.socials.tiktok ? `TikTok: ${user.socials.tiktok}` : "TikTok Not Linked"} 
+                              className={user.socials.tiktok ? "text-pink-500" : "text-white/20 opacity-25"}
+                            >
+                              <svg className="w-2.5 h-2.5" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.02 1.59 4.23.95.89 2.24 1.43 3.58 1.49v3.95c-1.74-.08-3.41-.75-4.73-1.89-.13-.11-.26-.22-.39-.34v6.86c.03 2.12-.9 4.19-2.52 5.56-1.92 1.63-4.66 2.1-7.05 1.22C4.5 20.18 2.8 17.55 3.05 14.8c.25-2.78 2.45-5.12 5.23-5.36 1.15-.09 2.3.17 3.3.75v4.06c-.84-.52-1.85-.71-2.8-.52-1.39.26-2.53 1.43-2.77 2.84-.28 1.62.67 3.23 2.25 3.66 1.44.4 3.05-.22 3.73-1.57.19-.38.28-.79.28-1.22V.02z" />
+                              </svg>
+                            </span>
+                            {/* Instagram */}
+                            <span 
+                              title={user.socials.instagram ? `Instagram: ${user.socials.instagram}` : "Instagram Not Linked"} 
+                              className={user.socials.instagram ? "text-pink-400" : "text-white/20 opacity-25"}
+                            >
+                              <svg className="w-2.5 h-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                                <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                              </svg>
+                            </span>
+                            {/* Facebook */}
+                            <span 
+                              title={user.socials.facebook ? `Facebook: ${user.socials.facebook}` : "Facebook Not Linked"} 
+                              className={user.socials.facebook ? "text-blue-500" : "text-white/20 opacity-25"}
+                            >
+                              <svg className="w-2.5 h-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                              </svg>
+                            </span>
                           </div>
                         </div>
                       </div>
@@ -614,6 +650,136 @@ export function WorkspaceHub({
 
         </div>
       </div>
+
+      {/* Read-Only Profile Preview Modal */}
+      {viewingUserProfile && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+          <div className="relative w-full max-w-sm bg-black border border-white/10 rounded-2xl p-6 glass shadow-[0_0_50px_rgba(147,51,234,0.15)] overflow-hidden text-center animate-in fade-in zoom-in-95 duration-200">
+            {/* Background glowing orb */}
+            <div className="absolute top-0 right-0 w-32 h-32 bg-accent-purple/20 rounded-full blur-2xl pointer-events-none" />
+
+            {/* Close Button */}
+            <button 
+              onClick={() => setViewingUserProfile(null)}
+              className="absolute top-4 right-4 p-1 rounded-lg hover:bg-white/5 text-white/60 hover:text-white transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            {/* Profile Avatar */}
+            <div className="w-20 h-20 rounded-full bg-white/5 border-2 border-accent-purple/30 mx-auto flex items-center justify-center overflow-hidden mb-4 mt-2">
+              {viewingUserProfile.avatar ? (
+                <img src={viewingUserProfile.avatar} className="w-full h-full object-cover" alt={viewingUserProfile.name} />
+              ) : (
+                <User className="w-10 h-10 text-white/40" />
+              )}
+            </div>
+
+            {/* Profile Info */}
+            <h3 className="font-extrabold text-lg text-white mb-0.5">{viewingUserProfile.name}</h3>
+            <span className="inline-block text-[9px] px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-white/60 font-bold mb-3">
+              {viewingUserProfile.badge}
+            </span>
+
+            {/* Social connections list */}
+            <div className="mt-4 pt-4 border-t border-white/5">
+              <span className="block text-[9px] uppercase tracking-widest text-white/40 font-bold mb-3">Social Connections</span>
+              <div className="flex gap-3 items-center justify-center">
+                {/* GitHub */}
+                <div 
+                  title={viewingUserProfile.socials?.github ? `GitHub: ${viewingUserProfile.socials.github}` : "GitHub Not Linked"}
+                  className={`p-2 rounded-xl border transition-all ${
+                    viewingUserProfile.socials?.github ? "bg-white/5 border-white/10 text-white" : "bg-white/[0.01] border-white/5 text-white/10 opacity-30"
+                  }`}
+                >
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z" />
+                  </svg>
+                </div>
+                {/* Telegram */}
+                <div 
+                  title={viewingUserProfile.socials?.telegram ? `Telegram: ${viewingUserProfile.socials.telegram}` : "Telegram Not Linked"}
+                  className={`p-2 rounded-xl border transition-all ${
+                    viewingUserProfile.socials?.telegram ? "bg-white/5 border-white/10 text-sky-400" : "bg-white/[0.01] border-white/5 text-white/10 opacity-30"
+                  }`}
+                >
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <path d="m22 2-7 20-4-9-9-4Z" />
+                    <path d="M22 2 11 13" />
+                  </svg>
+                </div>
+                {/* X */}
+                <div 
+                  title={viewingUserProfile.socials?.x ? `X: ${viewingUserProfile.socials.x}` : "X Not Linked"}
+                  className={`p-2 rounded-xl border transition-all ${
+                    viewingUserProfile.socials?.x ? "bg-white/5 border-white/10 text-white" : "bg-white/[0.01] border-white/5 text-white/10 opacity-30"
+                  }`}
+                >
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                  </svg>
+                </div>
+                {/* TikTok */}
+                <div 
+                  title={viewingUserProfile.socials?.tiktok ? `TikTok: ${viewingUserProfile.socials.tiktok}` : "TikTok Not Linked"}
+                  className={`p-2 rounded-xl border transition-all ${
+                    viewingUserProfile.socials?.tiktok ? "bg-white/5 border-white/10 text-pink-500" : "bg-white/[0.01] border-white/5 text-white/10 opacity-30"
+                  }`}
+                >
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.02 1.59 4.23.95.89 2.24 1.43 3.58 1.49v3.95c-1.74-.08-3.41-.75-4.73-1.89-.13-.11-.26-.22-.39-.34v6.86c.03 2.12-.9 4.19-2.52 5.56-1.92 1.63-4.66 2.1-7.05 1.22C4.5 20.18 2.8 17.55 3.05 14.8c.25-2.78 2.45-5.12 5.23-5.36 1.15-.09 2.3.17 3.3.75v4.06c-.84-.52-1.85-.71-2.8-.52-1.39.26-2.53 1.43-2.77 2.84-.28 1.62.67 3.23 2.25 3.66 1.44.4 3.05-.22 3.73-1.57.19-.38.28-.79.28-1.22V.02z" />
+                  </svg>
+                </div>
+                {/* Instagram */}
+                <div 
+                  title={viewingUserProfile.socials?.instagram ? `Instagram: ${viewingUserProfile.socials.instagram}` : "Instagram Not Linked"}
+                  className={`p-2 rounded-xl border transition-all ${
+                    viewingUserProfile.socials?.instagram ? "bg-white/5 border-white/10 text-pink-400" : "bg-white/[0.01] border-white/5 text-white/10 opacity-30"
+                  }`}
+                >
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                  </svg>
+                </div>
+                {/* Facebook */}
+                <div 
+                  title={viewingUserProfile.socials?.facebook ? `Facebook: ${viewingUserProfile.socials.facebook}` : "Facebook Not Linked"}
+                  className={`p-2 rounded-xl border transition-all ${
+                    viewingUserProfile.socials?.facebook ? "bg-white/5 border-white/10 text-blue-500" : "bg-white/[0.01] border-white/5 text-white/10 opacity-30"
+                  }`}
+                >
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            {/* Performance metrics */}
+            <div className="grid grid-cols-2 gap-4 mt-6 pt-4 border-t border-white/5 text-center">
+              <div>
+                <span className="block text-sm font-black text-white">{viewingUserProfile.reputation} XP</span>
+                <span className="block text-[8px] text-white/40 uppercase font-semibold mt-0.5">Reputation</span>
+              </div>
+              <div>
+                <span className="block text-sm font-black text-white">Rank #{viewingUserProfile.rank}</span>
+                <span className="block text-[8px] text-white/40 uppercase font-semibold mt-0.5">Rank</span>
+              </div>
+            </div>
+
+            {/* Verification Badge */}
+            <div className="mt-4 p-3 bg-white/[0.02] border border-white/5 rounded-xl text-center">
+              <span className="text-[10px] text-white/40">Verified Academy Graduate</span>
+              <span className="block text-[9px] font-bold text-green-400 mt-1">✓ Manually Verified TON Wallet Holder</span>
+            </div>
+
+            <Button onClick={() => setViewingUserProfile(null)} variant="primary" className="w-full mt-6">
+              Close Profile
+            </Button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
