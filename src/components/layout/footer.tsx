@@ -61,7 +61,7 @@ export function Footer() {
           <div>
             <h4 className="font-semibold text-white mb-6 text-sm uppercase tracking-wider">Resources</h4>
             <ul className="space-y-3 text-sm text-white/50">
-              <li><Link href="#" className="hover:text-white transition-colors">Whitepaper</Link></li>
+              <li><Link href="/whitepaper" className="hover:text-white transition-colors">Whitepaper</Link></li>
               <li><Link href="#faqs" className="hover:text-white transition-colors">FAQs</Link></li>
             </ul>
           </div>

@@ -41,13 +41,23 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Quest not found" }, { status: 404 });
     }
 
-    // Check if already completed
-    const alreadyCompleted = db.questLogs.some(
-      (log) => log.userId === user.id && log.questId === questId
-    );
+    // Check if already completed (goals are once-off; others reset daily)
+    const todayStr = new Date().toISOString().split("T")[0];
+    const alreadyCompleted = db.questLogs.some((log) => {
+      const matchesUserAndQuest = log.userId === user.id && log.questId === questId;
+      if (!matchesUserAndQuest) return false;
+      if (quest.category === "goals") return true; // Ever completed
+      return log.completedAt.startsWith(todayStr); // Completed today
+    });
 
     if (alreadyCompleted) {
-      return NextResponse.json({ success: true, message: "Quest already completed", reputationXP: user.reputationXP });
+      const dbUser = db.users.find((u) => u.id === user.id);
+      return NextResponse.json({ 
+        success: true, 
+        message: "Quest already completed today", 
+        reputationXP: dbUser ? dbUser.reputationXP : user.reputationXP,
+        streakDays: dbUser ? dbUser.streakDays : user.streakDays
+      });
     }
 
     // Add quest log
@@ -60,10 +70,15 @@ export async function POST(request: Request) {
 
     db.questLogs.push(newLog);
 
-    // Update user reputation points
+    // Update user reputation points and check-in streak
     const dbUser = db.users.find((u) => u.id === user.id);
     if (dbUser) {
       dbUser.reputationXP += quest.xpReward;
+      
+      // Increment streak if completing the daily check-in checklist quest (m1)
+      if (questId === "m1") {
+        dbUser.streakDays += 1;
+      }
     }
 
     writeDb(db);
@@ -72,6 +87,7 @@ export async function POST(request: Request) {
       success: true,
       xpEarned: quest.xpReward,
       reputationXP: dbUser ? dbUser.reputationXP : user.reputationXP,
+      streakDays: dbUser ? dbUser.streakDays : user.streakDays,
     });
   } catch (error: any) {
     return NextResponse.json({ error: error.message || "Failed to complete quest" }, { status: 500 });

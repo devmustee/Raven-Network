@@ -92,7 +92,7 @@ export function WorkspaceHub({
   const [viewingUserProfile, setViewingUserProfile] = useState<any | null>(null);
   
   // Daily Tasks state - time-windowed consistency booster
-  const [dailyTasks, setDailyTasks] = useState([
+  const [dailyTasks, setDailyTasks] = useState<any[]>([
     { id: 1, text: "Morning: Post GM on X", xp: 10, done: false, start: 6 * 60, end: 12 * 60, step: 0, isTelegramChannel: false, isTelegramCommunity: false, isX: true },
     { id: 2, text: "Morning: Post 2 original tweets", xp: 15, done: false, start: 6 * 60, end: 12 * 60, step: 0, isTelegramChannel: false, isTelegramCommunity: false, isX: true },
     { id: 3, text: "Morning: Write 50 quality replies", xp: 20, done: false, start: 6 * 60, end: 12 * 60, step: 0, isTelegramChannel: false, isTelegramCommunity: false, isX: true },
@@ -121,6 +121,15 @@ export function WorkspaceHub({
   
   const [questFilter, setQuestFilter] = useState<"all" | "morning" | "evening" | "night" | "goals">("all");
   const [floatingXps, setFloatingXps] = useState<{ id: string; text: string; top: number; left: number }[]>([]);
+
+  // Backend Persisted States
+  const [opportunities, setOpportunities] = useState<any[]>([]);
+  const [submissions, setSubmissions] = useState<any[]>([]);
+  const [leaderboard, setLeaderboard] = useState<any[]>([]);
+  const [applyingOppId, setApplyingOppId] = useState<string | null>(null);
+  const [submissionLink, setSubmissionLink] = useState("");
+  const [submittingOpp, setSubmittingOpp] = useState(false);
+  const [reputationXP, setReputationXP] = useState(820);
 
   // Time Engine
   const [currentMin, setCurrentMin] = useState(() => {
@@ -173,6 +182,101 @@ export function WorkspaceHub({
     }
   }, [currentMin, dailyTasks, unlockedTasks]);
 
+  // Load data from Backend APIs
+  React.useEffect(() => {
+    const token = localStorage.getItem("raven_user_token");
+    if (!token) return;
+
+    const headers = { Authorization: `Bearer ${token}` };
+
+    // 1. Fetch Profile to get actual XP
+    fetch("/api/profile", { headers })
+      .then(res => res.json())
+      .then(data => {
+        if (data.user) {
+          setReputationXP(data.user.reputationXP);
+        }
+      })
+      .catch(err => console.error("Profile fetch failed", err));
+
+    // 2. Fetch Quests and completions
+    fetch("/api/quests", { headers })
+      .then(res => res.json())
+      .then(data => {
+        if (data.quests) {
+          const mapped = data.quests.map((q: any) => {
+            const isX = q.verificationType === "twitter_retweet";
+            const isTG = q.verificationType === "telegram_join";
+            const isGit = q.verificationType === "github_commit";
+            
+            let start = 0;
+            let end = 24 * 60;
+            if (q.category === "morning") { start = 6 * 60; end = 12 * 60; }
+            else if (q.category === "evening") { start = 12 * 60; end = 18 * 60; }
+            else if (q.category === "night") { start = 18 * 60; end = 24 * 60; }
+
+            return {
+              id: q.id,
+              text: `${q.category.charAt(0).toUpperCase() + q.category.slice(1)}: ${q.title} - ${q.description}`,
+              xp: q.xpReward,
+              done: data.completedQuestIds.includes(q.id),
+              start,
+              end,
+              step: 0,
+              isTelegramChannel: isTG && q.title.toLowerCase().includes("channel"),
+              isTelegramCommunity: isTG && !q.title.toLowerCase().includes("channel"),
+              isX,
+              isGit,
+              rawQuest: q
+            };
+          });
+          setDailyTasks(mapped);
+          
+          const morningChecklistCompleted = data.completedQuestIds.includes("m1");
+          if (morningChecklistCompleted) {
+            setHasCheckedIn(true);
+          }
+        }
+      })
+      .catch(err => console.error("Quests fetch failed", err));
+
+    // 3. Fetch Opportunities and submissions
+    fetch("/api/opportunities", { headers })
+      .then(res => res.json())
+      .then(data => {
+        if (data.opportunities) {
+          setOpportunities(data.opportunities);
+        }
+        if (data.submissions) {
+          setSubmissions(data.submissions);
+        }
+      })
+      .catch(err => console.error("Opportunities fetch failed", err));
+  }, [walletAddress]);
+
+  // Load Leaderboard on tab activation
+  React.useEffect(() => {
+    if (mainTab === "leaderboard") {
+      fetch("/api/leaderboard")
+        .then(res => res.json())
+        .then(data => {
+          if (data.users) {
+            const mapped = data.users.map((u: any) => ({
+              rank: u.rank,
+              name: u.name,
+              reputation: u.reputation,
+              badge: getBadgeForUser(u.name, u.streakDays) || "Contributor",
+              avatar: u.avatar || "",
+              isUser: u.walletAddress === walletAddress,
+              socials: { github: u.github, telegram: u.telegram, x: u.x }
+            }));
+            setLeaderboard(mapped);
+          }
+        })
+        .catch(err => console.error("Leaderboard fetch failed", err));
+    }
+  }, [mainTab, walletAddress]);
+
   const getBadgeForUser = (name: string, currentUserStreak: number) => {
     let userStreak = 10;
     if (name === "MustaphaDev") userStreak = 365;
@@ -192,16 +296,38 @@ export function WorkspaceHub({
 
   const handleDailyCheckIn = (e?: React.MouseEvent) => {
     if (hasCheckedIn) return;
-    setHasCheckedIn(true);
-    setProfile(p => ({
-      ...p,
-      streakDays: p.streakDays + 1
-    }));
-    addNotification("Daily Streak claimed successfully! +1 Day added.", { type: "success", title: "Streak Claimed" });
-    if (e) triggerXpAnimation("+1 Streak Day ⚡", e);
+    
+    // Check in is represented by complete morning quest "m1"
+    const token = localStorage.getItem("raven_user_token");
+    fetch("/api/quests", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify({ questId: "m1" })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        setHasCheckedIn(true);
+        setReputationXP(data.reputationXP);
+        setProfile(p => ({
+          ...p,
+          streakDays: data.streakDays
+        }));
+        
+        // Mark task done locally
+        setDailyTasks(prev => prev.map(t => t.id === "m1" ? { ...t, done: true } : t));
+        
+        addNotification("Daily Streak claimed successfully! +1 Day added.", { type: "success", title: "Streak Claimed" });
+        if (e) triggerXpAnimation("+1 Streak Day ⚡", e);
+      }
+    })
+    .catch(err => console.error("Streak check-in failed", err));
   };
 
-  const toggleTask = (id: number, e?: React.MouseEvent) => {
+  const toggleTask = (id: any, e?: React.MouseEvent) => {
     const task = dailyTasks.find(t => t.id === id);
     if (!task) return;
 
@@ -242,31 +368,32 @@ export function WorkspaceHub({
     }
 
     const nextState = !task.done;
-    let newStep = task.step;
-
     if (nextState) {
-      addNotification(`+${task.xp} XP Earned! Streak protected.`, { type: "achievement", title: "Task Completed" });
-      if (e) triggerXpAnimation(`+${task.xp} XP`, e);
-      setProfile(p => ({
-        ...p,
-        streakDays: p.streakDays + 1
-      }));
-    } else {
-      // Reset step if unchecked
-      if (task.isTelegramChannel || task.isTelegramCommunity || task.isX) newStep = 0;
-      
-      setProfile(p => ({
-        ...p,
-        streakDays: Math.max(35, p.streakDays - 1)
-      }));
+      const token = localStorage.getItem("raven_user_token");
+      fetch("/api/quests", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({ questId: id })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          addNotification(`+${task.xp} XP Earned! Streak protected.`, { type: "achievement", title: "Task Completed" });
+          if (e) triggerXpAnimation(`+${task.xp} XP`, e);
+          
+          setReputationXP(data.reputationXP);
+          setProfile(p => ({
+            ...p,
+            streakDays: data.streakDays
+          }));
+          setDailyTasks(prev => prev.map(t => t.id === id ? { ...t, done: true } : t));
+        }
+      })
+      .catch(err => console.error("Quest log failed", err));
     }
-
-    setDailyTasks(prev => prev.map(t => {
-      if (t.id === id) {
-        return { ...t, done: nextState, step: newStep };
-      }
-      return t;
-    }));
   };
 
   // Removed showNotification wrapper
@@ -276,7 +403,7 @@ export function WorkspaceHub({
   const userRankEntry = {
     rank: 4,
     name: profile.name || "You (Connecting)",
-    reputation: 820 + (dailyTasks.filter(t => t.done).length * 15),
+    reputation: reputationXP,
     badge: profile.github ? "Verified Dev" : "Contributor",
     avatar: profile.avatar,
     isUser: true,
@@ -401,6 +528,9 @@ export function WorkspaceHub({
             </button>
 
             <div className="flex flex-col items-center text-center">
+              <span className="block text-[10px] uppercase tracking-widest text-white/40 font-bold mb-4">
+                Raven Network Profile
+              </span>
               <div className="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center overflow-hidden mb-3">
                 {profile.avatar ? (
                   <img src={profile.avatar} className="w-full h-full object-cover" alt="User Avatar" />
@@ -570,7 +700,7 @@ export function WorkspaceHub({
 
               {/* Badges timeline */}
               <div className="mt-6">
-                <span className="block text-[10px] uppercase tracking-widest text-white/40 font-bold mb-3">Unlocked Badges</span>
+                <span className="block text-[10px] uppercase tracking-widest text-white/40 font-bold mb-3">Raven Network Badges</span>
                 <div className="flex justify-between gap-2 overflow-x-auto pb-2">
                   {[
                     { name: "Fledgling", days: 7, color: "rgba(192, 132, 252, 0.2)", border: "rgba(192, 132, 252, 0.4)" },
@@ -655,8 +785,26 @@ export function WorkspaceHub({
                     width: `${Math.max(1, Math.min((profile.streakDays / 365) * 100, 100))}%`, 
                     color: "bg-orange-500" 
                   },
+                  { 
+                    label: "Consistency Score", 
+                    score: `${Math.min(100, 75 + profile.streakDays)}/100`, 
+                    width: `${Math.min(100, 75 + profile.streakDays)}%`, 
+                    color: "bg-emerald-500" 
+                  },
+                  { 
+                    label: "Contributions Score", 
+                    score: "85/100", 
+                    width: "85%", 
+                    color: "bg-indigo-500" 
+                  },
                   { label: "X Activities", score: "80/100", width: "80%", color: "bg-accent-purple" },
-                  { label: "Telegram Community Support", score: "65/100", width: "65%", color: "bg-accent-cyan" }
+                  { label: "Telegram Community Support", score: "65/100", width: "65%", color: "bg-accent-cyan" },
+                  { 
+                    label: "Missed Tasks", 
+                    score: `${dailyTasks.filter(t => currentMin >= t.end && !t.done).length} Tasks`, 
+                    width: `${Math.min(100, (dailyTasks.filter(t => currentMin >= t.end && !t.done).length / Math.max(1, dailyTasks.length)) * 100)}%`, 
+                    color: "bg-red-500/80" 
+                  }
                 ].map((skill, idx) => (
                   <div key={idx} className="space-y-1">
                     <div className="flex justify-between text-[10px] font-bold">
@@ -762,69 +910,151 @@ export function WorkspaceHub({
 
             {/* Tab Contents */}
             <div className="space-y-3 max-h-[400px] overflow-y-auto pr-1 mt-4">
-              {opportunitiesTab === "jobs" && jobs.map((job, idx) => (
-                <div key={idx} className="p-3.5 rounded-xl bg-white/[0.01] border border-white/5 flex items-center justify-between gap-4">
-                  <div>
-                    <h4 className="text-xs font-bold text-white">{job.title}</h4>
-                    <span className="text-[10px] text-white/40">{job.company} • {job.location}</span>
-                    <div className="flex gap-2 mt-1.5">
-                      <span className="text-[8px] px-1.5 py-0.5 rounded-full bg-accent-purple/10 border border-accent-purple/20 text-accent-purple font-bold">
-                        {job.type}
-                      </span>
-                      <span className="text-[8px] px-1.5 py-0.5 rounded-full bg-white/5 border border-white/10 text-white/40 font-bold">
-                        {job.salary}
-                      </span>
-                    </div>
-                  </div>
-                  <Button variant="outline" size="sm" className="flex items-center gap-1 text-[10px] py-1 h-auto">
-                    Apply <ExternalLink className="w-3 h-3" />
-                  </Button>
-                </div>
-              ))}
+              {(() => {
+                const filteredOpps = opportunities.filter(opp => {
+                  if (opportunitiesTab === "jobs" && opp.type !== "job") return false;
+                  if (opportunitiesTab === "hackathons" && opp.type !== "hackathon") return false;
+                  if (opportunitiesTab === "contests" && opp.type !== "bounty") return false;
+                  if (opportunityFilter !== "all" && opp.status !== opportunityFilter) return false;
+                  return true;
+                });
 
-              {opportunitiesTab === "hackathons" && hackathons.filter(h => opportunityFilter === "all" || h.status === opportunityFilter).map((hack, idx) => (
-                <div key={idx} className={`p-3.5 rounded-xl border flex items-center justify-between gap-4 ${hack.status === "completed" ? "bg-white/[0.005] border-white/5 opacity-60" : "bg-white/[0.01] border-white/5"}`}>
-                  <div>
-                    <h4 className="text-xs font-bold text-white">{hack.title}</h4>
-                    <span className="text-[10px] text-white/40">Hosted by {hack.host} • {hack.dates}</span>
-                    <div className="mt-1.5 flex gap-2">
-                      <span className="text-[8px] px-1.5 py-0.5 rounded-full bg-accent-blue/10 border border-accent-blue/20 text-accent-blue font-bold">
-                        Prize: {hack.prizePool}
-                      </span>
-                      {hack.status === "completed" && (
-                        <span className="text-[8px] px-1.5 py-0.5 rounded-full bg-white/5 border border-white/10 text-white/40 font-bold">
-                          Completed
-                        </span>
+                if (filteredOpps.length === 0) {
+                  return (
+                    <div className="text-center p-8 text-white/30 text-xs">
+                      No active or completed listings in this category.
+                    </div>
+                  );
+                }
+
+                return filteredOpps.map((opp) => {
+                  const hasApplied = submissions.some(s => s.opportunityId === opp.id);
+                  const submission = submissions.find(s => s.opportunityId === opp.id);
+                  const isLocked = reputationXP < opp.xpRequired;
+
+                  return (
+                    <div key={opp.id} className={`p-4 rounded-xl border flex flex-col gap-3 ${
+                      opp.status === "completed" ? "bg-white/[0.005] border-white/5 opacity-60" : "bg-white/[0.01] border-white/5"
+                    }`}>
+                      <div className="flex items-start justify-between gap-4">
+                        <div>
+                          <h4 className="text-xs font-bold text-white flex items-center gap-1.5">
+                            {opp.title}
+                            {isLocked && <Lock className="w-3 h-3 text-red-400" />}
+                          </h4>
+                          <p className="text-[10px] text-white/50 leading-relaxed mt-1">{opp.description}</p>
+                          <span className="text-[9px] text-white/30 block mt-1">Deadline: {opp.deadline}</span>
+                          <div className="flex gap-2 mt-2">
+                            <span className="text-[8px] px-1.5 py-0.5 rounded-full bg-accent-blue/10 border border-accent-blue/20 text-accent-blue font-bold">
+                              Prize: {opp.prizePool}
+                            </span>
+                            <span className="text-[8px] px-1.5 py-0.5 rounded-full bg-white/5 border border-white/10 text-white/40 font-bold">
+                              Rank Required: {opp.xpRequired} XP
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className="flex flex-col items-end gap-2 flex-shrink-0">
+                          {isLocked ? (
+                            <span className="text-[9px] text-red-400 font-bold flex items-center gap-1">
+                              <Lock className="w-3 h-3" />
+                              Locked
+                            </span>
+                          ) : submission ? (
+                            <span className={`text-[9px] font-bold flex items-center gap-1 ${
+                              submission.isApproved ? "text-[#00FFCC]" : "text-[#FFCC00]"
+                            }`}>
+                              <Check className="w-3.5 h-3.5" />
+                              {submission.isApproved ? "Approved" : "Under Review"}
+                            </span>
+                          ) : opp.status === "completed" ? (
+                            <span className="text-[9px] text-white/30 font-bold">Closed</span>
+                          ) : applyingOppId === opp.id ? (
+                            <button
+                              onClick={() => setApplyingOppId(null)}
+                              className="text-[9px] text-white/40 hover:text-white"
+                            >
+                              Cancel
+                            </button>
+                          ) : (
+                            <Button
+                              onClick={() => {
+                                setApplyingOppId(opp.id);
+                                setSubmissionLink("");
+                              }}
+                              variant="primary"
+                              size="sm"
+                              className="text-[10px] py-1 px-3 h-auto"
+                            >
+                              Apply
+                            </Button>
+                          )}
+                        </div>
+                      </div>
+
+                      {applyingOppId === opp.id && (
+                        <div className="pt-2 border-t border-white/5 space-y-2 animate-in fade-in duration-200">
+                          <label className="block text-[8px] font-bold uppercase tracking-wider text-white/40">
+                            Submission Link (GitHub, Vercel, or Drive link)
+                          </label>
+                          <div className="flex gap-2">
+                            <input
+                              type="text"
+                              value={submissionLink}
+                              onChange={(e) => setSubmissionLink(e.target.value)}
+                              placeholder="https://github.com/your-username/project-repo"
+                              className="flex-1 bg-white/[0.03] border border-white/10 focus:border-[#00F0FF]/30 transition-all rounded-lg px-3 py-1.5 text-xs text-white placeholder-white/20 outline-none"
+                            />
+                            <Button
+                              disabled={submittingOpp || !submissionLink}
+                              onClick={async () => {
+                                setSubmittingOpp(true);
+                                try {
+                                  const token = localStorage.getItem("raven_user_token");
+                                  const res = await fetch("/api/opportunities", {
+                                    method: "POST",
+                                    headers: {
+                                      "Content-Type": "application/json",
+                                      Authorization: `Bearer ${token}`
+                                    },
+                                    body: JSON.stringify({
+                                      opportunityId: opp.id,
+                                      submissionLink
+                                    })
+                                  });
+                                  const data = await res.json();
+                                  if (data.success) {
+                                    setSubmissions(prev => [...prev, data.submission]);
+                                    setApplyingOppId(null);
+                                    addNotification("Proof-of-work solution submitted for review!", {
+                                      type: "success",
+                                      title: "Solution Submitted"
+                                    });
+                                  } else {
+                                    addNotification(data.error || "Failed to submit application", {
+                                      type: "warning",
+                                      title: "Submission Error"
+                                    });
+                                  }
+                                } catch (err) {
+                                  console.error(err);
+                                } finally {
+                                  setSubmittingOpp(false);
+                                }
+                              }}
+                              variant="secondary"
+                              size="sm"
+                              className="text-[10px] py-1 px-4 h-auto"
+                            >
+                              {submittingOpp ? "Sending..." : "Submit"}
+                            </Button>
+                          </div>
+                        </div>
                       )}
                     </div>
-                  </div>
-                  <Button variant={hack.status === "completed" ? "outline" : "primary"} size="sm" className="flex items-center gap-1 text-[10px] py-1 h-auto" disabled={hack.status === "completed"}>
-                    {hack.status === "completed" ? "View Winners" : "Register"} <ExternalLink className="w-3 h-3" />
-                  </Button>
-                </div>
-              ))}
-
-              {opportunitiesTab === "contests" && contests.filter(c => opportunityFilter === "all" || c.status === opportunityFilter).map((contest, idx) => (
-                <div key={idx} className={`p-3.5 rounded-xl border flex items-center justify-between gap-4 ${contest.status === "completed" ? "bg-white/[0.005] border-white/5 opacity-60" : "bg-white/[0.01] border-white/5"}`}>
-                  <div>
-                    <h4 className="text-xs font-bold text-white">{contest.title}</h4>
-                    <span className="text-[10px] text-white/40">{contest.participants} • {contest.deadline}</span>
-                    <div className="mt-1.5 flex gap-2">
-                      <span className="text-[8px] px-1.5 py-0.5 rounded-full bg-accent-cyan/10 border border-accent-cyan/20 text-accent-cyan font-bold">
-                        Prize: {contest.prizePool}
-                      </span>
-                      {contest.status === "completed" && (
-                        <span className="text-[8px] px-1.5 py-0.5 rounded-full bg-white/5 border border-white/10 text-white/40 font-bold">
-                          Completed
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                  <Button variant="outline" size="sm" className="flex items-center gap-1 text-[10px] py-1 h-auto" disabled={contest.status === "completed"}>
-                    {contest.status === "completed" ? "View Winners" : "Submit"} <ExternalLink className="w-3 h-3" />
-                  </Button>
-                </div>
-              ))}
+                  );
+                });
+              })()}
             </div>
           </GlassCard>
           </div>
@@ -834,7 +1064,7 @@ export function WorkspaceHub({
           <div className="animate-in fade-in slide-in-from-bottom-4 duration-300">
             <div className="grid md:grid-cols-2 gap-6 text-left">
               {ecosystemProjects.map((project, idx) => {
-                const userReputation = 820 + (dailyTasks.filter(t => t.done).length * 15);
+                const userReputation = reputationXP;
                 const isLocked = userReputation < project.reputationRequired;
 
                 return (
@@ -939,8 +1169,11 @@ export function WorkspaceHub({
             </div>
 
             <div className="space-y-2">
-              {fullLeaderboard.map((user) => {
-                const isUser = user.isUser;
+              {leaderboard.length === 0 ? (
+                <div className="text-center p-8 text-white/30 text-xs">Loading rankings...</div>
+              ) : (
+                leaderboard.map((user) => {
+                  const isUser = user.isUser;
                 return (
                   <div 
                     key={user.rank} 
@@ -1063,7 +1296,7 @@ export function WorkspaceHub({
                     </div>
                   </div>
                 );
-              })}
+              }))}
             </div>
           </GlassCard>
           </div>

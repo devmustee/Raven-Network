@@ -84,8 +84,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <div className="absolute top-0 right-0 w-32 h-32 bg-[#00F0FF]/10 rounded-full blur-2xl pointer-events-none" />
           
           <div className="flex flex-col items-center text-center">
-            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#00F0FF] to-[#A060FF] flex items-center justify-center mb-6 shadow-lg shadow-[#00F0FF]/25">
-              <Shield className="w-8 h-8 text-black" />
+            <div className="w-16 h-16 relative flex items-center justify-center mb-6">
+              <img 
+                src="/logo.png" 
+                alt="Raven Network Logo" 
+                className="object-contain w-full h-full" 
+              />
             </div>
             
             <h2 className="text-xl font-extrabold tracking-tight mb-2">Raven HQ Authentication</h2>

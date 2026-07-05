@@ -28,8 +28,12 @@ export function AdminSidebar() {
     <aside className="w-64 bg-[#0B0B0C] border-r border-white/10 flex flex-col h-screen sticky top-0">
       {/* Brand Logo / Title */}
       <div className="p-6 border-b border-white/10 flex items-center gap-3">
-        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#00F0FF] to-[#A060FF] flex items-center justify-center shadow-lg shadow-[#00F0FF]/25">
-          <Shield className="w-4 h-4 text-black font-bold" />
+        <div className="w-8 h-8 relative flex items-center justify-center">
+          <img 
+            src="/logo.png" 
+            alt="Raven Network Logo" 
+            className="object-contain w-full h-full" 
+          />
         </div>
         <div>
           <h1 className="font-bold text-white tracking-wide text-sm">RAVEN HQ</h1>

@@ -30,6 +30,39 @@ export default function Home() {
     streakDays: 35,
   });
 
+  React.useEffect(() => {
+    const token = localStorage.getItem("raven_user_token");
+    if (token) {
+      fetch("/api/profile", {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.user) {
+          setWalletAddress(data.user.walletAddress);
+          setProfile({
+            name: data.user.name,
+            avatar: data.user.avatar || "",
+            github: data.user.github || "",
+            telegram: data.user.telegram || "",
+            x: data.user.x || "",
+            tiktok: "",
+            instagram: "",
+            facebook: "",
+            streakDays: data.user.streakDays || 0,
+          });
+        } else {
+          localStorage.removeItem("raven_user_token");
+        }
+      })
+      .catch(() => {
+        localStorage.removeItem("raven_user_token");
+      });
+    }
+  }, []);
+
   return (
     <>
       <Navbar 

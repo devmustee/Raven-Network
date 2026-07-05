@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Search, Edit2, Shield, User as UserIcon, Calendar, Award, Check, X } from "lucide-react";
+import { Search, Edit2, Shield, User as UserIcon, Calendar, Award, Check, X, Copy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface User {
@@ -19,8 +19,49 @@ interface User {
   createdAt: string;
 }
 
+function BadgeIcon({ name, className = "w-6 h-6" }: { name: string; className?: string }) {
+  const badgeMap: Record<string, string> = {
+    "Fledgling": "/badges/fledgling.png",
+    "Scout": "/badges/scout.png",
+    "Vanguard": "/badges/vanguard.png",
+    "Shadow": "/badges/shadow.png",
+    "Legend": "/badges/legend.png",
+  };
+
+  const src = badgeMap[name];
+  if (!src) return null;
+
+  return (
+    <img src={src} alt={`${name} Badge`} className={`${className} object-contain`} />
+  );
+}
+
+const getBadgeForUser = (name: string, currentUserStreak: number) => {
+  let userStreak = 10;
+  if (name === "MustaphaDev") userStreak = 365;
+  else if (name === "AfroCoder") userStreak = 120;
+  else if (name === "FatimaTON") userStreak = 90;
+  else if (name === "KofiWeb3") userStreak = 30;
+  else if (name === "Zubairu") userStreak = 15;
+  else userStreak = currentUserStreak;
+
+  if (userStreak >= 365) return "Legend";
+  if (userStreak >= 180) return "Shadow";
+  if (userStreak >= 90) return "Vanguard";
+  if (userStreak >= 30) return "Scout";
+  if (userStreak >= 7) return "Fledgling";
+  return null;
+};
+
 export default function AdminUsersPage() {
   const [users, setUsers] = useState<User[]>([]);
+  const [copiedAddress, setCopiedAddress] = useState<string | null>(null);
+
+  const handleCopy = (address: string) => {
+    navigator.clipboard.writeText(address);
+    setCopiedAddress(address);
+    setTimeout(() => setCopiedAddress(null), 2000);
+  };
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   
@@ -30,8 +71,7 @@ export default function AdminUsersPage() {
     name: "",
     role: "USER" as "USER" | "ADMIN" | "VALIDATOR",
     reputationXP: 0,
-    streakDays: 0,
-    isGraduated: false
+    streakDays: 0
   });
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState<{ text: string, type: "success" | "error" } | null>(null);
@@ -61,8 +101,7 @@ export default function AdminUsersPage() {
       name: user.name,
       role: user.role,
       reputationXP: user.reputationXP,
-      streakDays: user.streakDays,
-      isGraduated: user.isGraduated
+      streakDays: user.streakDays
     });
   };
 
@@ -155,14 +194,13 @@ export default function AdminUsersPage() {
               <th className="px-6 py-4.5 text-[10px] font-bold uppercase tracking-widest text-white/40">Role</th>
               <th className="px-6 py-4.5 text-[10px] font-bold uppercase tracking-widest text-white/40">Reputation (XP)</th>
               <th className="px-6 py-4.5 text-[10px] font-bold uppercase tracking-widest text-white/40">Streak</th>
-              <th className="px-6 py-4.5 text-[10px] font-bold uppercase tracking-widest text-white/40">Graduation Status</th>
               <th className="px-6 py-4.5 text-[10px] font-bold uppercase tracking-widest text-white/40 text-right">Actions</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-white/5 text-xs">
             {filteredUsers.length === 0 ? (
               <tr>
-                <td colSpan={7} className="px-6 py-10 text-center text-white/30 font-medium">
+                <td colSpan={6} className="px-6 py-10 text-center text-white/30 font-medium">
                   No members matched your search criteria
                 </td>
               </tr>
@@ -170,16 +208,81 @@ export default function AdminUsersPage() {
               filteredUsers.map((user) => (
                 <tr key={user.id} className="hover:bg-white/[0.01] transition-colors">
                   <td className="px-6 py-4 flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#00F0FF]/25 to-[#A060FF]/25 border border-white/5 flex items-center justify-center font-bold text-white/80">
-                      {user.name.charAt(0).toUpperCase()}
+                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#00F0FF]/25 to-[#A060FF]/25 border border-white/5 flex items-center justify-center font-bold text-white/80 overflow-hidden flex-shrink-0">
+                      {user.avatar ? (
+                        <img src={user.avatar} className="w-full h-full object-cover" alt={user.name} />
+                      ) : (
+                        user.name.charAt(0).toUpperCase()
+                      )}
                     </div>
                     <div>
-                      <span className="block font-semibold text-white">{user.name}</span>
-                      <span className="block text-[10px] text-white/40">@{user.telegram || "no_handle"}</span>
+                      <div className="flex items-center gap-1.5">
+                        <span className="font-semibold text-white">{user.name}</span>
+                        {(() => {
+                          const badgeName = getBadgeForUser(user.name, user.streakDays);
+                          return badgeName ? (
+                            <BadgeIcon name={badgeName} className="w-3.5 h-3.5" />
+                          ) : null;
+                        })()}
+                      </div>
+                      <div className="flex gap-1.5 items-center mt-1">
+                        {user.telegram && (
+                          <a 
+                            href={`https://t.me/${user.telegram}`} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="text-sky-400 hover:text-sky-300 text-[10px]"
+                            title={`Telegram: @${user.telegram}`}
+                          >
+                            @{user.telegram}
+                          </a>
+                        )}
+                        {user.x && (
+                          <a 
+                            href={`https://x.com/${user.x.replace('@', '')}`} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="text-white hover:text-white/80 text-[10px]"
+                            title={`X: ${user.x}`}
+                          >
+                            <svg className="w-2.5 h-2.5" viewBox="0 0 24 24" fill="currentColor">
+                              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                            </svg>
+                          </a>
+                        )}
+                        {user.github && (
+                          <a 
+                            href={`https://github.com/${user.github}`} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="text-white opacity-70 hover:opacity-100"
+                            title={`GitHub: ${user.github}`}
+                          >
+                            <svg className="w-2.5 h-2.5" viewBox="0 0 24 24" fill="currentColor">
+                              <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z" />
+                            </svg>
+                          </a>
+                        )}
+                      </div>
                     </div>
                   </td>
-                  <td className="px-6 py-4 font-mono text-white/50 text-[11px] max-w-[150px] truncate" title={user.walletAddress}>
-                    {user.walletAddress}
+                  <td className="px-6 py-4">
+                    <div className="flex items-center gap-1.5 font-mono text-white/50 text-[11px]">
+                      <span className="truncate max-w-[100px]" title={user.walletAddress}>
+                        {user.walletAddress}
+                      </span>
+                      <button 
+                        onClick={() => handleCopy(user.walletAddress)}
+                        className="text-white/30 hover:text-[#00F0FF] transition-colors"
+                        title="Copy Wallet Address"
+                      >
+                        {copiedAddress === user.walletAddress ? (
+                          <Check className="w-3 h-3 text-green-400" />
+                        ) : (
+                          <Copy className="w-3 h-3" />
+                        )}
+                      </button>
+                    </div>
                   </td>
                   <td className="px-6 py-4">
                     <span className={`inline-flex px-2 py-0.5 rounded-md text-[9px] font-bold border uppercase tracking-wider ${
@@ -197,20 +300,6 @@ export default function AdminUsersPage() {
                   </td>
                   <td className="px-6 py-4 text-white/70">
                     🔥 {user.streakDays} Days
-                  </td>
-                  <td className="px-6 py-4">
-                    <span className={`inline-flex items-center gap-1.5 ${
-                      user.isGraduated ? "text-[#00FFCC]" : "text-white/30"
-                    } font-semibold`}>
-                      {user.isGraduated ? (
-                        <>
-                          <Check className="w-3.5 h-3.5" />
-                          Graduated
-                        </>
-                      ) : (
-                        "Academy In-Progress"
-                      )}
-                    </span>
                   </td>
                   <td className="px-6 py-4 text-right">
                     <button
@@ -303,19 +392,7 @@ export default function AdminUsersPage() {
                 </div>
               </div>
 
-              {/* Graduation Toggle */}
-              <div className="flex items-center justify-between p-3.5 rounded-xl bg-white/[0.02] border border-white/5">
-                <div>
-                  <span className="block text-xs font-bold text-white">Academy Graduate</span>
-                  <span className="block text-[9px] text-white/40">Has verified graduation Flock NFT</span>
-                </div>
-                <input
-                  type="checkbox"
-                  checked={editForm.isGraduated}
-                  onChange={(e) => setEditForm({ ...editForm, isGraduated: e.target.checked })}
-                  className="w-4 h-4 border border-white/20 bg-transparent rounded outline-none checked:bg-[#00F0FF] checked:border-[#00F0FF]"
-                />
-              </div>
+
 
               {/* Action Buttons */}
               <div className="flex gap-3 pt-2">

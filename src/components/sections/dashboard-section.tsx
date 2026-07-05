@@ -174,7 +174,8 @@ export function DashboardSection({ walletAddress, setIsConnectModalOpen, profile
                   {[
                     { label: "Code Contributions (GitHub)", score: "80/100", width: "w-[80%]", color: "bg-accent-purple" },
                     { label: "Academy Modules", score: "90/100", width: "w-[90%]", color: "bg-accent-blue" },
-                    { label: "Community Support", score: "65/100", width: "w-[65%]", color: "bg-accent-cyan" }
+                    { label: "Community Support", score: "65/100", width: "w-[65%]", color: "bg-accent-cyan" },
+                    { label: "Missed Tasks", score: "2 Tasks", width: "w-[20%]", color: "bg-red-500/80" }
                   ].map((skill, idx) => (
                     <div key={idx} className="space-y-1.5">
                       <div className="flex justify-between text-xs font-semibold">

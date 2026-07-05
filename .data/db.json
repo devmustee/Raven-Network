@@ -1,0 +1,378 @@
+{
+  "users": [
+    {
+      "id": "user-1",
+      "walletAddress": "EQD...sage1",
+      "role": "ADMIN",
+      "name": "Cryptosage Edited",
+      "avatar": "/avatars/avatar1.png",
+      "github": "cryptosage",
+      "telegram": "cryptosage",
+      "x": "cryptosage_web3",
+      "reputationXP": 2000,
+      "streakDays": 60,
+      "isGraduated": true,
+      "createdAt": "2026-07-05T16:00:09.314Z"
+    },
+    {
+      "id": "user-3",
+      "walletAddress": "EQD...aisha3",
+      "role": "USER",
+      "name": "Aisha_Builds",
+      "avatar": "/avatars/avatar2.png",
+      "github": "aishabuilds",
+      "telegram": "aisha_dev",
+      "x": "aisha_builds",
+      "reputationXP": 780,
+      "streakDays": 18,
+      "isGraduated": true,
+      "createdAt": "2026-07-05T16:00:09.314Z"
+    },
+    {
+      "id": "user-4",
+      "walletAddress": "EQD...chidi4",
+      "role": "USER",
+      "name": "Chidi_Dev",
+      "avatar": "/avatars/avatar3.png",
+      "github": "chididev",
+      "telegram": "chidi_dev",
+      "x": "chidi_codes",
+      "reputationXP": 650,
+      "streakDays": 12,
+      "isGraduated": true,
+      "createdAt": "2026-07-05T16:00:09.314Z"
+    },
+    {
+      "id": "user-5",
+      "walletAddress": "EQD...nneka5",
+      "role": "USER",
+      "name": "Nneka_Creator",
+      "avatar": "/avatars/avatar4.png",
+      "github": "nnekacreates",
+      "telegram": "nneka_c",
+      "x": "nneka_creator",
+      "reputationXP": 540,
+      "streakDays": 8,
+      "isGraduated": true,
+      "createdAt": "2026-07-05T16:00:09.314Z"
+    },
+    {
+      "id": "user-6",
+      "walletAddress": "EQD...kofi6",
+      "role": "USER",
+      "name": "Kofi_Nodes",
+      "avatar": "/avatars/avatar5.png",
+      "github": "kofinodes",
+      "telegram": "kofi_nodes",
+      "x": "kofi_nodes",
+      "reputationXP": 490,
+      "streakDays": 5,
+      "isGraduated": true,
+      "createdAt": "2026-07-05T16:00:09.314Z"
+    },
+    {
+      "id": "admin-1",
+      "walletAddress": "EQA_ADMIN_HQ_RAVEN_GATEWAY_AUTHENTICATOR",
+      "role": "ADMIN",
+      "name": "Raven HQ Admin",
+      "avatar": "/logo.png",
+      "github": "raven-network",
+      "telegram": "raven_network",
+      "x": "raven_network",
+      "reputationXP": 9999,
+      "streakDays": 365,
+      "isGraduated": true,
+      "createdAt": "2026-07-05T16:00:09.314Z"
+    },
+    {
+      "id": "user-kko8n83",
+      "walletAddress": "EQA_RAVEN_WALLET_USER_9424",
+      "role": "USER",
+      "name": "user_9424",
+      "avatar": "",
+      "github": "",
+      "telegram": "user_9424",
+      "x": "",
+      "reputationXP": 835,
+      "streakDays": 35,
+      "isGraduated": true,
+      "createdAt": "2026-07-05T16:13:36.324Z"
+    },
+    {
+      "id": "user-tje4ltp",
+      "walletAddress": "EQA_RAVEN_WALLET_USER_6456",
+      "role": "USER",
+      "name": "user_6456",
+      "avatar": "",
+      "github": "user_6456",
+      "telegram": "",
+      "x": "",
+      "reputationXP": 835,
+      "streakDays": 36,
+      "isGraduated": true,
+      "createdAt": "2026-07-05T21:18:26.539Z"
+    },
+    {
+      "id": "user-xw16hti",
+      "walletAddress": "EQA_RAVEN_WALLET_USER_6482",
+      "role": "USER",
+      "name": "user_6482",
+      "avatar": "",
+      "github": "",
+      "telegram": "user_6482",
+      "x": "",
+      "reputationXP": 820,
+      "streakDays": 35,
+      "isGraduated": true,
+      "createdAt": "2026-07-05T21:37:55.218Z"
+    },
+    {
+      "id": "user-v5yvvz8",
+      "walletAddress": "EQA_RAVEN_WALLET_USER_9393",
+      "role": "USER",
+      "name": "user_9393",
+      "avatar": "",
+      "github": "",
+      "telegram": "user_9393",
+      "x": "",
+      "reputationXP": 820,
+      "streakDays": 35,
+      "isGraduated": true,
+      "createdAt": "2026-07-05T21:44:04.357Z"
+    },
+    {
+      "id": "user-upkp1jy",
+      "walletAddress": "EQA_RAVEN_WALLET_USER_8821",
+      "role": "USER",
+      "name": "user_8821",
+      "avatar": "",
+      "github": "",
+      "telegram": "user_8821",
+      "x": "",
+      "reputationXP": 820,
+      "streakDays": 35,
+      "isGraduated": true,
+      "createdAt": "2026-07-05T21:45:22.345Z"
+    },
+    {
+      "id": "user-upr3he8",
+      "walletAddress": "EQA_TONKEEPER_USER_1620",
+      "role": "USER",
+      "name": "user_1620",
+      "avatar": "",
+      "github": "",
+      "telegram": "user_1620",
+      "x": "",
+      "reputationXP": 835,
+      "streakDays": 36,
+      "isGraduated": true,
+      "createdAt": "2026-07-05T21:45:40.146Z"
+    },
+    {
+      "id": "user-srrvwt4",
+      "walletAddress": "EQA_RAVEN_WALLET_USER_8254",
+      "role": "USER",
+      "name": "user_8254",
+      "avatar": "",
+      "github": "user_8254",
+      "telegram": "",
+      "x": "",
+      "reputationXP": 820,
+      "streakDays": 35,
+      "isGraduated": true,
+      "createdAt": "2026-07-05T21:51:50.124Z"
+    },
+    {
+      "id": "user-2wlt94o",
+      "walletAddress": "EQA_RAVEN_WALLET_USER_7294",
+      "role": "USER",
+      "name": "user_7294",
+      "avatar": "",
+      "github": "",
+      "telegram": "user_7294",
+      "x": "",
+      "reputationXP": 820,
+      "streakDays": 35,
+      "isGraduated": true,
+      "createdAt": "2026-07-05T21:59:36.423Z"
+    },
+    {
+      "id": "user-voept9f",
+      "walletAddress": "EQA_RAVEN_WALLET_USER_7994",
+      "role": "USER",
+      "name": "user_7994",
+      "avatar": "",
+      "github": "",
+      "telegram": "user_7994",
+      "x": "",
+      "reputationXP": 820,
+      "streakDays": 35,
+      "isGraduated": true,
+      "createdAt": "2026-07-05T22:02:04.177Z"
+    },
+    {
+      "id": "user-q6q32ib",
+      "walletAddress": "EQA_RAVEN_WALLET_USER_5529",
+      "role": "USER",
+      "name": "user_5529",
+      "avatar": "",
+      "github": "user_5529",
+      "telegram": "",
+      "x": "",
+      "reputationXP": 820,
+      "streakDays": 35,
+      "isGraduated": true,
+      "createdAt": "2026-07-05T22:03:50.207Z"
+    },
+    {
+      "id": "user-csaaewn",
+      "walletAddress": "EQA_RAVEN_WALLET_USER_984",
+      "role": "USER",
+      "name": "user_984",
+      "avatar": "",
+      "github": "user_984",
+      "telegram": "",
+      "x": "",
+      "reputationXP": 820,
+      "streakDays": 35,
+      "isGraduated": true,
+      "createdAt": "2026-07-05T22:07:38.981Z"
+    },
+    {
+      "id": "user-01edf5c",
+      "walletAddress": "EQA_RAVEN_WALLET_USER_3743",
+      "role": "USER",
+      "name": "user_3743",
+      "avatar": "",
+      "github": "",
+      "telegram": "user_3743",
+      "x": "",
+      "reputationXP": 820,
+      "streakDays": 35,
+      "isGraduated": true,
+      "createdAt": "2026-07-05T22:09:47.492Z"
+    }
+  ],
+  "quests": [
+    {
+      "id": "m1",
+      "title": "On-Chain Checklist",
+      "description": "Initialize and verify your active node credentials.",
+      "category": "morning",
+      "xpReward": 15,
+      "verificationType": "manual"
+    },
+    {
+      "id": "m2",
+      "title": "Twitter Engagement",
+      "description": "Like and retweet the latest update announcement from Raven Network.",
+      "category": "morning",
+      "xpReward": 15,
+      "verificationType": "twitter_retweet",
+      "verificationMeta": {
+        "tweetId": "12345"
+      }
+    },
+    {
+      "id": "m3",
+      "title": "Telegram Roll Call",
+      "description": "Check in with the Raven Community Telegram group.",
+      "category": "morning",
+      "xpReward": 15,
+      "verificationType": "telegram_join"
+    },
+    {
+      "id": "e1",
+      "title": "GitHub Sync",
+      "description": "Verify your daily contribution commit push to the Raven codebase.",
+      "category": "evening",
+      "xpReward": 15,
+      "verificationType": "github_commit"
+    },
+    {
+      "id": "e2",
+      "title": "Community Q&A",
+      "description": "Help answer one technical question in the discord support channel.",
+      "category": "evening",
+      "xpReward": 15,
+      "verificationType": "manual"
+    },
+    {
+      "id": "n1",
+      "title": "Validator Node Heartbeat",
+      "description": "Send status logs check to validators node.",
+      "category": "night",
+      "xpReward": 15,
+      "verificationType": "manual"
+    },
+    {
+      "id": "g1",
+      "title": "Flock Post Generator Integration",
+      "description": "Contribute to building or expanding the AI automation suite.",
+      "category": "goals",
+      "xpReward": 150,
+      "verificationType": "github_commit"
+    },
+    {
+      "id": "g2",
+      "title": "Host local Web3 Meetup",
+      "description": "Organize a physical Web3 builders hack day in your city.",
+      "category": "goals",
+      "xpReward": 200,
+      "verificationType": "manual"
+    }
+  ],
+  "questLogs": [
+    {
+      "id": "log-pvp8d7n",
+      "userId": "user-kko8n83",
+      "questId": "m1",
+      "completedAt": "2026-07-05T16:42:53.761Z"
+    },
+    {
+      "id": "log-qy7ryuq",
+      "userId": "user-tje4ltp",
+      "questId": "m1",
+      "completedAt": "2026-07-05T21:18:33.491Z"
+    },
+    {
+      "id": "log-eafsukr",
+      "userId": "user-upr3he8",
+      "questId": "m1",
+      "completedAt": "2026-07-05T21:45:49.413Z"
+    }
+  ],
+  "opportunities": [
+    {
+      "id": "opp-1",
+      "title": "Junior Smart Contract Auditor",
+      "description": "Audit core locking and vesting smart contracts on TON. Verify security mechanisms.",
+      "type": "job",
+      "prizePool": "$2,200 / Month",
+      "deadline": "2026-07-20",
+      "xpRequired": 800,
+      "status": "active"
+    },
+    {
+      "id": "opp-2",
+      "title": "Africa Builders Hackathon",
+      "description": "Build innovative decentralized consumer applications using TON SDK & Raven payments.",
+      "type": "hackathon",
+      "prizePool": "$15,000 USD Pool",
+      "deadline": "2026-07-12",
+      "xpRequired": 200,
+      "status": "active"
+    },
+    {
+      "id": "opp-3",
+      "title": "Flock Social Media Bot Creation",
+      "description": "Write an automation script linking AI post generation to Twitter APIs.",
+      "type": "bounty",
+      "prizePool": "500 TON",
+      "deadline": "2026-07-09",
+      "xpRequired": 500,
+      "status": "active"
+    }
+  ],
+  "submissions": []
+}

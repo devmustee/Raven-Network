@@ -7,7 +7,32 @@ export async function GET() {
   if (!user) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
-  return NextResponse.json({ user });
+
+  const db = getDb();
+  const dbUser = db.users.find((u) => u.id === user.id);
+  
+  if (dbUser) {
+    // Streak Decay Engine: Decay streak if last activity was > 36h ago
+    const userLogs = db.questLogs.filter(log => log.userId === dbUser.id);
+    if (userLogs.length > 0) {
+      const sortedLogs = [...userLogs].sort((a, b) => new Date(b.completedAt).getTime() - new Date(a.completedAt).getTime());
+      const lastLogTime = new Date(sortedLogs[0].completedAt).getTime();
+      const now = Date.now();
+      const diffMs = now - lastLogTime;
+      const diffHours = diffMs / (1000 * 60 * 60);
+
+      if (diffHours > 36) {
+        const decayDays = Math.floor((diffHours - 12) / 24);
+        const oldStreak = dbUser.streakDays;
+        dbUser.streakDays = Math.max(0, dbUser.streakDays - decayDays);
+        if (oldStreak !== dbUser.streakDays) {
+          writeDb(db);
+        }
+      }
+    }
+  }
+
+  return NextResponse.json({ user: dbUser || user });
 }
 
 export async function POST(request: Request) {

@@ -68,21 +68,73 @@ export function Navbar({
       if (!isGraduate) {
         setConnectPhase("blocked");
       } else {
-        const mockAddress = `EQA${Math.random().toString(36).substring(2, 6).toUpperCase()}...${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
+        const usernameClean = tempSocialData ? tempSocialData.username.replace("@", "") : "user";
+        const mockAddress = `EQA_${provider.replace(" ", "_").toUpperCase()}_${usernameClean.toUpperCase()}`;
         
-        // Save complete profile state
-        if (setProfile && tempSocialData) {
-          setProfile(p => ({
-            ...p,
-            telegram: tempSocialData.provider === "Telegram" ? tempSocialData.username : p.telegram,
-            github: tempSocialData.provider === "GitHub" ? "github.com/user" : p.github,
-            name: tempSocialData.username.replace("@", "")
-          }));
-        }
-        
-        setWalletAddress(mockAddress);
-        setIsConnectModalOpen(false);
-        
+        // Call Backend Auth Verify
+        fetch("/api/auth/verify", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            address: mockAddress,
+            signature: "mock_signature_" + Date.now(),
+            walletName: provider
+          })
+        })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            const token = data.token;
+            localStorage.setItem("raven_user_token", token);
+            
+            // Build profile updates
+            const profileUpdates: any = {};
+            if (tempSocialData) {
+              if (tempSocialData.provider === "Telegram") {
+                profileUpdates.telegram = usernameClean;
+              }
+              if (tempSocialData.provider === "GitHub") {
+                profileUpdates.github = usernameClean;
+              }
+              profileUpdates.name = usernameClean;
+            }
+
+            // Sync social data into backend
+            fetch("/api/profile", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+              },
+              body: JSON.stringify(profileUpdates)
+            })
+            .then(res2 => res2.json())
+            .then(pData => {
+              const finalUser = pData.success ? pData.user : data.user;
+              
+              if (setProfile) {
+                setProfile({
+                  name: finalUser.name,
+                  avatar: finalUser.avatar || "",
+                  github: finalUser.github || "",
+                  telegram: finalUser.telegram || "",
+                  x: finalUser.x || "",
+                  tiktok: "",
+                  instagram: "",
+                  facebook: "",
+                  streakDays: finalUser.streakDays || 0,
+                });
+              }
+              setWalletAddress(finalUser.walletAddress);
+              setIsConnectModalOpen(false);
+            });
+          }
+        })
+        .catch(err => {
+          console.error("Auth verify failed", err);
+          setIsConnectModalOpen(false);
+        });
+
         // Reset modal phase
         setTimeout(() => {
           setConnectPhase("social-login");
@@ -144,7 +196,10 @@ export function Navbar({
                 <Button 
                   variant="outline" 
                   size="sm"
-                  onClick={() => setWalletAddress(null)}
+                  onClick={() => {
+                    localStorage.removeItem("raven_user_token");
+                    setWalletAddress(null);
+                  }}
                 >
                   Disconnect
                 </Button>
@@ -152,11 +207,12 @@ export function Navbar({
             ) : (
               <Button 
                 variant="primary" 
-                className="flex items-center gap-2 px-5"
+                size="sm"
+                className="flex items-center gap-1.5 font-bold"
                 onClick={() => setIsConnectModalOpen(true)}
               >
-                <User className="w-4 h-4" />
-                Login / Sign In
+                <User className="w-3.5 h-3.5" />
+                Sign In
               </Button>
             )}
           </div>
