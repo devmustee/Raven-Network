@@ -1426,7 +1426,7 @@ export function WorkspaceHub({
             {/* Verification Badge */}
             <div className="mt-4 p-3 bg-white/[0.02] border border-white/5 rounded-xl text-center">
               <span className="text-[10px] text-white/40">Verified Academy Graduate</span>
-              <span className="block text-[9px] font-bold text-green-400 mt-1">✓ Manually Verified TON Wallet Holder</span>
+              <span className="block text-[9px] font-bold text-green-400 mt-1">✓ Verified TON Wallet Holder</span>
             </div>
 
             <Button onClick={() => setViewingUserProfile(null)} variant="primary" className="w-full mt-6">

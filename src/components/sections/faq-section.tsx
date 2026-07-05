@@ -12,11 +12,11 @@ const faqData = [
   },
   {
     question: "How do I join?",
-    answer: "You can start by enrolling in Raven Academy. Complete a premium learning pathway (Onboarding, Creator, or Builder) to qualify for manual graduation verification and earn your on-chain credentials."
+    answer: "You can start by enrolling in Raven Academy. Complete a premium learning pathway (Onboarding, Creator, or Builder) to qualify for graduation and earn your on-chain credentials."
   },
   {
     question: "Is Raven Academy free?",
-    answer: "No, Raven Academy is a premium credentialed institution. It is not free. All graduates must be manually verified and hold the official Flock NFT on the TON blockchain to gain access to the Raven Network hub."
+    answer: "No, Raven Academy is a premium credentialed institution. It is not free. All graduates must hold the official Flock NFT on the TON blockchain to gain access to the Raven Network hub."
   },
   {
     question: "What is the streak system?",

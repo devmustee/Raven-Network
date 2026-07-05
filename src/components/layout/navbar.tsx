@@ -259,7 +259,7 @@ export function Navbar({
                 </div>
 
                 <p className="text-xs text-white/50 mb-6 leading-relaxed">
-                  Connect your TON wallet to verify your Raven Academy Graduation status. Only manually verified graduates holding the graduation Flock NFT on TON can log in.
+                  Connect your TON wallet to verify your Raven Academy Graduation status. Only graduates holding the graduation Flock NFT on TON can log in.
                 </p>
 
                 <div className="space-y-5">
@@ -321,11 +321,21 @@ export function Navbar({
             )}
 
             {connectPhase === "nft-verifying" && (
-              <div className="flex flex-col items-center justify-center py-10 text-center">
-                <div className="w-12 h-12 rounded-full border-2 border-accent-purple border-t-transparent animate-spin mb-4" />
-                <h3 className="font-bold text-sm text-white mb-2">Analyzing NFT Availability</h3>
+              <div className="flex flex-col items-center justify-center py-12 text-center">
+                <div className="relative w-16 h-16 mb-6">
+                  {/* Outer spinning ring */}
+                  <div className="absolute inset-0 border-2 border-accent-purple/20 border-t-accent-purple rounded-full animate-spin" />
+                  {/* Inner pulsing circle */}
+                  <div className="absolute inset-2 bg-accent-purple/10 rounded-full animate-pulse flex items-center justify-center">
+                    <svg className="w-6 h-6 text-accent-purple" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                      <circle cx="12" cy="12" r="10" />
+                      <path d="M12 2v4M12 18v4" />
+                    </svg>
+                  </div>
+                </div>
+                <h3 className="font-bold text-base text-white mb-2">Verifying Graduation Status</h3>
                 <p className="text-xs text-white/50 max-w-xs leading-relaxed">
-                  Querying TON blockchain to verify the presence of the Flock NFT...
+                  Scanning the TON Blockchain for your Raven Academy Graduation Flock NFT. Please wait...
                 </p>
               </div>
             )}
@@ -340,7 +350,7 @@ export function Navbar({
                 </div>
                 <h3 className="font-bold text-base text-white mb-2">Access Blocked</h3>
                 <p className="text-xs text-white/50 max-w-sm leading-relaxed mb-6">
-                  Raven Academy Graduation Flock NFT not found on TON for this wallet address. Only manually verified graduates holding the NFT can connect.
+                  Raven Academy Graduation Flock NFT not found on TON for this wallet address. Only graduates holding the NFT can connect.
                 </p>
                 <div className="flex gap-3 w-full">
                   <Button variant="outline" onClick={() => setConnectPhase("nft-eligibility")} className="flex-1">
