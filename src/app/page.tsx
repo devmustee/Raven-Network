@@ -10,7 +10,6 @@ import { NewsletterSection } from "@/components/sections/newsletter-section";
 import { OpportunitiesModal } from "@/components/ui/opportunities-modal";
 import { ProfileModal, ProfileData } from "@/components/ui/profile-modal";
 import { WorkspaceHub } from "@/components/sections/workspace-hub";
-import { EligibilityChecker } from "@/components/sections/eligibility-checker";
 import { PartnersSection } from "@/components/sections/partners-section";
 import { AboutSection } from "@/components/sections/about-section";
 
@@ -50,7 +49,6 @@ export default function Home() {
               walletAddress={walletAddress}
               setIsConnectModalOpen={setIsConnectModalOpen}
             />
-            <EligibilityChecker />
             <PartnersSection />
             <AboutSection />
             <PillarsSection 
@@ -74,7 +72,7 @@ export default function Home() {
         )}
       </main>
 
-      <Footer />
+      {!walletAddress && <Footer />}
 
       <OpportunitiesModal 
         isOpen={isOpportunitiesModalOpen} 

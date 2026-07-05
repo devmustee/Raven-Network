@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState, useRef } from "react";
-import { X, Camera, User } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { X, Camera, User, Lock, Sparkles } from "lucide-react";
 import { Button } from "./button";
 
 export interface ProfileData {
@@ -24,84 +25,26 @@ interface ProfileModalProps {
 }
 
 export function BadgeIcon({ name, className = "w-6 h-6" }: { name: string; className?: string }) {
-  const gradientId = `badge-grad-modal-${name.toLowerCase()}`;
-  if (name === "Fledgling") {
-    return (
-      <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#C084FC" />
-            <stop offset="100%" stopColor="#818CF8" />
-          </linearGradient>
-        </defs>
-        <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5l6.74-6.76z" stroke={`url(#${gradientId})`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        <line x1="16" y1="8" x2="2" y2="22" stroke={`url(#${gradientId})`} strokeWidth="2" strokeLinecap="round"/>
-      </svg>
-    );
-  }
-  if (name === "Scout") {
-    return (
-      <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#60A5FA" />
-            <stop offset="100%" stopColor="#3B82F6" />
-          </linearGradient>
-        </defs>
-        <circle cx="12" cy="12" r="10" stroke={`url(#${gradientId})`} strokeWidth="2"/>
-        <circle cx="12" cy="12" r="3" fill={`url(#${gradientId})`}/>
-        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke={`url(#${gradientId})`} strokeWidth="1.5" strokeDasharray="3 3"/>
-      </svg>
-    );
-  }
-  if (name === "Vanguard") {
-    return (
-      <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#22D3EE" />
-            <stop offset="100%" stopColor="#06B6D4" />
-          </linearGradient>
-        </defs>
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke={`url(#${gradientId})`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M12 6v12M8 10h8" stroke={`url(#${gradientId})`} strokeWidth="2" strokeLinecap="round"/>
-      </svg>
-    );
-  }
-  if (name === "Shadow") {
-    return (
-      <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#A855F7" />
-            <stop offset="100%" stopColor="#6B21A8" />
-          </linearGradient>
-        </defs>
-        <path d="M12 2L2 12l10 10 10-10L12 2z" stroke={`url(#${gradientId})`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M12 6l-6 6 6 6 6-6-6-6z" fill={`url(#${gradientId})`} opacity="0.4"/>
-      </svg>
-    );
-  }
-  if (name === "Legend") {
-    return (
-      <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#FBBF24" />
-            <stop offset="100%" stopColor="#D97706" />
-          </linearGradient>
-        </defs>
-        <path d="M2 4l3 12h14l3-12-6 7-4-7-4 7-6-7z" fill={`url(#${gradientId})`} stroke={`url(#${gradientId})`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M3 20h18" stroke={`url(#${gradientId})`} strokeWidth="2" strokeLinecap="round"/>
-      </svg>
-    );
-  }
-  return null;
+  const badgeMap: Record<string, string> = {
+    "Fledgling": "/badges/fledgling.png",
+    "Scout": "/badges/scout.png",
+    "Vanguard": "/badges/vanguard.png",
+    "Shadow": "/badges/shadow.png",
+    "Legend": "/badges/legend.png",
+  };
+
+  const src = badgeMap[name];
+  if (!src) return null;
+
+  return (
+    <img src={src} alt={`${name} Badge`} className={`${className} object-contain`} />
+  );
 }
 
 export function ProfileModal({ isOpen, onClose, profile, onSave }: ProfileModalProps) {
   const [formData, setFormData] = useState<ProfileData>({ ...profile });
   const [error, setError] = useState<string | null>(null);
+  const [selectedBadge, setSelectedBadge] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   if (!isOpen) return null;
@@ -317,36 +260,43 @@ export function ProfileModal({ isOpen, onClose, profile, onSave }: ProfileModalP
                 </span>
               </div>
               
-              <div className="grid grid-cols-5 gap-2">
+              <div className="flex justify-between gap-2 overflow-x-auto pb-2">
                 {[
-                  { name: "Fledgling", days: 7, icon: "🪶", color: "from-accent-purple/20 to-accent-purple/5 border-accent-purple/20 text-accent-purple" },
-                  { name: "Scout", days: 30, icon: "👁️", color: "from-accent-blue/20 to-accent-blue/5 border-accent-blue/20 text-accent-blue" },
-                  { name: "Vanguard", days: 90, icon: "🦅", color: "from-accent-cyan/20 to-accent-cyan/5 border-accent-cyan/20 text-accent-cyan" },
-                  { name: "Shadow", days: 180, icon: "🛡️", color: "from-purple-900/20 to-purple-900/5 border-purple-900/20 text-purple-400" },
-                  { name: "Legend", days: 365, icon: "👑", color: "from-amber-500/20 to-amber-500/5 border-amber-500/20 text-amber-500" }
+                  { name: "Fledgling", days: 7, color: "rgba(192, 132, 252, 0.4)", border: "rgba(192, 132, 252, 0.4)" },
+                  { name: "Scout", days: 30, color: "rgba(96, 165, 250, 0.4)", border: "rgba(96, 165, 250, 0.4)" },
+                  { name: "Vanguard", days: 90, color: "rgba(34, 211, 238, 0.4)", border: "rgba(34, 211, 238, 0.4)" },
+                  { name: "Shadow", days: 180, color: "rgba(168, 85, 247, 0.4)", border: "rgba(168, 85, 247, 0.4)" },
+                  { name: "Legend", days: 365, color: "rgba(251, 191, 36, 0.4)", border: "rgba(251, 191, 36, 0.4)" }
                 ].map((badge) => {
                   const isUnlocked = formData.streakDays >= badge.days;
                   return (
                     <div 
                       key={badge.name} 
-                      className={`relative flex flex-col items-center justify-center p-2.5 rounded-xl border text-center transition-all ${
-                        isUnlocked 
-                          ? `bg-gradient-to-b ${badge.color} shadow-[0_0_15px_rgba(255,255,255,0.02)]`
-                          : "bg-white/[0.01] border-white/5 opacity-30 select-none"
-                      }`}
+                      className="flex flex-col items-center gap-2 flex-1 min-w-[70px] cursor-pointer group"
+                      onClick={() => setSelectedBadge(badge.name)}
                     >
-                      <BadgeIcon name={badge.name} className="w-5 h-5 mb-1.5" />
-                      <span className="block text-[8px] font-bold text-white truncate max-w-full">{badge.name}</span>
-                      <span className="block text-[7px] text-white/45 mt-0.5">{badge.days}D</span>
-
-                      {!isUnlocked && (
-                        <div className="absolute top-1 right-1">
-                          <svg className="w-2.5 h-2.5 text-white/30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                            <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
-                            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-                          </svg>
+                      <div 
+                        className={`relative w-full aspect-square flex items-center justify-center p-1.5 rounded-xl border transition-all duration-300 group-hover:scale-105 group-active:scale-95 ${
+                          isUnlocked 
+                            ? 'bg-white/5 shadow-lg' 
+                            : 'bg-white/[0.01] border-white/5 opacity-40'
+                        }`}
+                        style={{
+                          boxShadow: isUnlocked ? `0 0 20px ${badge.color}` : 'none',
+                          borderColor: isUnlocked ? badge.border : 'rgba(255,255,255,0.05)'
+                        }}
+                      >
+                        {!isUnlocked && (
+                          <Lock className="absolute top-1.5 right-1.5 w-3 h-3 text-white/30 z-10" />
+                        )}
+                        <div className={`w-full h-full flex items-center justify-center overflow-hidden transition-all duration-500 ${!isUnlocked && 'grayscale brightness-50'}`}>
+                          <BadgeIcon name={badge.name} className="w-full h-full object-contain" />
                         </div>
-                      )}
+                      </div>
+                      <div className="flex flex-col items-center text-center">
+                        <span className={`text-[12px] font-bold transition-colors ${isUnlocked ? 'text-white group-hover:text-accent-cyan' : 'text-white/40 group-hover:text-white/60'}`}>{badge.name}</span>
+                        <span className="text-[10px] text-white/40 font-semibold mt-0.5">{badge.days}D</span>
+                      </div>
                     </div>
                   );
                 })}
@@ -370,6 +320,75 @@ export function ProfileModal({ isOpen, onClose, profile, onSave }: ProfileModalP
           </div>
         </form>
       </div>
+
+      <AnimatePresence>
+        {selectedBadge && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/90 backdrop-blur-xl"
+            onClick={() => setSelectedBadge(null)}
+          >
+            {(() => {
+              const badgeDefs = [
+                { name: "Fledgling", days: 7, color: "rgba(192, 132, 252, 0.5)", desc: "A promising start to your journey." },
+                { name: "Scout", days: 30, color: "rgba(96, 165, 250, 0.5)", desc: "You're exploring the ecosystem deeply." },
+                { name: "Vanguard", days: 90, color: "rgba(34, 211, 238, 0.5)", desc: "Leading the charge. True dedication." },
+                { name: "Shadow", days: 180, color: "rgba(168, 85, 247, 0.5)", desc: "A silent force shaping the network." },
+                { name: "Legend", days: 365, color: "rgba(251, 191, 36, 0.5)", desc: "An absolute legend. Unmatched." }
+              ];
+              const badge = badgeDefs.find(b => b.name === selectedBadge)!;
+              const isUnlocked = formData.streakDays >= badge.days;
+
+              return (
+                <motion.div 
+                  initial={{ scale: 0.8, y: 20 }}
+                  animate={{ scale: 1, y: 0 }}
+                  exit={{ scale: 0.8, y: 20 }}
+                  onClick={e => e.stopPropagation()}
+                  className="relative w-full max-w-sm bg-black border border-white/10 rounded-3xl p-8 flex flex-col items-center text-center overflow-hidden shadow-2xl"
+                  style={{ boxShadow: isUnlocked ? `0 0 100px ${badge.color}` : 'none' }}
+                >
+                  <button onClick={() => setSelectedBadge(null)} className="absolute top-4 right-4 text-white/40 hover:text-white">
+                    <X className="w-5 h-5" />
+                  </button>
+
+                  <div className={`w-40 h-40 mb-6 flex items-center justify-center transition-all duration-700 overflow-hidden rounded-2xl ${!isUnlocked && 'grayscale brightness-50'}`}>
+                    <BadgeIcon name={badge.name} className={`w-full h-full object-cover rounded-2xl ${isUnlocked ? 'drop-shadow-[0_0_30px_rgba(255,255,255,0.4)]' : ''}`} />
+                  </div>
+                  
+                  <h3 className={`text-3xl font-black mb-2 tracking-tight ${isUnlocked ? 'text-white' : 'text-white/40'}`}>
+                    {badge.name}
+                  </h3>
+                  
+                  <div className="px-4 py-1.5 rounded-full bg-white/5 border border-white/10 mb-4 inline-flex items-center gap-2">
+                    {isUnlocked ? <Sparkles className="w-4 h-4 text-yellow-400" /> : <Lock className="w-4 h-4 text-white/30" />}
+                    <span className="text-xs font-bold text-white/80">{badge.days} Day Streak Required</span>
+                  </div>
+
+                  <p className="text-sm text-white/50 px-4">
+                    {isUnlocked 
+                      ? badge.desc 
+                      : `You need ${badge.days - formData.streakDays} more streak days to unlock this prestigious achievement.`}
+                  </p>
+
+                  {isUnlocked && (
+                    <motion.div 
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.3 }}
+                      className="mt-6 font-mono text-[10px] text-accent-cyan uppercase tracking-widest"
+                    >
+                      Achievement Unlocked
+                    </motion.div>
+                  )}
+                </motion.div>
+              );
+            })()}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

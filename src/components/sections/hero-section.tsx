@@ -88,11 +88,11 @@ export function HeroSection({ walletAddress, setIsConnectModalOpen }: HeroSectio
             {/* Ambient background glow */}
             <div className="absolute w-[250px] h-[250px] bg-accent-purple/15 rounded-full blur-[80px] opacity-70 pointer-events-none" />
 
-            <div className="relative w-full max-w-[340px] md:max-w-[420px] aspect-square rounded-2xl overflow-hidden glass border border-white/10 shadow-[0_0_50px_rgba(147,51,234,0.15)] flex items-center justify-center p-6 bg-black/40 backdrop-blur-md">
+            <div className="relative w-full max-w-[340px] md:max-w-[420px] aspect-square rounded-2xl overflow-hidden glass border border-white/10 shadow-[0_0_50px_rgba(147,51,234,0.15)] flex items-center justify-center bg-black/40 backdrop-blur-md">
               <img 
-                src="/hero-3d.png" 
-                alt="Raven Network Ecosystem" 
-                className="w-full h-full object-contain rounded-xl hover:scale-102 transition-transform duration-500"
+                src="/ravens-unity.png" 
+                alt="Raven Network Unity" 
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
             </div>
