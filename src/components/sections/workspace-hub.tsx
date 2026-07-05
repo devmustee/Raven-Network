@@ -76,16 +76,6 @@ const ecosystemProjects = [
     link: "https://flock-post-generator.vercel.app/",
     reputationRequired: 850,
     tags: ["AI Tools", "Social Growth", "X.com"]
-  },
-  { 
-    title: "AssetChain Integration Hub", 
-    description: "Cross-border payment clearing house linking stablecoins directly to local bank accounts across 13+ African countries with micro-second settlements.", 
-    status: "Mainnet Sandbox", 
-    category: "Infrastructure",
-    logo: "/logo.png",
-    link: "#partners",
-    reputationRequired: 1000,
-    tags: ["AssetChain", "Stablecoins", "Liquidity"]
   }
 ];
 

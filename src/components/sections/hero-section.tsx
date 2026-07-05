@@ -56,7 +56,7 @@ export function HeroSection({ walletAddress, setIsConnectModalOpen }: HeroSectio
                   className="w-full sm:w-auto"
                   onClick={() => setIsConnectModalOpen(true)}
                 >
-                  Connect Wallet to Join
+                  Join Now
                 </Button>
               )}
             </div>

@@ -273,7 +273,7 @@ export function Navbar({
                         className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/5 hover:border-accent-purple/30 text-left transition-all hover:bg-white/[0.04] group"
                       >
                         <div className="w-5 h-5 flex items-center justify-center bg-white/5 rounded-md p-0.5">
-                          <img src="/logo.png" className="w-full h-full object-contain" alt="Raven Logo" />
+                          <img src="/wallet_logo.png" className="w-full h-full object-contain" alt="Raven Logo" />
                         </div>
                         <div className="flex-1">
                           <span className="block text-xs font-semibold text-white">Raven Wallet</span>
@@ -286,27 +286,12 @@ export function Navbar({
                         onClick={() => handleWalletConnect("Tonkeeper", "ton")}
                         className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/5 hover:border-accent-purple/30 text-left transition-all hover:bg-white/[0.04] group"
                       >
-                        <svg className="w-5 h-5 text-accent-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M6 3h12l4 6-10 12L2 9z" />
-                        </svg>
+                        <div className="w-5 h-5 flex items-center justify-center bg-white/5 rounded-md p-0.5">
+                          <img src="/tonkeeper_logo.png" className="w-full h-full object-contain" alt="Tonkeeper Logo" />
+                        </div>
                         <div className="flex-1">
                           <span className="block text-xs font-semibold text-white">Tonkeeper</span>
                           <span className="block text-[8px] text-green-400 font-bold mt-0.5">Holds Flock NFT (Verified)</span>
-                        </div>
-                      </button>
-
-                      {/* Tonhub */}
-                      <button
-                        onClick={() => handleWalletConnect("Tonhub", "ton")}
-                        className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/5 hover:border-red-500/20 text-left transition-all hover:bg-white/[0.04] group"
-                      >
-                        <svg className="w-5 h-5 text-accent-cyan" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                          <circle cx="12" cy="12" r="4" />
-                          <path d="M12 2v4M12 18v4M2 12h4M18 12h4" />
-                        </svg>
-                        <div className="flex-1">
-                          <span className="block text-xs font-semibold text-white">Tonhub</span>
-                          <span className="block text-[8px] text-red-400 font-bold mt-0.5">No NFT Found (Unregistered)</span>
                         </div>
                       </button>
                     </div>
@@ -321,11 +306,9 @@ export function Navbar({
                         onClick={() => handleWalletConnect("MetaMask", "evm")}
                         className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/5 hover:border-red-500/20 text-left transition-all hover:bg-white/[0.04] group"
                       >
-                        <svg className="w-5 h-5 text-orange-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M12 2L2 7l10 5 10-5-10-5z" />
-                          <path d="M2 17l10 5 10-5" />
-                          <path d="M2 12l10 5 10-5" />
-                        </svg>
+                        <div className="w-5 h-5 flex items-center justify-center bg-white/5 rounded-md p-0.5">
+                          <img src="/metamask_logo.svg" className="w-full h-full object-contain" alt="MetaMask Logo" />
+                        </div>
                         <div className="flex-1">
                           <span className="block text-xs font-semibold text-white">MetaMask</span>
                           <span className="block text-[8px] text-red-400 font-bold mt-0.5">No NFT Found (Unregistered)</span>
