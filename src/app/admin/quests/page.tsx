@@ -212,12 +212,12 @@ export default function AdminQuestsPage() {
               
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
                 {catQuests.length === 0 ? (
-                  <div className="md:col-span-2 xl:col-span-3 p-6 rounded-2xl bg-[#0B0B0C] border border-white/5 text-xs text-white/30 text-center">
+                  <div className="md:col-span-2 xl:col-span-3 p-6 rounded-2xl bg-obsidian border border-white/5 text-xs text-white/30 text-center">
                     No quests deployed in this category yet.
                   </div>
                 ) : (
                   catQuests.map((quest) => (
-                    <div key={quest.id} className="p-5 rounded-2xl bg-[#0B0B0C] border border-white/5 flex flex-col justify-between hover:border-white/15 transition-all shadow-xl group">
+                    <div key={quest.id} className="p-5 rounded-2xl bg-obsidian border border-white/5 flex flex-col justify-between hover:border-white/15 transition-all shadow-xl group">
                       <div className="space-y-2">
                         <div className="flex items-center justify-between">
                           <span className="inline-flex px-2 py-0.5 rounded bg-white/5 border border-white/10 text-[9px] font-bold text-[#A060FF] uppercase tracking-wider">
@@ -260,7 +260,7 @@ export default function AdminQuestsPage() {
       {/* Delete Confirmation Modal */}
       {deletingId && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fade-in">
-          <div className="w-full max-w-sm bg-[#0B0B0C] border border-white/10 rounded-2xl p-6 glass shadow-2xl">
+          <div className="w-full max-w-sm bg-obsidian border border-white/10 rounded-2xl p-6 glass shadow-2xl">
             <div className="flex items-center gap-3 text-[#FF0055] mb-4">
               <div className="w-10 h-10 rounded-lg bg-[#FF0055]/10 border border-[#FF0055]/20 flex items-center justify-center">
                 <AlertTriangle className="w-5 h-5" />
@@ -296,7 +296,7 @@ export default function AdminQuestsPage() {
       {/* Create / Edit Form Modal */}
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-          <div className="relative w-full max-w-md bg-[#0B0B0C] border border-white/10 rounded-2xl p-6 glass shadow-2xl overflow-hidden">
+          <div className="relative w-full max-w-md bg-obsidian border border-white/10 rounded-2xl p-6 glass shadow-2xl overflow-hidden">
             <div className="flex items-center justify-between mb-5">
               <h3 className="text-base font-bold text-white">
                 {editingQuest ? "Configure Quest Settings" : "Deploy New Quest"}
@@ -353,7 +353,7 @@ export default function AdminQuestsPage() {
                   <select
                     value={form.category}
                     onChange={(e) => setForm({ ...form, category: e.target.value as any })}
-                    className="w-full bg-[#0B0B0C] border border-white/10 focus:border-[#00F0FF]/30 transition-all rounded-xl p-3 text-xs text-white outline-none"
+                    className="w-full bg-obsidian border border-white/10 focus:border-[#00F0FF]/30 transition-all rounded-xl p-3 text-xs text-white outline-none"
                   >
                     <option value="morning">Morning Checklist</option>
                     <option value="evening">Evening Checklist</option>
@@ -379,7 +379,7 @@ export default function AdminQuestsPage() {
                 <select
                   value={form.verificationType}
                   onChange={(e) => setForm({ ...form, verificationType: e.target.value as any })}
-                  className="w-full bg-[#0B0B0C] border border-white/10 focus:border-[#00F0FF]/30 transition-all rounded-xl p-3 text-xs text-white outline-none"
+                  className="w-full bg-obsidian border border-white/10 focus:border-[#00F0FF]/30 transition-all rounded-xl p-3 text-xs text-white outline-none"
                 >
                   <option value="manual">Manual Verification</option>
                   <option value="twitter_retweet">Twitter Engagement (Retweet)</option>

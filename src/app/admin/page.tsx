@@ -128,7 +128,7 @@ export default function AdminDashboard() {
   return (
     <div className="space-y-8 animate-fade-in">
       {/* Welcome Banner */}
-      <div className="relative p-8 rounded-2xl bg-gradient-to-r from-[#0B0B0C] to-[#121214] border border-white/10 overflow-hidden shadow-2xl">
+      <div className="relative p-8 rounded-2xl bg-gradient-to-r from-obsidian to-[#121214] border border-white/10 overflow-hidden shadow-2xl">
         <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-[#00F0FF]/15 to-[#A060FF]/5 rounded-full blur-3xl pointer-events-none" />
         <div className="relative flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
@@ -147,7 +147,7 @@ export default function AdminDashboard() {
       {/* Grid Statistics */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         {/* Total Users */}
-        <div className="p-6 rounded-2xl bg-[#0B0B0C] border border-white/5 hover:border-white/10 transition-all duration-300 shadow-xl group">
+        <div className="p-6 rounded-2xl bg-obsidian border border-white/5 hover:border-white/10 transition-all duration-300 shadow-xl group">
           <div className="flex items-center justify-between mb-4">
             <div className="w-10 h-10 rounded-xl bg-white/[0.04] flex items-center justify-center text-white/60 group-hover:bg-[#00F0FF]/10 group-hover:text-[#00F0FF] transition-colors">
               <Users className="w-5 h-5" />
@@ -161,7 +161,7 @@ export default function AdminDashboard() {
         </div>
 
         {/* Quests */}
-        <div className="p-6 rounded-2xl bg-[#0B0B0C] border border-white/5 hover:border-white/10 transition-all duration-300 shadow-xl group">
+        <div className="p-6 rounded-2xl bg-obsidian border border-white/5 hover:border-white/10 transition-all duration-300 shadow-xl group">
           <div className="flex items-center justify-between mb-4">
             <div className="w-10 h-10 rounded-xl bg-white/[0.04] flex items-center justify-center text-white/60 group-hover:bg-[#A060FF]/10 group-hover:text-[#A060FF] transition-colors">
               <BookOpen className="w-5 h-5" />
@@ -175,7 +175,7 @@ export default function AdminDashboard() {
         </div>
 
         {/* Opportunities */}
-        <div className="p-6 rounded-2xl bg-[#0B0B0C] border border-white/5 hover:border-white/10 transition-all duration-300 shadow-xl group">
+        <div className="p-6 rounded-2xl bg-obsidian border border-white/5 hover:border-white/10 transition-all duration-300 shadow-xl group">
           <div className="flex items-center justify-between mb-4">
             <div className="w-10 h-10 rounded-xl bg-white/[0.04] flex items-center justify-center text-white/60 group-hover:bg-[#00FFCC]/10 group-hover:text-[#00FFCC] transition-colors">
               <Award className="w-5 h-5" />
@@ -189,7 +189,7 @@ export default function AdminDashboard() {
         </div>
 
         {/* Submissions */}
-        <div className="p-6 rounded-2xl bg-[#0B0B0C] border border-white/5 hover:border-white/10 transition-all duration-300 shadow-xl group">
+        <div className="p-6 rounded-2xl bg-obsidian border border-white/5 hover:border-white/10 transition-all duration-300 shadow-xl group">
           <div className="flex items-center justify-between mb-4">
             <div className="w-10 h-10 rounded-xl bg-white/[0.04] flex items-center justify-center text-white/60 group-hover:bg-[#FF0055]/10 group-hover:text-[#FF0055] transition-colors">
               <CheckSquare className="w-5 h-5" />
@@ -219,12 +219,12 @@ export default function AdminDashboard() {
 
           <div className="space-y-4">
             {pendingSubmissions.length === 0 ? (
-              <div className="p-8 rounded-2xl bg-[#0B0B0C] border border-white/5 text-center text-white/40 text-xs">
+              <div className="p-8 rounded-2xl bg-obsidian border border-white/5 text-center text-white/40 text-xs">
                 All submissions verified! Clean queue.
               </div>
             ) : (
               pendingSubmissions.slice(0, 3).map((sub) => (
-                <div key={sub.id} className="p-5 rounded-2xl bg-[#0B0B0C] border border-white/5 hover:border-white/10 transition-all flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div key={sub.id} className="p-5 rounded-2xl bg-obsidian border border-white/5 hover:border-white/10 transition-all flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                   <div className="space-y-1">
                     <span className="inline-flex px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-[9px] font-bold text-[#00F0FF] uppercase">
                       {sub.opportunityTitle}
@@ -272,7 +272,7 @@ export default function AdminDashboard() {
             <p className="text-xs text-white/40">Internal registry log tracker</p>
           </div>
 
-          <div className="p-6 rounded-2xl bg-[#0B0B0C] border border-white/5 space-y-5">
+          <div className="p-6 rounded-2xl bg-obsidian border border-white/5 space-y-5">
             <div className="flex items-center justify-between text-xs pb-4 border-b border-white/5">
               <span className="text-white/40">Total Submissions Checked</span>
               <span className="font-semibold text-white">{totalSubmissionsCount}</span>

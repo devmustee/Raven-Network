@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { Wallet, X, Check, User } from "lucide-react";
+import { ThemeToggle } from "./theme-toggle";
 
 import { ProfileData } from "../ui/profile-modal";
 
@@ -172,6 +173,7 @@ export function Navbar({
           </nav>
 
           <div className="flex items-center gap-4">
+            <ThemeToggle />
             {walletAddress ? (
               <div className="flex items-center gap-3">
                 {/* Connected Wallet Pill */}

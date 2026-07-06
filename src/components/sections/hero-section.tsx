@@ -130,7 +130,7 @@ export function HeroSection({ walletAddress, setIsConnectModalOpen }: HeroSectio
             <div className="absolute w-[240px] h-[240px] bg-accent-purple/10 rounded-full blur-[80px] opacity-50 pointer-events-none -bottom-10 -left-10" />
 
             {/* Card 1: Profile Preview Card */}
-            <div className="bg-[#0B0B0C]/80 border border-white/5 rounded-2xl p-5 backdrop-blur-xl space-y-4 shadow-[0_8px_32px_rgba(0,0,0,0.5)] hover:border-white/10 transition-all duration-300 group">
+            <div className="bg-obsidian/80 border border-white/5 rounded-2xl p-5 backdrop-blur-xl space-y-4 shadow-[0_8px_32px_rgba(0,0,0,0.5)] hover:border-white/10 transition-all duration-300 group">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   {/* Profile Avatar */}
@@ -207,7 +207,7 @@ export function HeroSection({ walletAddress, setIsConnectModalOpen }: HeroSectio
             </div>
 
             {/* Card 2: Reputation Score Card */}
-            <div className="bg-[#0B0B0C]/80 border border-white/5 rounded-2xl p-5 backdrop-blur-xl space-y-4 shadow-[0_8px_32px_rgba(0,0,0,0.5)] hover:border-white/10 transition-all duration-300">
+            <div className="bg-obsidian/80 border border-white/5 rounded-2xl p-5 backdrop-blur-xl space-y-4 shadow-[0_8px_32px_rgba(0,0,0,0.5)] hover:border-white/10 transition-all duration-300">
               <div className="flex justify-between items-center">
                 <span className="text-[9px] font-bold text-white/40 uppercase tracking-widest">Reputation</span>
                 <span className="text-sm font-black text-white">
@@ -282,7 +282,7 @@ export function HeroSection({ walletAddress, setIsConnectModalOpen }: HeroSectio
             <div className="grid grid-cols-2 gap-4">
               
               {/* Card 3: Badges */}
-              <div className="bg-[#0B0B0C]/80 border border-white/5 rounded-2xl p-4 backdrop-blur-xl flex flex-col justify-between h-36 shadow-[0_8px_32px_rgba(0,0,0,0.5)] hover:border-white/10 transition-all duration-300">
+              <div className="bg-obsidian/80 border border-white/5 rounded-2xl p-4 backdrop-blur-xl flex flex-col justify-between h-36 shadow-[0_8px_32px_rgba(0,0,0,0.5)] hover:border-white/10 transition-all duration-300">
                 <span className="text-[8px] font-bold text-white/40 uppercase tracking-widest block mb-1">Raven Network Badges</span>
                 <div className="flex flex-col items-center justify-center flex-1 gap-1.5 mt-1">
                   <div 
@@ -299,7 +299,7 @@ export function HeroSection({ walletAddress, setIsConnectModalOpen }: HeroSectio
               </div>
 
               {/* Card 4: Contributions list */}
-              <div className="bg-[#0B0B0C]/80 border border-white/5 rounded-2xl p-4 backdrop-blur-xl flex flex-col justify-between h-36 shadow-[0_8px_32px_rgba(0,0,0,0.5)] hover:border-white/10 transition-all duration-300">
+              <div className="bg-obsidian/80 border border-white/5 rounded-2xl p-4 backdrop-blur-xl flex flex-col justify-between h-36 shadow-[0_8px_32px_rgba(0,0,0,0.5)] hover:border-white/10 transition-all duration-300">
                 <span className="text-[8px] font-bold text-white/40 uppercase tracking-widest block mb-1">Contributions</span>
                 <div className="space-y-1 flex-1 mt-1 justify-center flex flex-col">
                   {[

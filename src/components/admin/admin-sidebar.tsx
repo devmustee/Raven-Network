@@ -25,7 +25,7 @@ export function AdminSidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="w-64 bg-[#0B0B0C] border-r border-white/10 flex flex-col h-screen sticky top-0">
+    <aside className="w-64 bg-obsidian border-r border-white/10 flex flex-col h-screen sticky top-0">
       {/* Brand Logo / Title */}
       <div className="p-6 border-b border-white/10 flex items-center gap-3">
         <div className="w-8 h-8 relative flex items-center justify-center">

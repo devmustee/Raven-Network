@@ -204,12 +204,12 @@ export default function AdminOpportunitiesPage() {
       {/* Opportunities List Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
         {opportunities.length === 0 ? (
-          <div className="col-span-full p-10 rounded-2xl bg-[#0B0B0C] border border-white/5 text-xs text-white/30 text-center">
+          <div className="col-span-full p-10 rounded-2xl bg-obsidian border border-white/5 text-xs text-white/30 text-center">
             No active or archived opportunities found on the registry.
           </div>
         ) : (
           opportunities.map((opp) => (
-            <div key={opp.id} className="p-6 rounded-2xl bg-[#0B0B0C] border border-white/5 hover:border-white/10 flex flex-col justify-between transition-all shadow-2xl group relative overflow-hidden">
+            <div key={opp.id} className="p-6 rounded-2xl bg-obsidian border border-white/5 hover:border-white/10 flex flex-col justify-between transition-all shadow-2xl group relative overflow-hidden">
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
@@ -271,7 +271,7 @@ export default function AdminOpportunitiesPage() {
       {/* Delete Confirmation Modal */}
       {deletingId && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fade-in">
-          <div className="w-full max-w-sm bg-[#0B0B0C] border border-white/10 rounded-2xl p-6 glass shadow-2xl">
+          <div className="w-full max-w-sm bg-obsidian border border-white/10 rounded-2xl p-6 glass shadow-2xl">
             <div className="flex items-center gap-3 text-[#FF0055] mb-4">
               <div className="w-10 h-10 rounded-lg bg-[#FF0055]/10 border border-[#FF0055]/20 flex items-center justify-center">
                 <AlertTriangle className="w-5 h-5" />
@@ -307,7 +307,7 @@ export default function AdminOpportunitiesPage() {
       {/* Create / Edit Form Modal */}
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-          <div className="relative w-full max-w-md bg-[#0B0B0C] border border-white/10 rounded-2xl p-6 glass shadow-2xl overflow-hidden">
+          <div className="relative w-full max-w-md bg-obsidian border border-white/10 rounded-2xl p-6 glass shadow-2xl overflow-hidden">
             <div className="flex items-center justify-between mb-5">
               <h3 className="text-base font-bold text-white">
                 {editingOpp ? "Configure Opportunity" : "Launch Opportunity"}
@@ -364,7 +364,7 @@ export default function AdminOpportunitiesPage() {
                   <select
                     value={form.type}
                     onChange={(e) => setForm({ ...form, type: e.target.value })}
-                    className="w-full bg-[#0B0B0C] border border-white/10 focus:border-[#00F0FF]/30 transition-all rounded-xl p-3 text-xs text-white outline-none"
+                    className="w-full bg-obsidian border border-white/10 focus:border-[#00F0FF]/30 transition-all rounded-xl p-3 text-xs text-white outline-none"
                   >
                     <option value="job">Job</option>
                     <option value="hackathon">Hackathon</option>
@@ -376,7 +376,7 @@ export default function AdminOpportunitiesPage() {
                   <select
                     value={form.status}
                     onChange={(e) => setForm({ ...form, status: e.target.value as any })}
-                    className="w-full bg-[#0B0B0C] border border-white/10 focus:border-[#00F0FF]/30 transition-all rounded-xl p-3 text-xs text-white outline-none"
+                    className="w-full bg-obsidian border border-white/10 focus:border-[#00F0FF]/30 transition-all rounded-xl p-3 text-xs text-white outline-none"
                   >
                     <option value="active">Active</option>
                     <option value="completed">Completed / Closed</option>

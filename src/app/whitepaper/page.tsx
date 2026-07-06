@@ -439,7 +439,7 @@ export default function WhitepaperPage() {
             placeholder="Search whitepaper sections, key terms..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-[#0B0B0C] border border-white/5 hover:border-white/10 focus:border-[#00F0FF]/30 transition-all rounded-xl py-3.5 pl-11 pr-4 text-xs text-white placeholder-white/30 outline-none"
+            className="w-full bg-obsidian border border-white/5 hover:border-white/10 focus:border-[#00F0FF]/30 transition-all rounded-xl py-3.5 pl-11 pr-4 text-xs text-white placeholder-white/30 outline-none"
           />
         </div>
 

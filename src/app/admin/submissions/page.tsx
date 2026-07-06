@@ -91,7 +91,7 @@ export default function AdminSubmissionsPage() {
       </div>
 
       {/* Submissions Table / Grid */}
-      <div className="bg-[#0B0B0C] border border-white/5 rounded-2xl overflow-hidden shadow-2xl">
+      <div className="bg-obsidian border border-white/5 rounded-2xl overflow-hidden shadow-2xl">
         {submissions.length === 0 ? (
           <div className="p-12 text-center text-white/30 text-xs font-medium">
             No developer solutions or applications have been submitted yet.

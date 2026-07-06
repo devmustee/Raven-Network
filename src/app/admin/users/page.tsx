@@ -179,13 +179,13 @@ export default function AdminUsersPage() {
             placeholder="Search name, wallet, social handle..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-[#0B0B0C] border border-white/5 hover:border-white/10 focus:border-[#00F0FF]/30 transition-all rounded-xl py-3 pl-10 pr-4 text-xs text-white placeholder-white/30 outline-none"
+            className="w-full bg-obsidian border border-white/5 hover:border-white/10 focus:border-[#00F0FF]/30 transition-all rounded-xl py-3 pl-10 pr-4 text-xs text-white placeholder-white/30 outline-none"
           />
         </div>
       </div>
 
       {/* Users Table Container */}
-      <div className="overflow-x-auto bg-[#0B0B0C] border border-white/5 rounded-2xl shadow-2xl">
+      <div className="overflow-x-auto bg-obsidian border border-white/5 rounded-2xl shadow-2xl">
         <table className="w-full text-left border-collapse">
           <thead>
             <tr className="border-b border-white/5 bg-white/[0.01]">
@@ -320,7 +320,7 @@ export default function AdminUsersPage() {
       {/* Edit User Modal Dialog */}
       {editingUser && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-          <div className="relative w-full max-w-md bg-[#0B0B0C] border border-white/10 rounded-2xl p-6 glass shadow-[0_0_50px_rgba(0,240,255,0.1)]">
+          <div className="relative w-full max-w-md bg-obsidian border border-white/10 rounded-2xl p-6 glass shadow-[0_0_50px_rgba(0,240,255,0.1)]">
             <div className="flex items-center justify-between mb-5">
               <h3 className="text-base font-bold text-white">Edit Member Details</h3>
               <button 
@@ -360,7 +360,7 @@ export default function AdminUsersPage() {
                 <select
                   value={editForm.role}
                   onChange={(e) => setEditForm({ ...editForm, role: e.target.value as any })}
-                  className="w-full bg-[#0B0B0C] border border-white/10 focus:border-[#00F0FF]/30 transition-all rounded-xl p-3 text-xs text-white outline-none"
+                  className="w-full bg-obsidian border border-white/10 focus:border-[#00F0FF]/30 transition-all rounded-xl p-3 text-xs text-white outline-none"
                 >
                   <option value="USER">USER</option>
                   <option value="ADMIN">ADMIN</option>

@@ -79,7 +79,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   if (!isAdmin) {
     return (
       <div className="flex h-screen w-screen items-center justify-center bg-black text-white p-4">
-        <div className="w-full max-w-md bg-[#0B0B0C] border border-white/10 rounded-2xl p-8 glass shadow-[0_0_50px_rgba(0,240,255,0.15)] relative overflow-hidden">
+        <div className="w-full max-w-md bg-obsidian border border-white/10 rounded-2xl p-8 glass shadow-[0_0_50px_rgba(0,240,255,0.15)] relative overflow-hidden">
           {/* Background glowing orb */}
           <div className="absolute top-0 right-0 w-32 h-32 bg-[#00F0FF]/10 rounded-full blur-2xl pointer-events-none" />
           

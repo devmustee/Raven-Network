@@ -3,6 +3,7 @@ import { Outfit, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { NotificationProvider } from "@/context/NotificationContext";
 import { NotificationToaster } from "@/components/ui/notification-toaster";
+import { ThemeProvider } from "@/context/ThemeContext";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -27,12 +28,33 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${outfit.variable} ${plusJakartaSans.variable} dark antialiased`}>
+    <html 
+      lang="en" 
+      suppressHydrationWarning 
+      className={`${outfit.variable} ${plusJakartaSans.variable} antialiased`}
+    >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                  document.documentElement.classList.add('dark')
+                } else {
+                  document.documentElement.classList.remove('dark')
+                }
+              } catch (_) {}
+            `,
+          }}
+        />
+      </head>
       <body className="bg-black text-white font-sans flex flex-col min-h-screen">
-        <NotificationProvider>
-          {children}
-          <NotificationToaster />
-        </NotificationProvider>
+        <ThemeProvider>
+          <NotificationProvider>
+            {children}
+            <NotificationToaster />
+          </NotificationProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
