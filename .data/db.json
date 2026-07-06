@@ -251,6 +251,76 @@
       "streakDays": 35,
       "isGraduated": true,
       "createdAt": "2026-07-05T22:09:47.492Z"
+    },
+    {
+      "id": "user-pjvosv8",
+      "walletAddress": "EQA_RAVEN_WALLET_USER_2384",
+      "role": "USER",
+      "name": "user_2384",
+      "avatar": "",
+      "github": "user_2384",
+      "telegram": "",
+      "x": "",
+      "reputationXP": 835,
+      "streakDays": 36,
+      "isGraduated": true,
+      "createdAt": "2026-07-06T02:11:26.949Z"
+    },
+    {
+      "id": "user-cbd4vh6",
+      "walletAddress": "EQA_RAVEN_WALLET_USER_9704",
+      "role": "USER",
+      "name": "user_9704",
+      "avatar": "",
+      "github": "",
+      "telegram": "user_9704",
+      "x": "",
+      "reputationXP": 820,
+      "streakDays": 35,
+      "isGraduated": true,
+      "createdAt": "2026-07-06T02:14:42.576Z"
+    },
+    {
+      "id": "user-1ixf87y",
+      "walletAddress": "EQA_RAVEN_WALLET_USER_3794",
+      "role": "USER",
+      "name": "user_3794",
+      "avatar": "",
+      "github": "user_3794",
+      "telegram": "",
+      "x": "",
+      "reputationXP": 820,
+      "streakDays": 35,
+      "isGraduated": true,
+      "createdAt": "2026-07-06T02:19:14.869Z"
+    },
+    {
+      "id": "user-j1lfsiu",
+      "walletAddress": "EQA_RAVEN_WALLET_USER_7663",
+      "role": "USER",
+      "name": "user_7663",
+      "avatar": "",
+      "github": "",
+      "telegram": "user_7663",
+      "x": "",
+      "reputationXP": 820,
+      "streakDays": 35,
+      "isGraduated": true,
+      "createdAt": "2026-07-06T02:23:14.821Z"
+    },
+    {
+      "id": "user-fogqgz2",
+      "walletAddress": "EQA_RAVEN_WALLET_USER_3137",
+      "role": "USER",
+      "name": "user_3137",
+      "avatar": "",
+      "github": "user_3137",
+      "telegram": "",
+      "x": "",
+      "reputationXP": 835,
+      "streakDays": 36,
+      "isGraduated": true,
+      "createdAt": "2026-07-06T02:29:49.957Z"
     }
   ],
   "quests": [
@@ -340,6 +410,18 @@
       "userId": "user-upr3he8",
       "questId": "m1",
       "completedAt": "2026-07-05T21:45:49.413Z"
+    },
+    {
+      "id": "log-3ecvzn1",
+      "userId": "user-pjvosv8",
+      "questId": "m1",
+      "completedAt": "2026-07-06T02:11:44.928Z"
+    },
+    {
+      "id": "log-o3xebs3",
+      "userId": "user-fogqgz2",
+      "questId": "m1",
+      "completedAt": "2026-07-06T02:31:16.159Z"
     }
   ],
   "opportunities": [

@@ -56,6 +56,10 @@ export async function POST(request: Request) {
     if (typeof body.github === "string") dbUser.github = body.github;
     if (typeof body.telegram === "string") dbUser.telegram = body.telegram;
     if (typeof body.x === "string") dbUser.x = body.x;
+    if (typeof body.tiktok === "string") dbUser.tiktok = body.tiktok;
+    if (typeof body.instagram === "string") dbUser.instagram = body.instagram;
+    if (typeof body.facebook === "string") dbUser.facebook = body.facebook;
+    if (typeof body.bio === "string") dbUser.bio = body.bio;
 
     writeDb(db);
 

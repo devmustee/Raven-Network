@@ -28,25 +28,54 @@ export function HeroSection({ walletAddress, setIsConnectModalOpen }: HeroSectio
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="grid lg:grid-cols-12 gap-12 items-center">
           
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="lg:col-span-7 text-center lg:text-left"
-          >
-            <span className="block text-xs font-black text-accent-cyan tracking-widest uppercase mb-4">
+          <div className="lg:col-span-7 text-center lg:text-left">
+            <motion.span 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="block text-xs font-black text-accent-cyan tracking-widest uppercase mb-4"
+            >
               Raven Contributor Ecosystem
-            </span>
-            <h1 className="font-sans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-5 leading-tight">
-              Building Africa's Largest <br className="hidden md:block" />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-blue to-accent-cyan">
-                Web3 Contributor Network.
+            </motion.span>
+            <h1 className="font-sans text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight mb-5 leading-tight">
+              <span className="block overflow-hidden py-0.5">
+                {["Building", "Africa's", "Largest"].map((word, i) => (
+                  <motion.span
+                    key={i}
+                    initial={{ y: "100%", opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.65, delay: 0.05 * i, ease: [0.2, 0.65, 0.3, 0.9] }}
+                    className="inline-block mr-2.5 text-white"
+                  >
+                    {word}
+                  </motion.span>
+                ))}
+              </span>
+              <span className="block overflow-hidden py-0.5">
+                <motion.span
+                  initial={{ y: "100%", opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 0.7, delay: 0.25, ease: [0.2, 0.65, 0.3, 0.9] }}
+                  className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-accent-blue to-accent-cyan"
+                >
+                  Web3 Contributor Network.
+                </motion.span>
               </span>
             </h1>
-            <p className="font-sans text-sm md:text-base text-white/50 mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+            <motion.p 
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+              className="font-sans text-sm md:text-base text-white/50 mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed"
+            >
               Empowering Africa's next generation of digital builders. Translate structured Web3 education into verifiable contribution pipelines and economic opportunities.
-            </p>
-            <div className="flex items-center justify-center lg:justify-start gap-5 mb-12">
+            </motion.p>
+            <motion.div 
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+              className="flex items-center justify-center lg:justify-start gap-5 mb-12"
+            >
               {walletAddress ? (
                 <Link href="#dashboard">
                   <Button variant="primary" size="md" className="rounded-full px-8 py-3.5 shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] transition-all hover:scale-105 duration-300 font-semibold text-xs h-auto">
@@ -66,7 +95,7 @@ export function HeroSection({ walletAddress, setIsConnectModalOpen }: HeroSectio
               <Link href="#pathways" className="text-xs font-semibold text-white/50 hover:text-white transition-colors py-2">
                 How it works
               </Link>
-            </div>
+            </motion.div>
 
             {/* Stats */}
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 pt-8 border-t border-white/10 mt-2 max-w-2xl lg:max-w-3xl">
@@ -75,7 +104,7 @@ export function HeroSection({ walletAddress, setIsConnectModalOpen }: HeroSectio
                   key={stat.label}
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.1 + (i * 0.05) }}
+                  transition={{ duration: 0.5, delay: 0.4 + (i * 0.05) }}
                   className="flex flex-col justify-between p-2.5 sm:p-4 rounded-xl bg-white/[0.01] border border-white/5 backdrop-blur-sm hover:border-white/10 transition-all hover:bg-white/[0.03] group"
                 >
                   <span className="text-xl sm:text-2xl font-black text-white font-mono tracking-tighter whitespace-nowrap group-hover:text-accent-cyan transition-colors">
@@ -87,7 +116,7 @@ export function HeroSection({ walletAddress, setIsConnectModalOpen }: HeroSectio
                 </motion.div>
               ))}
             </div>
-          </motion.div>
+          </div>
 
           {/* Custom Interactive Mockup Cards representing Profile, Reputation, Badges & Contributions */}
           <motion.div
@@ -128,19 +157,52 @@ export function HeroSection({ walletAddress, setIsConnectModalOpen }: HeroSectio
                   </span>
                 </div>
               </div>
-              <div className="flex gap-2">
-                <a href="https://github.com" target="_blank" className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/[0.02] border border-white/5 text-[9px] text-white/60 hover:text-white hover:bg-white/[0.04] transition-all">
-                  <svg className="w-3.5 h-3.5 text-white/70" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z" />
-                  </svg>
-                  GitHub
-                </a>
-                <a href="https://t.me" target="_blank" className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#00F0FF]/5 border border-[#00F0FF]/10 text-[9px] text-[#00F0FF] hover:bg-[#00F0FF]/10 transition-all">
-                  <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36 0-1.04-.2-1.55-.37-.63-.2-1.13-.31-1.08-.66.02-.18.28-.36.76-.55 2.97-1.29 4.96-2.14 5.97-2.55 2.85-1.18 3.44-1.38 3.83-1.39.08 0 .27.02.39.12.1.08.13.19.14.28 0 .06.01.12 0 .19z" />
-                  </svg>
-                  Telegram
-                </a>
+              <p className="text-[10px] text-white/50 leading-relaxed italic">
+                "Building decentralized payment gateways and consumer hubs on TON. Dedicated to onboarding African builders."
+              </p>
+              <div className="space-y-2">
+                <div className="flex gap-2 w-full">
+                  <a href="https://github.com" target="_blank" className="flex-1 flex items-center justify-center gap-1.5 px-3 h-9 rounded-xl bg-white/[0.02] border border-white/5 text-[10px] font-semibold text-white/60 hover:text-white hover:bg-white/[0.06] hover:border-white/10 transition-all duration-300">
+                    <svg className="w-3.5 h-3.5 text-white/70" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z" />
+                    </svg>
+                    GitHub
+                  </a>
+                  <a href="https://t.me" target="_blank" className="flex-1 flex items-center justify-center gap-1.5 px-3 h-9 rounded-xl bg-[#00F0FF]/5 border border-[#00F0FF]/10 text-[10px] font-semibold text-[#00F0FF] hover:bg-[#00F0FF]/10 hover:border-[#00F0FF]/20 transition-all duration-300">
+                    <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36 0-1.04-.2-1.55-.37-.63-.2-1.13-.31-1.08-.66.02-.18.28-.36.76-.55 2.97-1.29 4.96-2.14 5.97-2.55 2.85-1.18 3.44-1.38 3.83-1.39.08 0 .27.02.39.12.1.08.13.19.14.28 0 .06.01.12 0 .19z" />
+                    </svg>
+                    Telegram
+                  </a>
+                </div>
+                <div className="flex gap-2 w-full">
+                  {/* X */}
+                  <a href="https://x.com" target="_blank" className="group flex-1 flex items-center justify-center h-9 rounded-xl bg-white/[0.02] border border-white/5 text-white/40 hover:text-white hover:bg-white/[0.08] hover:border-white/20 transition-all duration-300">
+                    <svg className="w-3.5 h-3.5 transition-transform duration-300 group-hover:scale-110" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                    </svg>
+                  </a>
+                  {/* Facebook */}
+                  <a href="https://facebook.com" target="_blank" className="group flex-1 flex items-center justify-center h-9 rounded-xl bg-white/[0.02] border border-white/5 text-white/40 hover:text-[#1877F2] hover:bg-[#1877F2]/10 hover:border-[#1877F2]/30 transition-all duration-300">
+                    <svg className="w-3.5 h-3.5 transition-transform duration-300 group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                    </svg>
+                  </a>
+                  {/* Instagram */}
+                  <a href="https://instagram.com" target="_blank" className="group flex-1 flex items-center justify-center h-9 rounded-xl bg-white/[0.02] border border-white/5 text-white/40 hover:text-[#E4405F] hover:bg-[#E4405F]/10 hover:border-[#E4405F]/30 transition-all duration-300">
+                    <svg className="w-3.5 h-3.5 transition-transform duration-300 group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                    </svg>
+                  </a>
+                  {/* TikTok */}
+                  <a href="https://tiktok.com" target="_blank" className="group flex-1 flex items-center justify-center h-9 rounded-xl bg-white/[0.02] border border-white/5 text-white/40 hover:text-[#00f2fe] hover:bg-[#00f2fe]/10 hover:border-[#00f2fe]/30 transition-all duration-300">
+                    <svg className="w-3.5 h-3.5 transition-transform duration-300 group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+                    </svg>
+                  </a>
+                </div>
               </div>
             </div>
 

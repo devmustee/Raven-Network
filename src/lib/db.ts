@@ -14,6 +14,10 @@ export interface User {
   github: string;
   telegram: string;
   x: string;
+  tiktok?: string;
+  instagram?: string;
+  facebook?: string;
+  bio?: string;
   reputationXP: number;
   streakDays: number;
   isGraduated: boolean;

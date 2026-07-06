@@ -551,6 +551,12 @@ export function WorkspaceHub({
               </div>
               <span className="text-[10px] text-white/40 font-mono mt-0.5">{walletAddress}</span>
               
+              {profile.bio && (
+                <p className="text-xs text-white/50 mt-3 max-w-[220px] leading-relaxed italic">
+                  "{profile.bio}"
+                </p>
+              )}
+              
               {/* Profile Social indicators */}
               <div className="flex gap-2.5 items-center justify-center mt-3">
                 {/* GitHub */}
