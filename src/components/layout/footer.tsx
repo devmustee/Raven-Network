@@ -52,9 +52,11 @@ export function Footer() {
 
           <div>
             <h4 className="font-semibold text-white mb-6 text-sm uppercase tracking-wider">Company</h4>
+            <Link href="/about" className="text-white/70 text-sm font-medium mb-4 block hover:text-white transition-colors">Raven Learning Systems Ltd</Link>
             <ul className="space-y-3 text-sm text-white/50">
               <li><Link href="#pathways" className="hover:text-white transition-colors">Pathways</Link></li>
               <li><Link href="#contact" className="hover:text-white transition-colors">Contact</Link></li>
+              <li><Link href="/brand-assets" className="hover:text-white transition-colors">Brand Assets</Link></li>
             </ul>
           </div>
 

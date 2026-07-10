@@ -321,6 +321,20 @@
       "streakDays": 36,
       "isGraduated": true,
       "createdAt": "2026-07-06T02:29:49.957Z"
+    },
+    {
+      "id": "user-tat01nd",
+      "walletAddress": "EQA_RAVEN_WALLET_USER_3471",
+      "role": "USER",
+      "name": "user_3471",
+      "avatar": "",
+      "github": "user_3471",
+      "telegram": "",
+      "x": "",
+      "reputationXP": 1185,
+      "streakDays": 36,
+      "isGraduated": true,
+      "createdAt": "2026-07-07T19:18:58.847Z"
     }
   ],
   "quests": [
@@ -422,6 +436,24 @@
       "userId": "user-fogqgz2",
       "questId": "m1",
       "completedAt": "2026-07-06T02:31:16.159Z"
+    },
+    {
+      "id": "log-16sklyu",
+      "userId": "user-tat01nd",
+      "questId": "m1",
+      "completedAt": "2026-07-07T19:19:07.405Z"
+    },
+    {
+      "id": "log-4b6bw7a",
+      "userId": "user-tat01nd",
+      "questId": "g1",
+      "completedAt": "2026-07-07T19:21:20.972Z"
+    },
+    {
+      "id": "log-uc75zik",
+      "userId": "user-tat01nd",
+      "questId": "g2",
+      "completedAt": "2026-07-07T19:21:21.392Z"
     }
   ],
   "opportunities": [

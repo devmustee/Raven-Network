@@ -4,12 +4,72 @@ import React from "react";
 import { Button } from "../ui/button";
 
 const partnerCategories = [
-  "Blockchain Networks",
-  "Wallets",
-  "Exchanges",
-  "Infrastructure",
-  "Universities",
-  "Accelerators"
+  {
+    name: "Blockchain Networks",
+    icon: (
+      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="5" r="2.5" stroke="currentColor" strokeWidth="1.5"/>
+        <circle cx="5" cy="19" r="2.5" stroke="currentColor" strokeWidth="1.5"/>
+        <circle cx="19" cy="19" r="2.5" stroke="currentColor" strokeWidth="1.5"/>
+        <path d="M12 7.5V12M12 12L6.5 17M12 12L17.5 17" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+        <circle cx="12" cy="12" r="1.5" fill="currentColor"/>
+      </svg>
+    ),
+  },
+  {
+    name: "Wallets",
+    icon: (
+      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="6" width="20" height="14" rx="2" stroke="currentColor" strokeWidth="1.5"/>
+        <path d="M2 10H22" stroke="currentColor" strokeWidth="1.5"/>
+        <circle cx="17" cy="15" r="1.5" fill="currentColor"/>
+        <path d="M6 6V5C6 3.895 6.895 3 8 3H16C17.105 3 18 3.895 18 5V6" stroke="currentColor" strokeWidth="1.5"/>
+      </svg>
+    ),
+  },
+  {
+    name: "Exchanges",
+    icon: (
+      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 8H17L14 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M20 16H7L10 19" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M4 12H20" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="2 3"/>
+      </svg>
+    ),
+  },
+  {
+    name: "Infrastructure",
+    icon: (
+      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="3" y="3" width="18" height="6" rx="1.5" stroke="currentColor" strokeWidth="1.5"/>
+        <rect x="3" y="15" width="18" height="6" rx="1.5" stroke="currentColor" strokeWidth="1.5"/>
+        <circle cx="6.5" cy="6" r="1" fill="currentColor"/>
+        <circle cx="6.5" cy="18" r="1" fill="currentColor"/>
+        <path d="M12 9V15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="2 2"/>
+      </svg>
+    ),
+  },
+  {
+    name: "Universities",
+    icon: (
+      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 3L2 9L12 15L22 9L12 3Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
+        <path d="M6 11.5V17.5L12 21L18 17.5V11.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M22 9V16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      </svg>
+    ),
+  },
+  {
+    name: "Accelerators",
+    icon: (
+      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2C12 2 13.5 5 13.5 9C13.5 13 12 16 12 16C12 16 10.5 13 10.5 9C10.5 5 12 2 12 2Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
+        <path d="M12 16L8 20H10V22H14V20H16L12 16Z" fill="currentColor"/>
+        <path d="M8 11C6 12 5 14 5 14L9 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M16 11C18 12 19 14 19 14L15 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    ),
+  },
 ];
 
 const generateLogos = () => {
@@ -51,8 +111,9 @@ export function PartnersSection() {
         <h2 className="text-3xl md:text-5xl font-bold mb-6">Trusted by the Best</h2>
         <div className="flex flex-wrap justify-center gap-3 mb-10">
           {partnerCategories.map((category) => (
-            <span key={category} className="px-4 py-2 bg-black/50 border border-white/10 rounded-full text-sm text-white/70">
-              {category}
+            <span key={category.name} className="inline-flex items-center gap-2 px-4 py-2 bg-black/50 border border-white/10 rounded-full text-sm text-white/70">
+              {category.icon}
+              {category.name}
             </span>
           ))}
         </div>
