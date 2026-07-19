@@ -50,100 +50,91 @@ export function Navbar({
     setConnectPhase("social-verifying");
     
     setTimeout(() => {
-      // Simulate successful social login
-      setTempSocialData({ provider, username: `@user_${Math.floor(Math.random() * 10000)}` });
-      setConnectingProvider(null);
-      setConnectPhase("nft-eligibility");
+      const username = `@user_${Math.floor(Math.random() * 10000)}`;
+      const usernameClean = username.replace("@", "");
+      const mockAddress = `EQA_SOCIAL_${provider.toUpperCase()}_${usernameClean.toUpperCase()}`;
+      
+      // Auto authenticate directly after social login
+      fetch("/api/auth/verify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          address: mockAddress,
+          signature: "mock_signature_" + Date.now(),
+          walletName: "Raven Wallet" // Default to Raven Wallet to simulate verification
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          const token = data.token;
+          localStorage.setItem("raven_user_token", token);
+          
+          const profileUpdates: any = {
+            name: usernameClean,
+            avatar: `https://api.dicebear.com/7.x/bottts/svg?seed=${usernameClean}`,
+            bio: "Active contributor in the Raven ecosystem.",
+            skills: [
+              { label: "Rust / Move", score: 65, width: "65%", color: "bg-purple-500" },
+              { label: "Frontend dev", score: 80, width: "80%", color: "bg-cyan-500" },
+              { label: "Smart Contracts", score: 40, width: "40%", color: "bg-blue-500" }
+            ]
+          };
+
+          if (provider === "Telegram") {
+            profileUpdates.telegram = usernameClean;
+          } else if (provider === "GitHub") {
+            profileUpdates.github = usernameClean;
+          }
+
+          fetch("/api/profile", {
+            method: "POST",
+            headers: { 
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify(profileUpdates)
+          })
+          .then(async r => {
+            if (!r.ok) {
+              const text = await r.text();
+              throw new Error(text || `HTTP error! status: ${r.status}`);
+            }
+            return r.json();
+          })
+          .then(resData => {
+            const finalUser = resData.user || resData;
+            if (setProfile) {
+              setProfile({
+                id: finalUser.id,
+                name: finalUser.name || usernameClean,
+                avatar: finalUser.avatar || `https://api.dicebear.com/7.x/bottts/svg?seed=${usernameClean}`,
+                telegram: finalUser.telegram || "",
+                github: finalUser.github || "",
+                x: finalUser.x || "",
+                tiktok: "",
+                instagram: finalUser.instagram || "",
+                facebook: finalUser.facebook || "",
+                streakDays: finalUser.streakDays || 0,
+                isGraduated: true,
+              });
+            }
+            setWalletAddress(finalUser.walletAddress);
+            setIsConnectModalOpen(false);
+          });
+        }
+      })
+      .catch(err => {
+        console.error("Auth verify failed", err);
+        setIsConnectModalOpen(false);
+      })
+      .finally(() => {
+        setConnectingProvider(null);
+        setConnectPhase("social-login");
+      });
     }, 1500);
   };
 
-  const handleWalletConnect = (provider: string, type: "ton" | "evm") => {
-    setConnectingProvider(provider);
-    setConnectPhase("nft-verifying");
-    
-    setTimeout(() => {
-      setConnectingProvider(null);
-      // Gating logic: Tonkeeper & Raven Wallet hold the Flock NFT. Tonhub and MetaMask do not.
-      const isGraduate = provider === "Raven Wallet" || provider === "Tonkeeper";
-      
-      if (!isGraduate) {
-        setConnectPhase("blocked");
-      } else {
-        const usernameClean = tempSocialData ? tempSocialData.username.replace("@", "") : "user";
-        const mockAddress = `EQA_${provider.replace(" ", "_").toUpperCase()}_${usernameClean.toUpperCase()}`;
-        
-        // Call Backend Auth Verify
-        fetch("/api/auth/verify", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            address: mockAddress,
-            signature: "mock_signature_" + Date.now(),
-            walletName: provider
-          })
-        })
-        .then(res => res.json())
-        .then(data => {
-          if (data.success) {
-            const token = data.token;
-            localStorage.setItem("raven_user_token", token);
-            
-            // Build profile updates
-            const profileUpdates: any = {};
-            if (tempSocialData) {
-              if (tempSocialData.provider === "Telegram") {
-                profileUpdates.telegram = usernameClean;
-              }
-              if (tempSocialData.provider === "GitHub") {
-                profileUpdates.github = usernameClean;
-              }
-              profileUpdates.name = usernameClean;
-            }
-
-            // Sync social data into backend
-            fetch("/api/profile", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`
-              },
-              body: JSON.stringify(profileUpdates)
-            })
-            .then(res2 => res2.json())
-            .then(pData => {
-              const finalUser = pData.success ? pData.user : data.user;
-              
-              if (setProfile) {
-                setProfile({
-                  name: finalUser.name,
-                  avatar: finalUser.avatar || "",
-                  github: finalUser.github || "",
-                  telegram: finalUser.telegram || "",
-                  x: finalUser.x || "",
-                  tiktok: "",
-                  instagram: "",
-                  facebook: "",
-                  streakDays: finalUser.streakDays || 0,
-                });
-              }
-              setWalletAddress(finalUser.walletAddress);
-              setIsConnectModalOpen(false);
-            });
-          }
-        })
-        .catch(err => {
-          console.error("Auth verify failed", err);
-          setIsConnectModalOpen(false);
-        });
-
-        // Reset modal phase
-        setTimeout(() => {
-          setConnectPhase("social-login");
-          setTempSocialData(null);
-        }, 500);
-      }
-    }, 1800);
-  };
 
   return (
     <>
@@ -177,15 +168,15 @@ export function Navbar({
             {walletAddress ? (
               <div className="flex items-center gap-3">
                 {/* Connected Wallet Pill */}
-                <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold text-white/75">
-                  <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                  {walletAddress}
+                <div className="hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.03] border border-white/10 hover:border-green-500/30 text-xs font-medium text-white/90 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] transition-all duration-300">
+                  <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse shadow-[0_0_8px_#4ade80]" />
+                  <span className="font-mono tracking-wide">{walletAddress.length > 18 ? `${walletAddress.slice(0, 10)}...${walletAddress.slice(-6)}` : walletAddress}</span>
                 </div>
 
                 {/* Dedicated Profile Button */}
                 <button 
                   onClick={() => setIsProfileModalOpen(true)}
-                  className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all overflow-hidden"
+                  className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 hover:border-accent-cyan/40 transition-all overflow-hidden shadow-[0_0_10px_rgba(255,255,255,0.02)]"
                   title="Edit Profile"
                 >
                   {profile.avatar ? (
@@ -195,16 +186,15 @@ export function Navbar({
                   )}
                 </button>
 
-                <Button 
-                  variant="outline" 
-                  size="sm"
+                <button 
                   onClick={() => {
                     localStorage.removeItem("raven_user_token");
                     setWalletAddress(null);
                   }}
+                  className="px-3.5 py-1.5 rounded-xl border border-red-500/20 hover:border-red-500/40 bg-red-500/5 hover:bg-red-500/10 text-red-400 text-xs font-bold transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
                 >
-                  Disconnect
-                </Button>
+                  Sign Out
+                </button>
               </div>
             ) : (
               <Button 
@@ -241,7 +231,7 @@ export function Navbar({
                 </div>
 
                 <p className="text-xs text-white/50 mb-6 leading-relaxed">
-                  Connect your social account to get started. You will be asked to verify your Raven Academy Graduation NFT in the next step.
+                  Connect your social account to instantly log in and access the Raven Network.
                 </p>
 
                 <div className="space-y-3">
@@ -294,132 +284,7 @@ export function Navbar({
               </div>
             )}
 
-            {connectPhase === "nft-eligibility" && (
-              <>
-                <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-lg font-bold text-white">Check Graduation Eligibility</h3>
-                  <button 
-                    onClick={() => setIsConnectModalOpen(false)}
-                    className="p-1 rounded-lg hover:bg-white/5 text-white/60 hover:text-white transition-colors"
-                  >
-                    <X className="w-5 h-5" />
-                  </button>
-                </div>
-
-                <div className="bg-green-500/10 border border-green-500/20 rounded-xl p-3 mb-6 flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center text-green-400">
-                    <Check className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <span className="block text-xs font-bold text-white">Social Login Successful</span>
-                    <span className="block text-[10px] text-white/60">Now connect your wallet to verify NFT</span>
-                  </div>
-                </div>
-
-                <p className="text-xs text-white/50 mb-6 leading-relaxed">
-                  Connect your TON wallet to verify your Raven Academy Graduation status. Only graduates holding the graduation Flock NFT on TON can log in.
-                </p>
-
-                <div className="space-y-5">
-                  {/* TON Network */}
-                  <div>
-                    <span className="block text-[10px] uppercase tracking-widest text-white/40 font-bold mb-3">TON Network (Graduates ONLY)</span>
-                    <div className="flex flex-col gap-2.5">
-                      {/* Raven Wallet */}
-                      <button
-                        onClick={() => handleWalletConnect("Raven Wallet", "ton")}
-                        className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/5 hover:border-accent-purple/30 text-left transition-all hover:bg-white/[0.04] group"
-                      >
-                        <div className="w-5 h-5 flex items-center justify-center bg-white/5 rounded-md p-0.5">
-                          <img src="/wallet_logo.png" className="w-full h-full object-contain" alt="Raven Logo" />
-                        </div>
-                        <div className="flex-1">
-                          <span className="block text-xs font-semibold text-white">Raven Wallet</span>
-                          <span className="block text-[8px] text-green-400 font-bold mt-0.5">Holds Flock NFT (Verified)</span>
-                        </div>
-                      </button>
-
-                      {/* Tonkeeper */}
-                      <button
-                        onClick={() => handleWalletConnect("Tonkeeper", "ton")}
-                        className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/5 hover:border-accent-purple/30 text-left transition-all hover:bg-white/[0.04] group"
-                      >
-                        <div className="w-5 h-5 flex items-center justify-center bg-white/5 rounded-md p-0.5">
-                          <img src="/tonkeeper_logo.png" className="w-full h-full object-contain" alt="Tonkeeper Logo" />
-                        </div>
-                        <div className="flex-1">
-                          <span className="block text-xs font-semibold text-white">Tonkeeper</span>
-                          <span className="block text-[8px] text-green-400 font-bold mt-0.5">Holds Flock NFT (Verified)</span>
-                        </div>
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* EVM Networks */}
-                  <div>
-                    <span className="block text-[10px] uppercase tracking-widest text-white/40 font-bold mb-3">EVM Networks</span>
-                    <div className="flex flex-col gap-2.5">
-                      {/* MetaMask */}
-                      <button
-                        onClick={() => handleWalletConnect("MetaMask", "evm")}
-                        className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/5 hover:border-red-500/20 text-left transition-all hover:bg-white/[0.04] group"
-                      >
-                        <div className="w-5 h-5 flex items-center justify-center bg-white/5 rounded-md p-0.5">
-                          <img src="/metamask_logo.svg" className="w-full h-full object-contain" alt="MetaMask Logo" />
-                        </div>
-                        <div className="flex-1">
-                          <span className="block text-xs font-semibold text-white">MetaMask</span>
-                          <span className="block text-[8px] text-red-400 font-bold mt-0.5">No NFT Found (Unregistered)</span>
-                        </div>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </>
-            )}
-
-            {connectPhase === "nft-verifying" && (
-              <div className="flex flex-col items-center justify-center py-12 text-center">
-                <div className="relative w-16 h-16 mb-6">
-                  {/* Outer spinning ring */}
-                  <div className="absolute inset-0 border-2 border-accent-purple/20 border-t-accent-purple rounded-full animate-spin" />
-                  {/* Inner pulsing circle */}
-                  <div className="absolute inset-2 bg-accent-purple/10 rounded-full animate-pulse flex items-center justify-center">
-                    <svg className="w-6 h-6 text-accent-purple" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                      <circle cx="12" cy="12" r="10" />
-                      <path d="M12 2v4M12 18v4" />
-                    </svg>
-                  </div>
-                </div>
-                <h3 className="font-bold text-base text-white mb-2">Verifying Graduation Status</h3>
-                <p className="text-xs text-white/50 max-w-xs leading-relaxed">
-                  Scanning the TON Blockchain for your Raven Academy Graduation Flock NFT. Please wait...
-                </p>
-              </div>
-            )}
-
-            {connectPhase === "blocked" && (
-              <div className="flex flex-col items-center text-center py-6">
-                <div className="w-12 h-12 rounded-full bg-red-500/10 border border-red-500/20 flex items-center justify-center mb-4">
-                  <svg className="w-6 h-6 text-red-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                    <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
-                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-                  </svg>
-                </div>
-                <h3 className="font-bold text-base text-white mb-2">Access Blocked</h3>
-                <p className="text-xs text-white/50 max-w-sm leading-relaxed mb-6">
-                  Raven Academy Graduation Flock NFT not found on TON for this wallet address. Only graduates holding the NFT can connect.
-                </p>
-                <div className="flex gap-3 w-full">
-                  <Button variant="outline" onClick={() => setConnectPhase("nft-eligibility")} className="flex-1">
-                    Try Another Wallet
-                  </Button>
-                  <Button variant="secondary" onClick={() => setIsConnectModalOpen(false)} className="flex-1">
-                    Cancel
-                  </Button>
-                </div>
-              </div>
-            )}
+            {/* Removed wallet & NFT checks */}
 
             <div className="mt-8 pt-4 border-t border-white/5 text-[10px] text-white/40 text-center">
               By connecting, you agree to our Terms of Service.

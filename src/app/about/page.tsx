@@ -25,7 +25,7 @@ export default function AboutPage() {
             <Building2 className="w-6 h-6 text-accent-cyan" />
           </div>
           <div>
-            <h1 className="text-3xl md:text-4xl font-black tracking-tight">Raven Learning Systems Ltd</h1>
+            <h1 className="text-3xl md:text-4xl font-black tracking-tight">Raven Network Limited</h1>
             <p className="text-xs text-white/50 mt-1">Building Africa&apos;s Web3 Future</p>
           </div>
         </div>
@@ -45,7 +45,7 @@ export default function AboutPage() {
               Who We Are
             </h2>
             <p>
-              <strong className="text-white">Raven Learning Systems Ltd</strong> is a technology company registered and headquartered in Africa, dedicated to building the infrastructure that powers Web3 education and talent development across the continent.
+              <strong className="text-white">Raven Network Limited</strong> is a technology company registered and headquartered in Africa, dedicated to building the infrastructure that powers Web3 education and talent development across the continent.
             </p>
             <p>
               We operate <strong className="text-white">Raven Network</strong> — a contributor-first ecosystem where individuals learn blockchain technologies, earn verifiable credentials, build on-chain reputation, and access real-world opportunities from global Web3 organizations.
@@ -84,7 +84,7 @@ export default function AboutPage() {
               What We Build
             </h2>
             <p>
-              Raven Learning Systems Ltd develops and maintains the core products that power the Raven ecosystem:
+              Raven Network Limited develops and maintains the core products that power the Raven ecosystem:
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {[
@@ -164,7 +164,7 @@ export default function AboutPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3">
               <div>
                 <span className="text-white/40 text-xs uppercase tracking-wider">Registered Name</span>
-                <p className="text-white font-semibold">Raven Learning Systems Ltd</p>
+                <p className="text-white font-semibold">Raven Network Limited</p>
               </div>
               <div>
                 <span className="text-white/40 text-xs uppercase tracking-wider">Type</span>

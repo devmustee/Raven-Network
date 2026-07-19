@@ -5,7 +5,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { GraduationCap, Route, Users, ShieldCheck, Briefcase, Landmark } from "lucide-react";
 
 const steps = [
-  { id: 1, title: "Join Raven Academy", desc: "Start your journey by enrolling in free Web3 courses.", icon: GraduationCap },
+  { id: 1, title: "Join Raven Academy", desc: "Start your journey by enrolling in premium Web3 courses.", icon: GraduationCap },
   { id: 2, title: "Complete Pathway", desc: "Finish your chosen track (Onboarding, Creator, Builder).", icon: Route },
   { id: 3, title: "Join Raven Network", desc: "Enter the contributor network upon graduation.", icon: Users },
   { id: 4, title: "Build Reputation", desc: "Earn points through consistency and contributions.", icon: ShieldCheck },

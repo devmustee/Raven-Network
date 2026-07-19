@@ -335,6 +335,217 @@
       "streakDays": 36,
       "isGraduated": true,
       "createdAt": "2026-07-07T19:18:58.847Z"
+    },
+    {
+      "id": "user-kyvg6s1",
+      "walletAddress": "EQA_RAVEN_WALLET_USER_6973",
+      "role": "USER",
+      "name": "user_6973",
+      "avatar": "",
+      "github": "",
+      "telegram": "user_6973",
+      "x": "",
+      "reputationXP": 835,
+      "streakDays": 36,
+      "isGraduated": true,
+      "createdAt": "2026-07-10T00:30:24.091Z"
+    },
+    {
+      "id": "user-7fpgwh6",
+      "walletAddress": "EQA_RAVEN_WALLET_USER_5776",
+      "role": "USER",
+      "name": "user_5776",
+      "avatar": "",
+      "github": "",
+      "telegram": "user_5776",
+      "x": "",
+      "reputationXP": 835,
+      "streakDays": 36,
+      "isGraduated": true,
+      "createdAt": "2026-07-12T22:41:35.688Z"
+    },
+    {
+      "id": "user-jbj6ksb",
+      "walletAddress": "EQA_RAVEN_WALLET_USER_226",
+      "role": "USER",
+      "name": "user_226",
+      "avatar": "",
+      "github": "",
+      "telegram": "user_226",
+      "x": "",
+      "reputationXP": 835,
+      "streakDays": 36,
+      "isGraduated": true,
+      "createdAt": "2026-07-19T00:14:36.365Z"
+    },
+    {
+      "id": "user-9nfvsz0",
+      "walletAddress": "EQA_SOCIAL_GITHUB_USER_9761",
+      "role": "USER",
+      "name": "Raven Builder",
+      "avatar": "",
+      "github": "",
+      "telegram": "",
+      "x": "",
+      "reputationXP": 820,
+      "streakDays": 35,
+      "isGraduated": true,
+      "createdAt": "2026-07-19T00:22:13.111Z"
+    },
+    {
+      "id": "user-2fkdovc",
+      "walletAddress": "EQA_SOCIAL_GITHUB_USER_807",
+      "role": "USER",
+      "name": "Raven Builder",
+      "avatar": "",
+      "github": "",
+      "telegram": "",
+      "x": "",
+      "reputationXP": 820,
+      "streakDays": 35,
+      "isGraduated": true,
+      "createdAt": "2026-07-19T00:22:15.834Z"
+    },
+    {
+      "id": "user-nxfdklq",
+      "walletAddress": "EQA_SOCIAL_TELEGRAM_USER_6361",
+      "role": "USER",
+      "name": "Raven Builder",
+      "avatar": "",
+      "github": "",
+      "telegram": "",
+      "x": "",
+      "reputationXP": 820,
+      "streakDays": 35,
+      "isGraduated": true,
+      "createdAt": "2026-07-19T00:22:18.648Z"
+    },
+    {
+      "id": "user-t06zf3p",
+      "walletAddress": "EQA_SOCIAL_TELEGRAM_USER_3968",
+      "role": "USER",
+      "name": "Raven Builder",
+      "avatar": "",
+      "github": "",
+      "telegram": "",
+      "x": "",
+      "reputationXP": 835,
+      "streakDays": 36,
+      "isGraduated": true,
+      "createdAt": "2026-07-19T00:22:40.442Z"
+    },
+    {
+      "id": "user-arurens",
+      "walletAddress": "EQA_SOCIAL_GITHUB_USER_4253",
+      "role": "USER",
+      "name": "Raven Builder",
+      "avatar": "",
+      "github": "",
+      "telegram": "",
+      "x": "",
+      "reputationXP": 820,
+      "streakDays": 35,
+      "isGraduated": true,
+      "createdAt": "2026-07-19T00:29:42.898Z"
+    },
+    {
+      "id": "user-gzlqdui",
+      "walletAddress": "EQA_SOCIAL_GITHUB_USER_7776",
+      "role": "USER",
+      "name": "Raven Builder",
+      "avatar": "",
+      "github": "",
+      "telegram": "",
+      "x": "",
+      "reputationXP": 820,
+      "streakDays": 35,
+      "isGraduated": true,
+      "createdAt": "2026-07-19T00:29:45.582Z"
+    },
+    {
+      "id": "user-scks7du",
+      "walletAddress": "EQA_SOCIAL_GITHUB_USER_6544",
+      "role": "USER",
+      "name": "Raven Builder",
+      "avatar": "",
+      "github": "",
+      "telegram": "",
+      "x": "",
+      "reputationXP": 820,
+      "streakDays": 35,
+      "isGraduated": true,
+      "createdAt": "2026-07-19T00:29:51.874Z"
+    },
+    {
+      "id": "user-s5k0tmi",
+      "walletAddress": "EQA_SOCIAL_GITHUB_USER_2503",
+      "role": "USER",
+      "name": "Raven Builder",
+      "avatar": "",
+      "github": "",
+      "telegram": "",
+      "x": "",
+      "reputationXP": 820,
+      "streakDays": 35,
+      "isGraduated": true,
+      "createdAt": "2026-07-19T00:30:06.460Z"
+    },
+    {
+      "id": "user-z3a7yck",
+      "walletAddress": "EQA_SOCIAL_GITHUB_USER_4515",
+      "role": "USER",
+      "name": "Raven Builder",
+      "avatar": "",
+      "github": "",
+      "telegram": "",
+      "x": "",
+      "reputationXP": 820,
+      "streakDays": 35,
+      "isGraduated": true,
+      "createdAt": "2026-07-19T00:32:11.547Z"
+    },
+    {
+      "id": "user-mukti1y",
+      "walletAddress": "EQA_SOCIAL_GITHUB_USER_3861",
+      "role": "USER",
+      "name": "Raven Builder",
+      "avatar": "",
+      "github": "",
+      "telegram": "",
+      "x": "",
+      "reputationXP": 835,
+      "streakDays": 36,
+      "isGraduated": true,
+      "createdAt": "2026-07-19T00:32:15.475Z"
+    },
+    {
+      "id": "user-m6mxeiy",
+      "walletAddress": "EQA_SOCIAL_GITHUB_USER_723",
+      "role": "USER",
+      "name": "Raven Builder",
+      "avatar": "",
+      "github": "",
+      "telegram": "",
+      "x": "",
+      "reputationXP": 820,
+      "streakDays": 35,
+      "isGraduated": true,
+      "createdAt": "2026-07-19T06:20:49.914Z"
+    },
+    {
+      "id": "user-xxqyd8u",
+      "walletAddress": "EQA_SOCIAL_GITHUB_USER_2213",
+      "role": "USER",
+      "name": "user_2213",
+      "avatar": "https://api.dicebear.com/7.x/bottts/svg?seed=user_2213",
+      "github": "user_2213",
+      "telegram": "",
+      "x": "",
+      "reputationXP": 820,
+      "streakDays": 35,
+      "isGraduated": true,
+      "createdAt": "2026-07-19T06:21:39.866Z",
+      "bio": "Active contributor in the Raven ecosystem."
     }
   ],
   "quests": [
@@ -454,6 +665,36 @@
       "userId": "user-tat01nd",
       "questId": "g2",
       "completedAt": "2026-07-07T19:21:21.392Z"
+    },
+    {
+      "id": "log-lxp830y",
+      "userId": "user-kyvg6s1",
+      "questId": "m1",
+      "completedAt": "2026-07-10T00:30:34.437Z"
+    },
+    {
+      "id": "log-r36xwri",
+      "userId": "user-7fpgwh6",
+      "questId": "m1",
+      "completedAt": "2026-07-12T22:42:48.535Z"
+    },
+    {
+      "id": "log-4xkbclr",
+      "userId": "user-jbj6ksb",
+      "questId": "m1",
+      "completedAt": "2026-07-19T00:19:50.210Z"
+    },
+    {
+      "id": "log-uo6gcxa",
+      "userId": "user-t06zf3p",
+      "questId": "m1",
+      "completedAt": "2026-07-19T00:22:53.641Z"
+    },
+    {
+      "id": "log-xo4qcwm",
+      "userId": "user-mukti1y",
+      "questId": "m1",
+      "completedAt": "2026-07-19T00:40:11.700Z"
     }
   ],
   "opportunities": [
@@ -488,5 +729,44 @@
       "status": "active"
     }
   ],
-  "submissions": []
+  "submissions": [],
+  "followers": [],
+  "posts": [
+    {
+      "id": "post-1",
+      "userId": "admin-1",
+      "authorName": "Raven HQ Admin",
+      "authorAvatar": "/logo.png",
+      "content": "Welcome to the new Raven Network Contributor Hub! We are excited to launch this community feed. Start sharing your milestones, nodes status, or smart contracts code here! 🐦⬛",
+      "likes": [
+        "user-3",
+        "user-4"
+      ],
+      "comments": [],
+      "createdAt": "2026-07-18T22:34:48.034Z"
+    },
+    {
+      "id": "post-2",
+      "userId": "user-3",
+      "authorName": "Aisha_Builds",
+      "authorAvatar": "https://api.dicebear.com/7.x/bottts/svg?seed=Aisha",
+      "content": "Just completed my morning validation node heartbeat checklist! Node is running at 99.8% uptime. Let's build! 🚀 #TON #NodeValidators",
+      "likes": [
+        "admin-1"
+      ],
+      "comments": [],
+      "createdAt": "2026-07-19T00:04:48.034Z"
+    },
+    {
+      "id": "post-3",
+      "userId": "user-4",
+      "authorName": "Chidi_Dev",
+      "authorAvatar": "https://api.dicebear.com/7.x/bottts/svg?seed=Chidi",
+      "content": "Anyone else working on the new EVM bridging opportunity? The Rust interface looks clean, but I'm encountering a gas optimization issue. Ping me if you'd like to collaborate! ⚙️",
+      "likes": [],
+      "comments": [],
+      "createdAt": "2026-07-19T00:24:48.034Z"
+    }
+  ],
+  "messages": []
 }

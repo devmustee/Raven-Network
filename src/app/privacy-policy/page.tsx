@@ -39,7 +39,7 @@ export default function PrivacyPolicy() {
               1. Introduction
             </h2>
             <p>
-              Welcome to the **Raven Network**. We are operated by **Raven Learning Systems Ltd** ("we", "us", or "our"), a company registered in the Federal Republic of Nigeria. 
+              Welcome to the **Raven Network**. We are operated by **Raven Network Limited** ("we", "us", or "our"), a company registered in the Federal Republic of Nigeria. 
             </p>
             <p>
               This Privacy Policy explains how we collect, use, store, and process your personal data when you interact with our contributor platform, connect your wallet, complete tasks, or claim streak rewards. We are committed to safeguarding your privacy in compliance with the **Nigeria Data Protection Act (NDPA) 2023** and the **Nigeria Data Protection Regulation (NDPR) 2019**.
@@ -120,7 +120,7 @@ export default function PrivacyPolicy() {
           </section>
 
           <div className="pt-6 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-white/40 font-mono">
-            <span>© {new Date().getFullYear()} Raven Learning Systems Ltd</span>
+            <span>© {new Date().getFullYear()} Raven Network Limited</span>
             <span>Registered in Nigeria</span>
           </div>
 

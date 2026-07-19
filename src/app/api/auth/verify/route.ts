@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getDb, writeDb, User } from "@/lib/db";
+import { signJWT } from "@/lib/jwt";
 
 export async function POST(request: Request) {
   try {
@@ -14,9 +15,7 @@ export async function POST(request: Request) {
 
     // Auto-create user profile if they don't exist in database
     if (!user) {
-      const isGraduated = walletName === "Tonkeeper" || walletName === "Raven Wallet";
       const isAdmin = address === "EQA_ADMIN_HQ_RAVEN_GATEWAY_AUTHENTICATOR";
-
       user = {
         id: "user-" + Math.random().toString(36).substring(2, 9),
         walletAddress: address,
@@ -28,7 +27,7 @@ export async function POST(request: Request) {
         x: "",
         reputationXP: isAdmin ? 9999 : 820,
         streakDays: isAdmin ? 365 : 35,
-        isGraduated: isGraduated,
+        isGraduated: true,
         createdAt: new Date().toISOString(),
       };
 
@@ -36,8 +35,12 @@ export async function POST(request: Request) {
       writeDb(db);
     }
 
-    // Return mock JWT token containing role and status
-    const token = `session_token_${user.id}_${user.role}_${Date.now()}`;
+    // Return cryptographically signed JWT token containing user details with 7 days expiration
+    const token = signJWT({
+      userId: user.id,
+      role: user.role,
+      exp: Date.now() + 7 * 24 * 60 * 60 * 1000
+    });
 
     return NextResponse.json({
       success: true,

@@ -15,7 +15,7 @@ const brandAssets = [
   {
     name: "Raven Academy",
     description: "The education arm of Raven Network — used for courses, certifications, and learning-related content.",
-    logo: "/academy_logo.png",
+    logo: "/academy_logo.jpg",
     bgClass: "bg-black",
     accent: "accent-purple",
   },
@@ -54,17 +54,19 @@ const baseNfts = [
 const adjectives = [
   "Nexus", "Genesis", "Quantum", "Obsidian", "Vortex", "Aether", "Solaris", 
   "Specter", "Astral", "Prismatic", "Nova", "Titan", "Crystalline", "Echo", 
-  "Glitch", "Hyper", "Voodoo", "Shadow", "Rogue", "Zenith"
+  "Glitch", "Hyper", "Voodoo", "Shadow", "Rogue", "Zenith", "Cosmic", "Galactic",
+  "Solar", "Lunar", "Phantom", "Spectral", "Divine", "Abyssal", "Chrono", "Volcanic",
+  "Matrix", "Holographic", "Steampunk", "Synthwave", "Cybernetic", "Stardust"
 ];
 
 const traits = ["Mythic", "Legendary", "Epic", "Rare"];
 
-const allNfts = Array.from({ length: 100 }, (_, i) => {
-  const idStr = String(i + 1).padStart(2, '0');
+const allNfts = Array.from({ length: 1000 }, (_, i) => {
+  const idStr = String(i + 1).padStart(3, '0');
   if (i < 20) {
     return {
       id: idStr,
-      baseId: idStr,
+      baseId: String(i + 1).padStart(2, '0'),
       name: baseNfts[i].name,
       trait: baseNfts[i].trait,
       hueShift: 0,
@@ -112,7 +114,7 @@ export default function BrandAssetsPage() {
           </div>
           <div>
             <h1 className="text-3xl md:text-4xl font-black tracking-tight">Brand Assets</h1>
-            <p className="text-xs text-white/50 mt-1">Raven Learning Systems Ltd</p>
+            <p className="text-xs text-white/50 mt-1">Raven Network Limited</p>
           </div>
         </div>
 
@@ -260,7 +262,7 @@ export default function BrandAssetsPage() {
               <span className="w-1.5 h-1.5 rounded-full bg-accent-purple" />
               Raven NFT Collection
             </h2>
-            <p className="text-sm text-white/50">100 unique collectible Raven NFT artworks. Generate and collect your favorite traits.</p>
+            <p className="text-sm text-white/50">1,000 unique collectible Raven NFT artworks. Generate and collect your favorite traits.</p>
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
@@ -271,12 +273,9 @@ export default function BrandAssetsPage() {
               >
                 <div className="relative aspect-square overflow-hidden bg-black/40">
                   <img
-                    src={`/nfts/raven-nft-${nft.baseId}.png`}
+                    src={`/nfts/raven-nft-${nft.id}.png`}
                     alt={nft.name}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    style={{
-                      filter: nft.hueShift ? `hue-rotate(${nft.hueShift}deg) saturate(${nft.saturate}%)` : undefined,
-                    }}
                   />
                   <div className="absolute top-2 right-2">
                     <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
@@ -292,11 +291,11 @@ export default function BrandAssetsPage() {
                 <div className="p-3 flex items-center justify-between">
                   <div>
                     <p className="text-xs font-bold text-white truncate max-w-[100px]">{nft.name}</p>
-                    <p className="text-[10px] text-white/40">#{nft.id} / 100</p>
+                    <p className="text-[10px] text-white/40">#{nft.id} / 1000</p>
                   </div>
                   <a
-                    href={`/nfts/raven-nft-${nft.baseId}.png`}
-                    download={`${nft.name.toLowerCase().replace(/\s+/g, "-")}-${nft.id}.png`}
+                    href={`/nfts/raven-nft-${nft.id}.png`}
+                    download={`raven-nft-${nft.id}.png`}
                     className="w-7 h-7 flex items-center justify-center rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-colors"
                   >
                     <Download className="w-3 h-3 text-white/70" />

@@ -61,12 +61,49 @@ export interface Submission {
   submittedAt: string;
 }
 
-interface DatabaseSchema {
+export interface FollowerRelation {
+  id: string;
+  followerId: string;
+  followingId: string;
+  createdAt: string;
+}
+
+export interface CommunityPost {
+  id: string;
+  userId: string;
+  authorName: string;
+  authorAvatar: string;
+  content: string;
+  likes: string[];
+  comments: {
+    id: string;
+    userId: string;
+    authorName: string;
+    authorAvatar: string;
+    content: string;
+    createdAt: string;
+  }[];
+  createdAt: string;
+}
+
+export interface DirectMessage {
+  id: string;
+  senderId: string;
+  receiverId: string;
+  content: string;
+  isRead: boolean;
+  createdAt: string;
+}
+
+export interface DatabaseSchema {
   users: User[];
   quests: Quest[];
   questLogs: QuestLog[];
   opportunities: Opportunity[];
   submissions: Submission[];
+  followers: FollowerRelation[];
+  posts: CommunityPost[];
+  messages: DirectMessage[];
 }
 
 const DEFAULT_USERS: User[] = [
@@ -262,6 +299,39 @@ const DEFAULT_OPPORTUNITIES: Opportunity[] = [
   }
 ];
 
+const DEFAULT_POSTS: CommunityPost[] = [
+  {
+    id: "post-1",
+    userId: "admin-1",
+    authorName: "Raven HQ Admin",
+    authorAvatar: "/logo.png",
+    content: "Welcome to the new Raven Network Contributor Hub! We are excited to launch this community feed. Start sharing your milestones, nodes status, or smart contracts code here! 🐦⬛",
+    likes: ["user-3", "user-4"],
+    comments: [],
+    createdAt: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: "post-2",
+    userId: "user-3",
+    authorName: "Aisha_Builds",
+    authorAvatar: "https://api.dicebear.com/7.x/bottts/svg?seed=Aisha",
+    content: "Just completed my morning validation node heartbeat checklist! Node is running at 99.8% uptime. Let's build! 🚀 #TON #NodeValidators",
+    likes: ["admin-1"],
+    comments: [],
+    createdAt: new Date(Date.now() - 30 * 60 * 1000).toISOString(),
+  },
+  {
+    id: "post-3",
+    userId: "user-4",
+    authorName: "Chidi_Dev",
+    authorAvatar: "https://api.dicebear.com/7.x/bottts/svg?seed=Chidi",
+    content: "Anyone else working on the new EVM bridging opportunity? The Rust interface looks clean, but I'm encountering a gas optimization issue. Ping me if you'd like to collaborate! ⚙️",
+    likes: [],
+    comments: [],
+    createdAt: new Date(Date.now() - 10 * 60 * 1000).toISOString(),
+  }
+];
+
 export function getDb(): DatabaseSchema {
   if (!fs.existsSync(DB_DIR)) {
     fs.mkdirSync(DB_DIR, { recursive: true });
@@ -274,6 +344,9 @@ export function getDb(): DatabaseSchema {
       questLogs: [],
       opportunities: DEFAULT_OPPORTUNITIES,
       submissions: [],
+      followers: [],
+      posts: DEFAULT_POSTS,
+      messages: [],
     };
     fs.writeFileSync(DB_FILE, JSON.stringify(initialDb, null, 2), "utf8");
     return initialDb;
@@ -281,7 +354,14 @@ export function getDb(): DatabaseSchema {
 
   try {
     const raw = fs.readFileSync(DB_FILE, "utf8");
-    return JSON.parse(raw);
+    const parsed = JSON.parse(raw) as DatabaseSchema;
+    if (!parsed.followers) parsed.followers = [];
+    if (!parsed.posts || parsed.posts.length === 0) {
+      parsed.posts = DEFAULT_POSTS;
+      writeDb(parsed);
+    }
+    if (!parsed.messages) parsed.messages = [];
+    return parsed;
   } catch (err) {
     console.error("Failed to parse database file, rebuilding default:", err);
     const initialDb: DatabaseSchema = {
@@ -290,6 +370,9 @@ export function getDb(): DatabaseSchema {
       questLogs: [],
       opportunities: DEFAULT_OPPORTUNITIES,
       submissions: [],
+      followers: [],
+      posts: DEFAULT_POSTS,
+      messages: [],
     };
     fs.writeFileSync(DB_FILE, JSON.stringify(initialDb, null, 2), "utf8");
     return initialDb;

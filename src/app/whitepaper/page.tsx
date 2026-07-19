@@ -90,7 +90,7 @@ export default function WhitepaperPage() {
             </p>
           </div>
           <p>
-            Developed and operated by <strong>Raven Learning Systems Ltd</strong>, Raven Network is more than a community platform. It is the infrastructure that connects education, professional identity, reputation, and opportunity into a unified ecosystem designed for long-term growth.
+            Developed and operated by <strong>Raven Network Limited</strong>, Raven Network is more than a community platform. It is the infrastructure that connects education, professional identity, reputation, and opportunity into a unified ecosystem designed for long-term growth.
           </p>
           <p>The Raven ecosystem consists of four integrated products:</p>
           <div className="grid md:grid-cols-2 gap-4 my-6">
@@ -176,7 +176,7 @@ export default function WhitepaperPage() {
       content: (
         <div className="space-y-4">
           <p>
-            Raven Network is operated by <strong>Raven Learning Systems Ltd</strong>, a technology and education organization building Web3 talent pipelines. The corporate focus spans technical operations, product scaling, compliance frameworks, and developer relations partnerships.
+            Raven Network is operated by <strong>Raven Network Limited</strong>, a technology and education organization building Web3 talent pipelines. The corporate focus spans technical operations, product scaling, compliance frameworks, and developer relations partnerships.
           </p>
           <div className="p-6 rounded-2xl bg-white/[0.01] border border-white/5 my-6 flex flex-col sm:flex-row gap-6 items-center">
             <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#00F0FF]/30 to-[#A060FF]/30 flex-shrink-0 flex items-center justify-center font-black text-2xl text-white">
@@ -299,7 +299,7 @@ export default function WhitepaperPage() {
       content: (
         <div className="space-y-4">
           <p>
-            Raven Learning Systems Ltd employs a multi-channel monetization model designed to fund continuous platform improvements without sacrificing open accessibility:
+            Raven Network Limited employs a multi-channel monetization model designed to fund continuous platform improvements without sacrificing open accessibility:
           </p>
           <div className="grid md:grid-cols-2 gap-4 my-6">
             <div className="p-4 rounded-xl bg-white/[0.01] border border-white/5">
@@ -359,13 +359,13 @@ export default function WhitepaperPage() {
       content: (
         <div className="space-y-4 text-xs text-white/50">
           <p>
-            <strong>Ecosystem Contact:</strong> Raven Learning Systems Ltd, Nigeria. Email and official digital directories are available upon platform request.
+            <strong>Ecosystem Contact:</strong> Raven Network Limited, Nigeria. Email and official digital directories are available upon platform request.
           </p>
           <p>
             <strong>Legal Notice:</strong> This whitepaper is presented solely for educational and informational purposes. It does not constitute a solicitation of investments, an offering of financial securities, or guaranteed career employment. Forward-looking targets reflect strategic vision and are subject to engineering adjustments and protocol variations.
           </p>
           <p>
-            <strong>Intellectual Property:</strong> All system architectures, branding design tokens, and product concepts described herein remain the exclusive property of Raven Learning Systems Ltd.
+            <strong>Intellectual Property:</strong> All system architectures, branding design tokens, and product concepts described herein remain the exclusive property of Raven Network Limited.
           </p>
         </div>
       )
@@ -427,7 +427,7 @@ export default function WhitepaperPage() {
             Building Africa's Largest Web3 Contributor Ecosystem
           </p>
           <span className="block text-xs text-white/30 font-medium mt-4">
-            Developed by Raven Learning Systems Ltd • 2026
+            Developed by Raven Network Limited • 2026
           </span>
         </div>
 

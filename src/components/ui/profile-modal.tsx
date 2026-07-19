@@ -6,6 +6,7 @@ import { X, Camera, User, Lock, Sparkles } from "lucide-react";
 import { Button } from "./button";
 
 export interface ProfileData {
+  id?: string;
   name: string;
   avatar: string;
   github: string;
@@ -16,6 +17,7 @@ export interface ProfileData {
   facebook: string;
   bio?: string;
   streakDays: number;
+  isGraduated?: boolean;
 }
 
 interface ProfileModalProps {
@@ -27,9 +29,14 @@ interface ProfileModalProps {
 
 export function BadgeIcon({ name, className = "w-6 h-6" }: { name: string; className?: string }) {
   const badgeMap: Record<string, string> = {
+    "Initiate": "/badges/fledgling.png",
+    "Novice": "/badges/fledgling.png",
     "Fledgling": "/badges/fledgling.png",
+    "Apprentice": "/badges/scout.png",
     "Scout": "/badges/scout.png",
+    "Pathfinder": "/badges/vanguard.png",
     "Vanguard": "/badges/vanguard.png",
+    "Sentinel": "/badges/shadow.png",
     "Shadow": "/badges/shadow.png",
     "Legend": "/badges/legend.png",
   };
@@ -37,8 +44,27 @@ export function BadgeIcon({ name, className = "w-6 h-6" }: { name: string; class
   const src = badgeMap[name];
   if (!src) return null;
 
+  // Visual distinction using CSS Hue Rotations to make 10 unique colors from the 5 base assets
+  let filterStyle = "";
+  if (name === "Novice") {
+    filterStyle = "hue-rotate(90deg) brightness(1.2) saturate(1.3)"; // Green
+  } else if (name === "Fledgling") {
+    filterStyle = "hue-rotate(180deg) brightness(1.3)"; // Cyan
+  } else if (name === "Apprentice") {
+    filterStyle = "hue-rotate(60deg) saturate(1.5)"; // Pink/Red scout
+  } else if (name === "Pathfinder") {
+    filterStyle = "hue-rotate(240deg) saturate(1.5)"; // Hot orange/red vanguard
+  } else if (name === "Sentinel") {
+    filterStyle = "hue-rotate(130deg) brightness(1.1) saturate(1.4)"; // Lime green shadow
+  }
+
   return (
-    <img src={src} alt={`${name} Badge`} className={`${className} object-contain`} />
+    <img 
+      src={src} 
+      alt={`${name} Badge`} 
+      className={`${className} object-contain`} 
+      style={filterStyle ? { filter: filterStyle } : undefined}
+    />
   );
 }
 

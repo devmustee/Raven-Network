@@ -7,7 +7,7 @@ import { BookOpen, Network, Wallet, Building2 } from "lucide-react";
 
 const products = [
   {
-    title: "Raven Learning Systems Ltd",
+    title: "Raven Network Limited",
     desc: "The company building products that accelerate Web3 education, contributor growth, and digital opportunity.",
     icon: Building2,
     color: "from-gray-500 to-gray-700",

@@ -9,8 +9,8 @@ import { Button } from "../ui/button";
 const pillars = [
   {
     title: "1. Learn",
-    desc: "Master Web3 skills through free structured learning pathways at Raven Academy.",
-    details: ["Web3 Onboarding Basics", "Creator & Content Strategy", "Developer & Builder Track"],
+    desc: "Master Web3 skills through two premium structured onboarding pathways at Raven Academy.",
+    details: ["Creator & Content Strategy", "Developer & Builder Track"],
     icon: BookOpen,
     color: "group-hover:border-accent-purple/30",
     glow: "bg-accent-purple/10",

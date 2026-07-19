@@ -45,6 +45,7 @@ export function Footer() {
           <div>
             <h4 className="font-semibold text-white mb-6 text-sm uppercase tracking-wider">Ecosystem</h4>
             <ul className="space-y-3 text-sm text-white/50">
+              <li><Link href="/about" className="hover:text-white transition-colors font-medium text-white/70">Raven Network Limited</Link></li>
               <li><Link href="#academy" className="hover:text-white transition-colors">Raven Academy</Link></li>
               <li><Link href="#wallet" className="hover:text-white transition-colors">Raven Wallet</Link></li>
             </ul>
@@ -52,7 +53,6 @@ export function Footer() {
 
           <div>
             <h4 className="font-semibold text-white mb-6 text-sm uppercase tracking-wider">Company</h4>
-            <Link href="/about" className="text-white/70 text-sm font-medium mb-4 block hover:text-white transition-colors">Raven Learning Systems Ltd</Link>
             <ul className="space-y-3 text-sm text-white/50">
               <li><Link href="#pathways" className="hover:text-white transition-colors">Pathways</Link></li>
               <li><Link href="#contact" className="hover:text-white transition-colors">Contact</Link></li>
@@ -70,7 +70,7 @@ export function Footer() {
         </div>
         
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between text-sm text-white/40">
-          <p>© {new Date().getFullYear()} Raven Learning Systems Ltd. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Raven Network Limited. All rights reserved.</p>
           <div className="flex gap-6 mt-4 md:mt-0">
             <Link href="/privacy-policy" className="hover:text-white">Privacy Policy</Link>
             <Link href="/terms-of-service" className="hover:text-white">Terms of Service</Link>

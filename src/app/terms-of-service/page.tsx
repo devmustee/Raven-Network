@@ -39,7 +39,7 @@ export default function TermsOfService() {
               1. Agreement to Terms
             </h2>
             <p>
-              These Terms of Service ("Terms") constitute a legally binding agreement made between you, whether personally or on behalf of an entity ("you") and **Raven Learning Systems Ltd** ("we", "us", or "our"), concerning your access to and use of the **Raven Network** contributor platform. 
+              These Terms of Service ("Terms") constitute a legally binding agreement made between you, whether personally or on behalf of an entity ("you") and **Raven Network Limited** ("we", "us", or "our"), concerning your access to and use of the **Raven Network** contributor platform. 
             </p>
             <p>
               We are a registered business entity in the Federal Republic of Nigeria. By accessing the platform, connecting your Web3 wallet, or completing daily quests, you acknowledge that you have read, understood, and agreed to be bound by all of these Terms. If you do not agree, you are prohibited from using the platform.
@@ -94,7 +94,7 @@ export default function TermsOfService() {
               5. Limitation of Liability
             </h2>
             <p>
-              To the maximum extent permitted by the laws of the Federal Republic of Nigeria, Raven Learning Systems Ltd, its directors, employees, or partners, will not be liable to you or any third party for any direct, indirect, consequential, exemplary, incidental, special, or punitive damages arising from your use of the platform, including lost profits, lost data, or wallet vulnerability exploits.
+              To the maximum extent permitted by the laws of the Federal Republic of Nigeria, Raven Network Limited, its directors, employees, or partners, will not be liable to you or any third party for any direct, indirect, consequential, exemplary, incidental, special, or punitive damages arising from your use of the platform, including lost profits, lost data, or wallet vulnerability exploits.
             </p>
           </section>
 
@@ -112,7 +112,7 @@ export default function TermsOfService() {
           </section>
 
           <div className="pt-6 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-white/40 font-mono">
-            <span>© {new Date().getFullYear()} Raven Learning Systems Ltd</span>
+            <span>© {new Date().getFullYear()} Raven Network Limited</span>
             <span>Registered in Nigeria</span>
           </div>
 

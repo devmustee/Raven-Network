@@ -8,7 +8,7 @@ import { ChevronDown } from "lucide-react";
 const faqData = [
   {
     question: "What is Raven Network?",
-    answer: "Raven Network, powered by Raven Learning system LTD, is an ecosystem designed to build Africa's largest Web3 contributor network. It connects education (Raven Academy), reputation tracking, and decentralized wallet verification (TON Flock NFTs) to provide verified global earning opportunities."
+    answer: "Raven Network, powered by Raven Network Limited, is an ecosystem designed to build Africa's largest Web3 contributor network. It connects education (Raven Academy), reputation tracking, and decentralized wallet verification (TON Flock NFTs) to provide verified global earning opportunities."
   },
   {
     question: "How do I join?",
