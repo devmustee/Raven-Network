@@ -4,6 +4,7 @@ import "./globals.css";
 import { NotificationProvider } from "@/context/NotificationContext";
 import { NotificationToaster } from "@/components/ui/notification-toaster";
 import { ThemeProvider } from "@/context/ThemeContext";
+import { PWARegister } from "@/components/layout/pwa-register";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -20,6 +21,12 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: "Raven Network | Learn. Contribute. Build. Earn.",
   description: "Join Africa's largest Web3 contributor network and connect millions of people to education, reputation, and global opportunities.",
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    title: "Raven Network",
+    statusBarStyle: "black-translucent",
+  },
 };
 
 export default function RootLayout({
@@ -34,6 +41,10 @@ export default function RootLayout({
       className={`${outfit.variable} ${plusJakartaSans.variable} antialiased`}
     >
       <head>
+        <meta name="theme-color" content="#000000" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <link rel="apple-touch-icon" href="/icon.png" />
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -49,6 +60,7 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-black text-white font-sans flex flex-col min-h-screen">
+        <PWARegister />
         <ThemeProvider>
           <NotificationProvider>
             {children}

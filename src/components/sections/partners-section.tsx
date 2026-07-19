@@ -93,6 +93,12 @@ const generateLogos = () => {
         <rect x="18" y="11" width="3" height="2" fill="#5A2DCC"/>
         <path d="M8 6V18L16 6V18" stroke="#5A2DCC" strokeWidth="3" strokeLinejoin="miter"/>
       </svg>
+    )},
+    { name: "Elympics AI", color: "text-white", icon: (
+      <img src="/elympics_logo.png" className="w-6 h-6 mr-3 object-contain invert" alt="Elympics AI" />
+    )},
+    { name: "Bitget Wallet", color: "text-white", icon: (
+      <img src="/bitget_wallet_logo.png" className="w-6 h-6 mr-3 object-contain rounded" alt="Bitget Wallet" />
     )}
   ];
 
@@ -108,7 +114,7 @@ export function PartnersSection() {
   return (
     <section id="partners" className="py-24 relative overflow-hidden bg-white/5 border-y border-white/10">
       <div className="container mx-auto px-4 md:px-6 mb-16 text-center">
-        <h2 className="text-3xl md:text-5xl font-bold mb-6">Trusted by the Best</h2>
+        <h2 className="text-3xl md:text-5xl font-bold mb-6">Our Partners</h2>
         <div className="flex flex-wrap justify-center gap-3 mb-10">
           {partnerCategories.map((category) => (
             <span key={category.name} className="inline-flex items-center gap-2 px-4 py-2 bg-black/50 border border-white/10 rounded-full text-sm text-white/70">

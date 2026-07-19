@@ -303,9 +303,7 @@ export function HeroSection({ walletAddress, setIsConnectModalOpen }: HeroSectio
                 <span className="text-[8px] font-bold text-white/40 uppercase tracking-widest block mb-1">Contributions</span>
                 <div className="space-y-1 flex-1 mt-1 justify-center flex flex-col">
                   {[
-                    "Raven Network",
                     "Raven Wallet",
-                    "Raven Academy",
                     "The Flock AI"
                   ].map((repo) => (
                     <div key={repo} className="flex items-center gap-1.5 px-2 py-0.5 rounded bg-white/[0.01] border border-white/5 text-[8.5px] text-white/60 font-mono overflow-hidden whitespace-nowrap text-ellipsis hover:text-white transition-colors">

@@ -546,6 +546,36 @@
       "isGraduated": true,
       "createdAt": "2026-07-19T06:21:39.866Z",
       "bio": "Active contributor in the Raven ecosystem."
+    },
+    {
+      "id": "user-y59vo46",
+      "walletAddress": "EQA_SOCIAL_TELEGRAM_USER_5514",
+      "role": "USER",
+      "name": "user_5514",
+      "avatar": "https://api.dicebear.com/7.x/bottts/svg?seed=user_5514",
+      "github": "",
+      "telegram": "user_5514",
+      "x": "",
+      "reputationXP": 820,
+      "streakDays": 35,
+      "isGraduated": true,
+      "createdAt": "2026-07-19T17:56:34.750Z",
+      "bio": "Active contributor in the Raven ecosystem."
+    },
+    {
+      "id": "user-vfsj9ks",
+      "walletAddress": "EQA_SOCIAL_GOOGLE_USER_3788",
+      "role": "USER",
+      "name": "user_3788",
+      "avatar": "https://api.dicebear.com/7.x/bottts/svg?seed=user_3788",
+      "github": "",
+      "telegram": "",
+      "x": "",
+      "reputationXP": 835,
+      "streakDays": 36,
+      "isGraduated": true,
+      "createdAt": "2026-07-19T19:59:55.137Z",
+      "bio": "Active contributor in the Raven ecosystem."
     }
   ],
   "quests": [
@@ -695,6 +725,12 @@
       "userId": "user-mukti1y",
       "questId": "m1",
       "completedAt": "2026-07-19T00:40:11.700Z"
+    },
+    {
+      "id": "log-xrdwjcj",
+      "userId": "user-vfsj9ks",
+      "questId": "m1",
+      "completedAt": "2026-07-19T20:00:12.847Z"
     }
   ],
   "opportunities": [

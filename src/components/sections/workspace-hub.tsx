@@ -172,9 +172,8 @@ export function WorkspaceHub({
     else setQuestFilter("goals");
   }, []);
 
-  const triggerXpAnimation = (text: string, e?: React.MouseEvent) => {
-    if (!e) return;
-    const rect = e.currentTarget.getBoundingClientRect();
+  const triggerXpAnimation = (text: string, rect?: DOMRect | null) => {
+    if (!rect) return;
     const top = rect.top + window.scrollY - 10;
     const left = rect.left + window.scrollX + rect.width / 2;
     const id = Math.random().toString(36).substring(2, 9);
@@ -443,6 +442,7 @@ export function WorkspaceHub({
 
   const handleDailyCheckIn = (e?: React.MouseEvent) => {
     if (hasCheckedIn) return;
+    const rect = e?.currentTarget ? e.currentTarget.getBoundingClientRect() : null;
     
     // Check in is represented by complete morning quest "m1"
     const token = localStorage.getItem("raven_user_token");
@@ -468,7 +468,7 @@ export function WorkspaceHub({
         setDailyTasks(prev => prev.map(t => t.id === "m1" ? { ...t, done: true } : t));
         
         addNotification("Daily Streak claimed successfully! +1 Day added.", { type: "success", title: "Streak Claimed" });
-        if (e) triggerXpAnimation("+1 Streak Day ⚡", e);
+        if (rect) triggerXpAnimation("+1 Streak Day ⚡", rect);
       }
     })
     .catch(err => console.error("Streak check-in failed", err));
@@ -477,6 +477,7 @@ export function WorkspaceHub({
   const toggleTask = (id: any, e?: React.MouseEvent) => {
     const task = dailyTasks.find(t => t.id === id);
     if (!task) return;
+    const rect = e?.currentTarget ? e.currentTarget.getBoundingClientRect() : null;
 
     if (task.start > currentMin) {
       addNotification("This task is locked. Come back later!", { type: "warning", title: "Task Locked" });
@@ -529,7 +530,7 @@ export function WorkspaceHub({
       .then(data => {
         if (data.success) {
           addNotification(`+${task.xp} XP Earned! Streak protected.`, { type: "achievement", title: "Task Completed" });
-          if (e) triggerXpAnimation(`+${task.xp} XP`, e);
+          if (rect) triggerXpAnimation(`+${task.xp} XP`, rect);
           
           setReputationXP(data.reputationXP);
           setProfile(p => ({
