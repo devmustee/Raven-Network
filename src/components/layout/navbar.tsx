@@ -42,6 +42,7 @@ export function Navbar({
     : [
         { name: "Pathways", href: "#pathways" },
         { name: "Partners", href: "#partners" },
+        { name: "Team", href: "#team" },
         { name: "FAQs", href: "#faqs" }
       ];
 

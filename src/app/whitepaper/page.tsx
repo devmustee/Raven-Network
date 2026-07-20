@@ -186,7 +186,7 @@ export default function WhitepaperPage() {
               <span className="block font-black text-white text-sm">Engr. Mustapha Mohamed (DevMustee)</span>
               <span className="block text-[10px] text-accent-cyan font-bold uppercase tracking-wider mb-2">Founder & Architect</span>
               <p className="text-xs text-white/50 leading-relaxed">
-                Software engineer and Web3 ecosystem builder. Experienced in technical onboarding, developer relations, hackathon architecture, and community growth initiatives. DevMustee designed the Raven contributor ecosystem to solve the transition gap between education and verified work.
+                Software engineer, Web3 ecosystem builder, member of the TON Syndicate, and contributor to Bitrus. Experienced in technical onboarding, developer relations, hackathon architecture, and community growth initiatives. DevMustee designed the Raven contributor ecosystem to solve the transition gap between education and verified work.
               </p>
             </div>
           </div>
@@ -334,7 +334,7 @@ export default function WhitepaperPage() {
           <div className="space-y-4 my-6">
             <div>
               <span className="block font-bold text-white text-xs">Phase 1: Foundation (2026)</span>
-              <p className="text-xs text-white/50">Launch of Raven Academy, MVP Network, and basic reputation tracking. Onboard first 10,000 African contributors.</p>
+              <p className="text-xs text-white/50">Launch of Raven Academy, MVP Network, Raven Wallet, and basic reputation tracking. Onboard first 10,000 African contributors.</p>
             </div>
             <div>
               <span className="block font-bold text-white text-xs">Phase 2: Expansion (2027)</span>
@@ -342,7 +342,7 @@ export default function WhitepaperPage() {
             </div>
             <div>
               <span className="block font-bold text-white text-xs">Phase 3: Infrastructure (2028)</span>
-              <p className="text-xs text-white/50">Full wallet launch, multi-chain identity anchoring, and institutional enterprise hiring integrations.</p>
+              <p className="text-xs text-white/50">Deploy multi-chain identity anchoring and institutional enterprise hiring integrations.</p>
             </div>
             <div>
               <span className="block font-bold text-white text-xs">Phase 4: Decentralization (2029+)</span>

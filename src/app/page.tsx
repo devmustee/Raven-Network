@@ -12,6 +12,7 @@ import { ProfileModal, ProfileData } from "@/components/ui/profile-modal";
 import { WorkspaceHub } from "@/components/sections/workspace-hub";
 import { PartnersSection } from "@/components/sections/partners-section";
 import { AboutSection } from "@/components/sections/about-section";
+import { TeamSection } from "@/components/sections/founder-section";
 
 export default function Home() {
   const [walletAddress, setWalletAddress] = useState<string | null>(null);
@@ -84,6 +85,7 @@ export default function Home() {
             />
             <PartnersSection />
             <AboutSection />
+            <TeamSection />
             <PillarsSection 
               walletAddress={walletAddress}
               setIsConnectModalOpen={setIsConnectModalOpen}

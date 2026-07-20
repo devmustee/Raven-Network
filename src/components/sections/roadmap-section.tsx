@@ -11,6 +11,7 @@ const roadmapData = [
       "Launch Raven Academy",
       "Launch Raven Network",
       "Launch PWA",
+      "Launch Raven Wallet",
       "10,000 Members"
     ],
     status: "current"
@@ -27,7 +28,6 @@ const roadmapData = [
   {
     year: "2028",
     goals: [
-      "Raven Wallet Launch",
       "DAO Governance Setup",
       "Enterprise Partnerships"
     ],

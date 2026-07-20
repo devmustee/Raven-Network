@@ -86,7 +86,7 @@ export function WorkspaceHub({
   setIsProfileModalOpen,
   setWalletAddress 
 }: WorkspaceHubProps) {
-  const [mainTab, setMainTab] = useState<"opportunities" | "projects" | "leaderboard" | "daily" | "community">("opportunities");
+  const [mainTab, setMainTab] = useState<"opportunities" | "projects" | "leaderboard" | "daily" | "community" | "team">("opportunities");
   const [opportunitiesTab, setOpportunitiesTab] = useState<"jobs" | "hackathons" | "contests">("jobs");
   const [opportunityFilter, setOpportunityFilter] = useState<"all" | "active" | "completed">("all");
   const [viewingUserProfile, setViewingUserProfile] = useState<any | null>(null);
@@ -693,6 +693,12 @@ export function WorkspaceHub({
           className={`px-5 py-2 rounded-xl text-xs font-bold transition-all duration-300 ${mainTab === "community" ? "bg-green-500/15 text-green-400 border border-green-500/30 shadow-[0_0_15px_rgba(34,197,94,0.1)]" : "border border-transparent text-white/45 hover:text-white/80 hover:bg-white/[0.04]"}`}
         >
           Community Hub
+        </button>
+        <button 
+          onClick={() => setMainTab("team")} 
+          className={`px-5 py-2 rounded-xl text-xs font-bold transition-all duration-300 ${mainTab === "team" ? "bg-accent-cyan/15 text-accent-cyan border border-accent-cyan/35 shadow-[0_0_15px_rgba(0,240,255,0.1)] font-black" : "border border-transparent text-white/45 hover:text-white/80 hover:bg-white/[0.04]"}`}
+        >
+          Ecosystem Team
         </button>
       </div>
 
@@ -2112,6 +2118,150 @@ export function WorkspaceHub({
               </div>
             </div>
           </GlassCard>
+          </div>
+        )}
+
+        {mainTab === "team" && (
+          <div className="col-span-12 animate-in fade-in slide-in-from-bottom-4 duration-300">
+            <GlassCard className="p-8 border-white/5 relative overflow-hidden text-left">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-accent-cyan/5 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute bottom-0 left-0 w-64 h-64 bg-accent-purple/5 rounded-full blur-3xl pointer-events-none" />
+
+              <div className="mb-10 text-center max-w-2xl mx-auto relative z-10">
+                <h2 className="text-3xl font-black mb-3 text-transparent bg-clip-text bg-gradient-to-r from-accent-cyan via-white to-accent-purple">
+                  Ecosystem Team & Leadership
+                </h2>
+                <p className="text-xs text-white/60 leading-relaxed">
+                  The executive leadership driving Web3 education, verifiable reputation, and digital opportunities across Africa.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
+                {/* CEO */}
+                <div className="bg-white/[0.01] border border-white/5 rounded-2xl p-6 hover:border-accent-cyan/30 transition-all duration-300 flex flex-col h-full group hover:bg-white/[0.02]">
+                  <div className="flex items-center gap-4 mb-5">
+                    <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-white/10 flex-shrink-0">
+                      <img src="/devmustee.jpg" alt="Engr. Mustapha Mohamed" className="w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.nextElementSibling?.classList.remove('hidden'); }} />
+                      <div className="hidden absolute inset-0 bg-white/5 flex items-center justify-center text-xl font-bold">MM</div>
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-white text-sm group-hover:text-accent-cyan transition-colors">Engr. Mustapha Mohamed</h3>
+                      <span className="text-[10px] text-accent-cyan font-bold tracking-wider uppercase">Founder & CEO</span>
+                    </div>
+                  </div>
+                  <p className="text-xs text-white/50 leading-relaxed mb-6 flex-1">Software engineer | AI/ML Engineer | Web3 Key opinion Leader | EX TON Syndicate | contributor to Bitrus.</p>
+                  <div className="flex flex-wrap gap-1.5 mb-6">
+                    <span className="px-2 py-0.5 bg-white/5 rounded text-[8px] font-semibold text-white/60">AI/ML</span>
+                    <span className="px-2 py-0.5 bg-white/5 rounded text-[8px] font-semibold text-white/60">Web3 KOL</span>
+                    <span className="px-2 py-0.5 bg-white/5 rounded text-[8px] font-semibold text-white/60">TON Syndicate</span>
+                    <span className="px-2 py-0.5 bg-white/5 rounded text-[8px] font-semibold text-white/60">Bitrus</span>
+                  </div>
+                  <div className="flex items-center gap-3 pt-4 border-t border-white/5">
+                    <a href="https://github.com/devmustee" target="_blank" rel="noreferrer" className="text-white/45 hover:text-white transition-colors"><span className="text-[10px] font-bold">GitHub</span></a>
+                    <a href="https://x.com/devmustee" target="_blank" rel="noreferrer" className="text-white/45 hover:text-white transition-colors"><span className="text-[10px] font-bold">X.com</span></a>
+                  </div>
+                </div>
+
+                {/* COO */}
+                <div className="bg-white/[0.01] border border-white/5 rounded-2xl p-6 hover:border-accent-purple/30 transition-all duration-300 flex flex-col h-full group hover:bg-white/[0.02]">
+                  <div className="flex items-center gap-4 mb-5">
+                    <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-white/10 flex-shrink-0">
+                      <img src="/bosun.jpg" alt="Mr. Bosun Adeneyi" className="w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.nextElementSibling?.classList.remove('hidden'); }} />
+                      <div className="hidden absolute inset-0 bg-white/5 flex items-center justify-center text-xl font-bold">BA</div>
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-white text-sm group-hover:text-accent-purple transition-colors">Mr. Bosun Adeneyi</h3>
+                      <span className="text-[10px] text-accent-purple font-bold tracking-wider uppercase">Co-founder & COO</span>
+                    </div>
+                  </div>
+                  <p className="text-xs text-white/50 leading-relaxed mb-6 flex-1">Ex-Techstars Accelerator operations lead. Focuses on scaling institutional talent networks, project pipelines, and corporate partnerships.</p>
+                  <div className="flex flex-wrap gap-1.5 mb-6">
+                    <span className="px-2 py-0.5 bg-white/5 rounded text-[8px] font-semibold text-white/60">Co-founder</span>
+                    <span className="px-2 py-0.5 bg-white/5 rounded text-[8px] font-semibold text-white/60">Operations</span>
+                    <span className="px-2 py-0.5 bg-white/5 rounded text-[8px] font-semibold text-white/60">Partnerships</span>
+                  </div>
+                  <div className="flex items-center gap-3 pt-4 border-t border-white/5 text-[10px] text-white/40"><span>Active Leadership</span></div>
+                </div>
+
+                {/* CTO */}
+                <div className="bg-white/[0.01] border border-white/5 rounded-2xl p-6 hover:border-accent-cyan/30 transition-all duration-300 flex flex-col h-full group hover:bg-white/[0.02]">
+                  <div className="flex items-center gap-4 mb-5">
+                    <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-white/10 flex-shrink-0">
+                      <img src="/abdul.jpg" alt="Engr. Abduleasheed Ibrahim" className="w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.nextElementSibling?.classList.remove('hidden'); }} />
+                      <div className="hidden absolute inset-0 bg-white/5 flex items-center justify-center text-xl font-bold">AI</div>
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-white text-sm group-hover:text-accent-cyan transition-colors">Engr. Abduleasheed Ibrahim</h3>
+                      <span className="text-[10px] text-accent-cyan font-bold tracking-wider uppercase">Co-founder & CTO</span>
+                    </div>
+                  </div>
+                  <p className="text-xs text-white/50 leading-relaxed mb-6 flex-1">Senior Software Engineer | AI/ML Engineer | Python (CPython) Contributor.</p>
+                  <div className="flex flex-wrap gap-1.5 mb-6">
+                    <span className="px-2 py-0.5 bg-white/5 rounded text-[8px] font-semibold text-white/60">Co-founder</span>
+                    <span className="px-2 py-0.5 bg-white/5 rounded text-[8px] font-semibold text-white/60">AI/ML</span>
+                    <span className="px-2 py-0.5 bg-white/5 rounded text-[8px] font-semibold text-white/60">CPython</span>
+                  </div>
+                  <div className="flex items-center gap-3 pt-4 border-t border-white/5 text-[10px] text-white/40"><span>Active Leadership</span></div>
+                </div>
+
+                {/* CMO */}
+                <div className="bg-white/[0.01] border border-white/5 rounded-2xl p-6 hover:border-orange-500/30 transition-all duration-300 flex flex-col h-full group hover:bg-white/[0.02]">
+                  <div className="flex items-center gap-4 mb-5">
+                    <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-white/10 flex-shrink-0">
+                      <img src="/jerry.jpg" alt="Jerry Gomna" className="w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.nextElementSibling?.classList.remove('hidden'); }} />
+                      <div className="hidden absolute inset-0 bg-white/5 flex items-center justify-center text-xl font-bold">JG</div>
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-white text-sm group-hover:text-orange-400 transition-colors">Jerry Gomna</h3>
+                      <span className="text-[10px] text-orange-400 font-bold tracking-wider uppercase">Chief Marketing Officer (CMO)</span>
+                    </div>
+                  </div>
+                  <p className="text-xs text-white/50 leading-relaxed mb-6 flex-1">Ex TON Syndicate, Web3 Key opinion Leader!</p>
+                  <div className="flex flex-wrap gap-1.5 mb-6">
+                    <span className="px-2 py-0.5 bg-white/5 rounded text-[8px] font-semibold text-white/60">Ex TON Syndicate</span>
+                    <span className="px-2 py-0.5 bg-white/5 rounded text-[8px] font-semibold text-white/60">KOL</span>
+                    <span className="px-2 py-0.5 bg-white/5 rounded text-[8px] font-semibold text-white/60">Marketing</span>
+                  </div>
+                  <div className="flex items-center gap-3 pt-4 border-t border-white/5 text-[10px] text-white/40"><span>Active Leadership</span></div>
+                </div>
+
+                {/* CFO */}
+                <div className="bg-white/[0.01] border border-white/5 rounded-2xl p-6 hover:border-yellow-500/30 transition-all duration-300 flex flex-col h-full group hover:bg-white/[0.02]">
+                  <div className="flex items-center gap-4 mb-5">
+                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-yellow-400 to-amber-600 flex-shrink-0 flex items-center justify-center text-xl font-bold text-white">ER</div>
+                    <div>
+                      <h3 className="font-bold text-white text-sm group-hover:text-yellow-400 transition-colors">Elena Rostov</h3>
+                      <span className="text-[10px] text-yellow-400 font-bold tracking-wider uppercase">Chief Financial Officer (CFO)</span>
+                    </div>
+                  </div>
+                  <p className="text-xs text-white/50 leading-relaxed mb-6 flex-1">Ecosystem treasury strategist. Coordinates tokenomics audits, stablecoin liquidity pool tracking, and community grant budgets.</p>
+                  <div className="flex flex-wrap gap-1.5 mb-6">
+                    <span className="px-2 py-0.5 bg-white/5 rounded text-[8px] font-semibold text-white/60">Finance</span>
+                    <span className="px-2 py-0.5 bg-white/5 rounded text-[8px] font-semibold text-white/60">Treasury</span>
+                    <span className="px-2 py-0.5 bg-white/5 rounded text-[8px] font-semibold text-white/60">Compliance</span>
+                  </div>
+                  <div className="flex items-center gap-3 pt-4 border-t border-white/5 text-[10px] text-white/40"><span>Active Leadership</span></div>
+                </div>
+
+                {/* Head of Community */}
+                <div className="bg-white/[0.01] border border-white/5 rounded-2xl p-6 hover:border-green-500/30 transition-all duration-300 flex flex-col h-full group hover:bg-white/[0.02]">
+                  <div className="flex items-center gap-4 mb-5">
+                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-green-400 to-teal-600 flex-shrink-0 flex items-center justify-center text-xl font-bold text-white">AD</div>
+                    <div>
+                      <h3 className="font-bold text-white text-sm group-hover:text-green-400 transition-colors">Amina Diallo</h3>
+                      <span className="text-[10px] text-green-400 font-bold tracking-wider uppercase">Head of Community</span>
+                    </div>
+                  </div>
+                  <p className="text-xs text-white/50 leading-relaxed mb-6 flex-1">Coordinates community relations, local university developer chapters, quest verification moderation, and builder support networks.</p>
+                  <div className="flex flex-wrap gap-1.5 mb-6">
+                    <span className="px-2 py-0.5 bg-white/5 rounded text-[8px] font-semibold text-white/60">Community Lead</span>
+                    <span className="px-2 py-0.5 bg-white/5 rounded text-[8px] font-semibold text-white/60">DevRel</span>
+                    <span className="px-2 py-0.5 bg-white/5 rounded text-[8px] font-semibold text-white/60">Moderation</span>
+                  </div>
+                  <div className="flex items-center gap-3 pt-4 border-t border-white/5 text-[10px] text-white/40"><span>Active Leadership</span></div>
+                </div>
+              </div>
+            </GlassCard>
           </div>
         )}
       </div>
